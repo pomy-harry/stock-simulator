@@ -19,7 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         System.out.println(customer);
 
-        if (customer.equals(null) || !customer.getPassword().equals(pw)) {
+        if (customer == null || !customer.getPassword().equals(pw)) {
             return null;
         }
 
