@@ -1,0 +1,24 @@
+.header {
+    /* position: fixed; */
+
+    /* width: 100%; fixed를 하면 자신의 영역만 차지하게 되기 때문에 width 100% 적용 */
+    padding: 10px 10%;
+    
+    background-color: black;
+    color: white;    
+
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+    align-items: center;
+    font-weight: bold;
+}
+
+.button {
+    width: 7.2rem;
+    height: 3rem;
+    padding: 0 15px;
+    align-items: center;
+}
+
+
