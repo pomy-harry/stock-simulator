@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
+import dev.pomyharry.stocksimulator.back.exception.IdNotFoundException;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -20,7 +21,8 @@ public class CustomerServiceImpl implements CustomerService {
         System.out.println(customer);
 
         if (customer == null || !customer.getPassword().equals(pw)) {
-            return null;
+            // return null;
+            throw new IdNotFoundException("Id cannot be found");
         }
 
         System.out.println("pw : " + pw);

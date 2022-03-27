@@ -1,5 +1,6 @@
 package dev.pomyharry.stocksimulator.back.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +22,14 @@ public class CustomerController {
     }
 
     @PostMapping
-    public CustomerDTO login(@RequestBody(required = true) CustomerDTO customer) {
-        return customerService.findId(customer.getEmail(), customer.getPassword());
+    public ResponseEntity<?> login(@RequestBody(required = true) CustomerDTO customer) {
+        try {
+            CustomerDTO c = customerService.findId(customer.getEmail(), customer.getPassword());
+            return ResponseEntity.ok().body(c);
+        } catch (Exception e) {
+
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 }
