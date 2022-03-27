@@ -1,35 +1,29 @@
-import React, { useState } from 'react';
 import { Input } from '@material-ui/core'
-import Button from 'react-bootstrap/Button';
-import Modal from "react-bootstrap/Modal";
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import classes from "./Header.module.css";
+import React, { useState } from 'react'
+import Button from 'react-bootstrap/Button'
+import Modal from "react-bootstrap/Modal"
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
 
-const Header = (props) => {
+const BASE_URL = 'http://localhost:8090/login';
 
-  const [user, setUser] = useState('user');
+const LoginModal = (props) => {
+
+  //"YOON", "ABCD@1234", "1234!@#$"
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
-    <header className={classes.header}>
-      <h1>STOCK SIMULATOR</h1> 
-      {user ? (
-        <Button className={classes.button} variant="outline-light" onClick={props.onOpen}>로그인</Button>
-        ) : (
-          <Button className={classes.button} variant="outline-light" onClick={() => setUser(null)}>로그아웃</Button>
-      )}
-      <Modal show={props.show} onHide={props.onClose}>
+
+    <Modal show={props.show} onHide={props.onClose}>
       <Modal.Header closeButton>
         <Modal.Title>STOCK SIMULATOR</Modal.Title>
       </Modal.Header>
-      <Modal.Body className={classes.modal__body}>
+      <Modal.Body>
       <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
-        <Tab eventKey="home" title="로그인" >
+        <Tab eventKey="home" title="로그인">
           <Input
-            className={classes.modal__body__tab}
             placeholder="이메일"
             type="text"
             value={email}
@@ -41,7 +35,7 @@ const Header = (props) => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          /><br/><br/>
+          /><br/>
 
           <Button type='submit' variant="outline-dark" onClick={props.onClose}>
             로그인
@@ -67,7 +61,7 @@ const Header = (props) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            /><br/><br/>
+            />
           </div>
           <Button type='submit' variant="outline-dark" onClick={props.onClose}>
             회원가입
@@ -81,9 +75,7 @@ const Header = (props) => {
       </Tabs>
       </Modal.Body>
     </Modal>
-    </header>
   )
 }
 
-
-export default Header;
+export default LoginModal
