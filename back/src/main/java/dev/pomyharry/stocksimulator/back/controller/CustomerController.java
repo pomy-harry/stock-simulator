@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
+import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.service.CustomerService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/login")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -21,15 +21,32 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+    @RequestMapping("/login")
     @PostMapping
     public ResponseEntity<?> login(@RequestBody(required = true) CustomerDTO customer) {
+
         try {
-            CustomerDTO c = customerService.findId(customer.getEmail(), customer.getPassword());
+            CustomerDTO c = customerService.login(customer);
             return ResponseEntity.ok().body(c);
         } catch (Exception e) {
 
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+
+    }
+
+    @RequestMapping("/join")
+    @PostMapping
+    public ResponseEntity<?> createCustomer(@RequestBody(required = true) CustomerDTO customer) {
+
+        try {
+            Customer c = customerService
+                    .create(new Customer(customer.getName(), customer.getEmail(), customer.getPassword()));
+            return ResponseEntity.ok().body(c);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
 
 }

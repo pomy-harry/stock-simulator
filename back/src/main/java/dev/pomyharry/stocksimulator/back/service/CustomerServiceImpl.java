@@ -7,6 +7,7 @@ import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
 import dev.pomyharry.stocksimulator.back.exception.IdNotFoundException;
+import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -15,20 +16,27 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Override
-    public CustomerDTO findId(String email, String pw) {
-        Customer customer = customerRepository.findByEmail(email);
+    public CustomerDTO login(CustomerDTO c) {
+        // ID 조회
+        Customer customer = customerRepository.findByEmail(c.getEmail());
 
-        System.out.println(customer);
-
-        if (customer == null || !customer.getPassword().equals(pw)) {
-            // return null;
+        if (customer == null || !customer.getPassword().equals(c.getPassword())) {
             throw new IdNotFoundException("Id cannot be found");
         }
 
-        System.out.println("pw : " + pw);
-        System.out.println("password : " + customer.getPassword());
-
         return new CustomerDTO(customer.getId(), customer.getName(), customer.getEmail(), customer.getPassword());
+    }
+
+    @Override
+    public Customer create(Customer c) {
+        Customer customer = customerRepository.findByEmail(c.getEmail());
+
+        // ID 중복 검사
+        if (customer != null) {
+            throw new DuplicationException("Id is Duplicated");
+        }
+
+        return customerRepository.save(c);
     }
 
 }
