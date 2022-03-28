@@ -57,6 +57,10 @@ const CreateAccount = () => {
         }
       )
 
+      setOpenCreateAccount(false);
+      setAccountName('');
+      setDeposit('');
+
     };  
   return (
     <div className="App">

@@ -66,4 +66,6 @@ build/
 
 
 ### properties ###
+!**/src/main/resources/static
+!**/src/main/resources/templates
 application.properties
