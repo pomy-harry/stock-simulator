@@ -23,6 +23,7 @@
 .modal__body__button {
     width: 29rem;
     height: 3rem;
+    margin-bottom: 5px;
     border: 0px solid white;
     background-color: black;
     color: white;

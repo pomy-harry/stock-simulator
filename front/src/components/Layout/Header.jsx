@@ -11,7 +11,7 @@ const SIGNUP_URL = 'http://localhost:8090/join';
 
 const Header = (props) => {
 
-  const [user, setUser] = useState('null');
+  const [userStatus, setUserStatus] = useState(null);
 
   // POST로 로그인 정보 전송 함수
   const loginHandler = async(userData) => {
@@ -20,7 +20,7 @@ const Header = (props) => {
       email: userData.email,
       password: userData.password,
     }));
-
+      
     await fetch(LOGIN_URL, {
       method: 'POST',
       headers: {
@@ -30,9 +30,17 @@ const Header = (props) => {
         email: userData.email,
         password: userData.password,
       })
-    })
+    }).then((res) => {
+        if(res.ok){
+          res.json().then((res2 => {
+            console.log(res2.id);
+            setUserStatus(res2.id);
+          }))
+        }
+      }
+    );
+  }
 
-  };
 
   // 로그인 버튼 클릭시 작동하는 함수
   // 로그인 -> 서버 -> 유효성 검사 -> customer 객체 받아옴 -> user로 상태 변경 -> 로그인 창 닫기 
@@ -97,10 +105,10 @@ const Header = (props) => {
   return (
     <header className={classes.header}>
       <h1>STOCK SIMULATOR</h1> 
-      {user ? (
+      {!userStatus ? (
         <Button className={classes.button} variant="outline-light" onClick={props.onOpen}>로그인</Button>
         ) : (
-          <Button className={classes.button} variant="outline-light" onClick={() => setUser(null)}>로그아웃</Button>
+            <Button className={classes.button} variant="outline-light" onClick={() => setUserStatus(null)}>로그아웃</Button>
       )}
       <Modal show={props.show} onHide={props.onClose}>
         <Modal.Header closeButton>
