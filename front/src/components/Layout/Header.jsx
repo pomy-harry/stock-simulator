@@ -17,8 +17,8 @@ const Header = (props) => {
   const loginHandler = async(userData) => {
     console.log(userData);
     console.log(JSON.stringify({
-      userEmail: userData.email,
-      userpassword: userData.password,
+      email: userData.email,
+      password: userData.password,
     }));
 
     await fetch(LOGIN_URL, {
@@ -27,10 +27,11 @@ const Header = (props) => {
         'Content-Type' : 'application/json',
       },
       body: JSON.stringify({
-        userEmail: userData.email,
-        userPassword: userData.password,
+        email: userData.email,
+        password: userData.password,
       })
     })
+
   };
 
   // 로그인 버튼 클릭시 작동하는 함수
@@ -48,6 +49,7 @@ const Header = (props) => {
       email: enteredLoginEmail,
       password: enteredLoginPassword,
     });
+
   }
 
   // POST로 회원가입 정보 전송 함수
@@ -91,6 +93,7 @@ const Header = (props) => {
     });
   }
 
+
   return (
     <header className={classes.header}>
       <h1>STOCK SIMULATOR</h1> 
@@ -100,28 +103,28 @@ const Header = (props) => {
           <Button className={classes.button} variant="outline-light" onClick={() => setUser(null)}>로그아웃</Button>
       )}
       <Modal show={props.show} onHide={props.onClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>STOCK SIMULATOR</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className={classes.modal__body}>
-      <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+        <Modal.Header closeButton>
+          <Modal.Title>STOCK SIMULATOR</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className={classes.modal__body}>
+        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
 
-        <Tab eventKey="home" title="로그인" className={classes.tab}>
-          <Input ref={loginEmailInputRef} label="이메일" input={{id:"email", type:"text"}} placeholder="이메일"/>
-          <Input ref={loginPasswordInputRef} label="비밀번호" input={{id:"password", type:"password"}} placeholder="비밀번호"/>
-          <Button className={classes.modal__body__button} type="submit" onClick={loginButtonHandler}>로그인</Button>
-        </Tab>
+          <Tab eventKey="home" title="로그인" className={classes.tab}>
+            <Input ref={loginEmailInputRef} label="이메일" input={{id:"email", type:"text"}} placeholder="이메일"/>
+            <Input ref={loginPasswordInputRef} label="비밀번호" input={{id:"password", type:"password"}} placeholder="비밀번호"/>
+            <Button className={classes.modal__body__button} type="submit" onClick={loginButtonHandler}>로그인</Button>
+          </Tab>
 
-        <Tab eventKey="profile" title="회원가입">
-          <Input ref={signUpUserNameInputRef} label="이름" input={{id:"signup_name", type:"text"}} placeholder="이름"/>
-          <Input ref={signUpEmailInputRef} label="이메일" input={{id:"signup_email", type:"text"}} placeholder="이메일"/>
-          <Input ref={signUpPasswordInputRef} label="비밀번호" input={{id:"signup_password", type:"password"}} placeholder="비밀번호"/>
-          <Button className={classes.modal__body__button} type='submit' onClick={signUpButtonHandler}>회원가입</Button>
-        </Tab>
+          <Tab eventKey="profile" title="회원가입">
+            <Input ref={signUpUserNameInputRef} label="이름" input={{id:"signup_name", type:"text"}} placeholder="이름"/>
+            <Input ref={signUpEmailInputRef} label="이메일" input={{id:"signup_email", type:"text"}} placeholder="이메일"/>
+            <Input ref={signUpPasswordInputRef} label="비밀번호" input={{id:"signup_password", type:"password"}} placeholder="비밀번호"/>
+            <Button className={classes.modal__body__button} type='submit' onClick={signUpButtonHandler}>회원가입</Button>
+          </Tab>
 
-      </Tabs>
-      </Modal.Body>
-    </Modal>
+        </Tabs>
+        </Modal.Body>
+      </Modal>
     </header>
   )
 }
