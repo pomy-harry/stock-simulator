@@ -32,9 +32,6 @@ public class Customer {
     @Column(name = "CUSTOMER_PW")
     private String password;
 
-    @Column(name = "ACCOUNT_ID")
-    private String account_id;
-
     public Customer(String name, String email, String pw) {
         this.name = name;
         this.email = email;
