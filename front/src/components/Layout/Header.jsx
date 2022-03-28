@@ -6,7 +6,8 @@ import Tabs from 'react-bootstrap/Tabs';
 import classes from "./Header.module.css";
 import Input from "../Commons/Input";
 
-const BASE_URL = 'http://localhost:8090/login';
+const LOGIN_URL = 'http://localhost:8090/login';
+const SIGNUP_URL = 'http://localhost:8090/join';
 
 const Header = (props) => {
 
@@ -20,7 +21,7 @@ const Header = (props) => {
       userpassword: userData.password,
     }));
 
-    await fetch(BASE_URL, {
+    await fetch(LOGIN_URL, {
       method: 'POST',
       headers: {
         'Content-Type' : 'application/json',
@@ -33,6 +34,7 @@ const Header = (props) => {
   };
 
   // 로그인 버튼 클릭시 작동하는 함수
+  // 로그인 -> 서버 -> 유효성 검사 -> customer 객체 받아옴 -> user로 상태 변경 -> 로그인 창 닫기 
   const loginEmailInputRef = useRef();
   const loginPasswordInputRef = useRef();
 
@@ -57,7 +59,7 @@ const Header = (props) => {
       password: userData.password,
     }));
 
-    await fetch(BASE_URL, {
+    await fetch(SIGNUP_URL, {
       method: 'POST',
       headers: {
         'Content-Type' : 'application/json',
