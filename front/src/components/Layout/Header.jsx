@@ -148,11 +148,12 @@ const Header = (props) => {
 
   return (
     <header className={classes.header}>
-      
-      <div className={classes.header__logo}>
-        <img src={logo_img} alt="logo" />
-        <Link to="/" className={classes.link}><h2>주린이 구원소</h2></Link>        
-      </div>
+      <Link to="/" className={classes.link}>
+        <div className={classes.header__logo}>
+          <img src={logo_img} alt="logo" />
+          <h2>주린이 구원소</h2>     
+        </div>
+      </Link>   
 
       <div className={classes.header__loginbutton}>
         {!userStatus ? (

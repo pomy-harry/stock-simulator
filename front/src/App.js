@@ -22,8 +22,7 @@ const App = () => {
     <>
       <BrowserRouter>
 
-        <Header open={loginModalOpen} onClose={loginModalOnClose} onClick={loginModalOnClick}/>
-        
+        <Header open={loginModalOpen} onClose={loginModalOnClose} onClick={loginModalOnClick}/>        
         
         <Routes>
           <Route exact path="/" element={<Main/>} />
