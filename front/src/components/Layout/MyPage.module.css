@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+}
+
+.MyPage {
+    display: flex;
+}
+
+.MyPage__mystockinfo {
+    width: 60%;
+    min-width: 600px;
+    max-width: 800px;
+    height: cal(100vh-60px);
+    background-color: white;    
+    flex-direction: column;
+    border: solid skyblue;
+}
+
+.rate {
+    width: calc(100%-20px);
+    height: 100px;
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: 3px solid greenyellow;
+}
+
+.stockdetail {    
+    width: calc(100%-20px);
+    height: 800px;
+    border: 3px solid coral;
+}
+
+
+.MyPage__myinfo {
+    width: 40%;
+    min-width: 300px;
+    max-width: 500px;
+    border: solid skyblue;
+}
+
+.emptySpace {
+    width: calc(100%-20px);
+    height: 100px;
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: 3px solid greenyellow;
+}
+
+.customerinfo {    
+    width: calc(100%-20px);
+    height: 400px;
+    border: 3px solid teal;
+}
+
+.stockinfo {    
+    width: calc(100%-20px);
+    height: 400px;
+    border: 3px solid olive;
+}
