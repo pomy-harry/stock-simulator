@@ -27,8 +27,8 @@ const Header = (props) => {
         'Content-Type' : 'application/json',
       },
       body: JSON.stringify({
-        userEmail: userData.email,
-        userPassword: userData.password,
+        email: userData.email,
+        password: userData.password,
       })
     })
   };
