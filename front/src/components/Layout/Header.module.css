@@ -19,3 +19,12 @@
     padding: 0 15px;
     align-items: center;
 }
+
+.modal__body__button {
+    width: 29rem;
+    height: 3rem;
+    border: 0px solid white;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
