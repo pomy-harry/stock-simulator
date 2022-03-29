@@ -1,6 +1,7 @@
 import React from 'react'
 import classes from "./Main.module.css";
-import { Button, Input } from '@mui/material';
+import { Button} from '@mui/material';
+import StockList from './ComboBox';
 
 const Main = () => {
 
@@ -9,7 +10,8 @@ const Main = () => {
 
       <div className={classes.chart}>
         <form className={classes.chart__search}>
-            <Input className={classes.chart__search__input} placeholder="검색" type='text' />
+            {/* <Input className={classes.chart__search__input} placeholder="검색" type='text' /> */}
+            <StockList className={classes.chart__search__input}></StockList>
             <Button className={classes.chart__search__button1}>버튼1</Button>
             <Button className={classes.chart__search__button2}>버튼2</Button>
         </form>
