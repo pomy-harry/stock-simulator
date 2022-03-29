@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StockDTO {
-
     private String code;
 
     private String name;
@@ -25,5 +24,4 @@ public class StockDTO {
         this.code = code;
         this.name = name;
     }
-    
 }

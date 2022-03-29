@@ -39,4 +39,15 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.save(c);
     }
 
+    @Override
+    public Customer findById(String id) {
+        Customer customer = customerRepository.findById(id).get();
+
+        if (customer == null) {
+            throw new IdNotFoundException("아이디가 존재하지 않습니다.");
+        }
+
+        return customer;
+    }
+
 }

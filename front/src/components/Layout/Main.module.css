@@ -1,85 +1,85 @@
 * {
-    margin: 0;
+  margin: 0;
 }
 
 .main {
-    display: flex;
+  display: flex;
 }
 
-
 .chart {
-    width: 60%;
-    min-width: 800px;
-    height: cal(100vh-60px);
-    background-color: white;    
-    flex-direction: column;
-    border: solid skyblue;
+  width: 60%;
+  min-width: 800px;
+  height: cal(100vh-60px);
+  background-color: white;
+  flex-direction: column;
+  border: solid skyblue;
 }
 
 .chart__search {
-    width: calc(100%-20px);
-    height: 35px;
-    display: flex;
-    margin-top: 15px;
-    margin-bottom: 20px;
-    /* border: 3px solid greenyellow; */
+  width: calc(100%-20px);
+  height: 35px;
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  /* border: 3px solid greenyellow; */
 }
 
 .chart__search__input {
-    padding: 10px;
-    margin-left: 10px;
-    width: 100%;
-    border: 1px solid #1976d2;
+  padding: 10px;
+  margin-left: 10px;
+  width: 100%;
+  border: 1px solid #1976d2;
 }
 
 .chart__search Button {
-    width: 15px;
+  width: 15px;
 }
 
 .chart__search__button1 {
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 15px;
-    border: 1px solid #1976d2;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 15px;
+  border: 1px solid #1976d2;
 }
 
 .chart__search__button2 {
-    margin-right: 10px;
-    width: 15px;
-    border: 1px solid #1976d2;
+  margin-right: 10px;
+  width: 15px;
+  border: 1px solid #1976d2;
 }
 
-.chart__list {    
-    width: calc(100%-20px);
-    height: 100vh;
+.chart__list {
+  width: calc(100%-20px);
+  height: 100vh;
 }
 
-.chart__list_one {    
-    width: calc(100%-20px);
-    padding-top : 50%;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    border: 3px solid blueviolet;
+.chart__list_one {
+  width: calc(100%-20px);
+  padding-top: 50%;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  border: 3px solid blueviolet;
 }
 
 .info {
-    width: 40%;
-    min-width: 500px;
-    border: solid skyblue;
+  width: 40%;
+  min-width: 500px;
+  border: solid skyblue;
 }
 
 .info__myinfo {
-    width: calc(100%-20px);
-    height: 47px;
-    margin: 10px;
-    border: 2px solid sienna;
+  width: calc(100%-20px);
+  height: 47px;
+  margin: 10px;
+  border: 2px solid sienna;
 }
 
 .info__tabs {
-    width: calc(100%-20px);
-    height: 100vh;
-    margin-left: 10px;
-    margin-right: 10px;
-    border: 3px solid blueviolet;
+  width: calc(100%-20px);
+  height: 100vh;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 3px solid blueviolet;
 }

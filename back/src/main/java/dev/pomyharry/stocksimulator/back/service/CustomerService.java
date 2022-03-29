@@ -9,4 +9,5 @@ public interface CustomerService {
 
     Customer create(Customer customer);
 
+    Customer findById(String id);
 }
