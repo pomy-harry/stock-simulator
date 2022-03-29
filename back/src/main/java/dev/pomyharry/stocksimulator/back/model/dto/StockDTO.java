@@ -20,7 +20,7 @@ public class StockDTO {
 
     private String chartUrl;
 
-    StockDTO(String code, String name) {
+    public StockDTO(String code, String name) {
         this.code = code;
         this.name = name;
     }
