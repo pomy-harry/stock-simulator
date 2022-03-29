@@ -21,7 +21,7 @@ public class StockChartController {
 
     @PostMapping("/chart")
     public ResponseEntity<?> getStockChart(@RequestBody(required = true) StockDTO stock){
-        String c = stockChartService.getStockChart(stock);
-        return ResponseEntity.ok().body(c);
+        StockDTO s = stockChartService.getStockChart(stock);
+        return ResponseEntity.ok().body(s);
     }
 }

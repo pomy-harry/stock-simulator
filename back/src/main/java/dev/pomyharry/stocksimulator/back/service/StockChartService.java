@@ -12,7 +12,7 @@ public class StockChartService {
 
     private final StockChartComponent stockChartComponent;
 
-    public String getStockChart(StockDTO stock) {
+    public StockDTO getStockChart(StockDTO stock) {
         return stockChartComponent.getStockChart(stock);
     }
 }
