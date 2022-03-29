@@ -19,10 +19,6 @@ public class StockServiceImpl implements StockService {
     public List<Stock> findAllStocks() {
         List<Stock> stocks = stockRepository.findAll();
 
-        for (Stock s : stocks) {
-            System.out.println(s);
-        }
-
         return stocks;
     }
 
