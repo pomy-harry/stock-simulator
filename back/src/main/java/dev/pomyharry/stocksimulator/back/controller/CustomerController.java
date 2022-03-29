@@ -29,7 +29,7 @@ public class CustomerController {
             CustomerDTO c = customerService.login(customer);
             return ResponseEntity.ok().body(c);
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
@@ -40,9 +40,11 @@ public class CustomerController {
     public ResponseEntity<?> createCustomer(@RequestBody(required = true) CustomerDTO customer) {
 
         try {
-            Customer c = customerService.create(new Customer(customer.getName(), customer.getEmail(), customer.getPassword()));
+            Customer c = customerService
+                    .create(new Customer(customer.getName(), customer.getEmail(), customer.getPassword()));
             return ResponseEntity.ok().body(c);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 

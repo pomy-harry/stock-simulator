@@ -9,16 +9,20 @@ import dev.pomyharry.stocksimulator.back.repository.AccountRepository;
 
 @Service
 public class AccountServiceImpl implements AccountService {
-    
+
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    CustomerService customerService;
+
     @Override
     public void insertAccount(AccountDTO accountDTO) {
-        
+
         Account account = new Account();
         account.setName(accountDTO.getName());
         account.setDeposit(accountDTO.getDeposit());
+        account.setCustomer(customerService.findById(accountDTO.getId()));
 
         accountRepository.save(account);
     }
