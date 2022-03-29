@@ -7,4 +7,6 @@ import dev.pomyharry.stocksimulator.back.model.entity.Stock;
 
 public interface StockRepository extends JpaRepository<Stock, String> {
     List<Stock> findAll();
+
+    Stock findByCode(String code);
 }

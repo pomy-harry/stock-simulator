@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Stock {
 
     @Id
-    @Column(name = "STOCK_ID")
+    @Column(name = "STOCK_CODE")
     private String code;
 
     @Column(name = "STOCK_NAME")

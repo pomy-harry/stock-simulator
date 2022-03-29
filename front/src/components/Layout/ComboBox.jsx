@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
 const BASE_URL = 'http://localhost:8090/stocks';
+const STOCK_URL = 'http://localhost:8090/stocks/watch';
 
 const StockList = () => {
     const [stocks, setStocks] = useState([]);
@@ -35,8 +36,28 @@ const StockList = () => {
           disablePortal
           id="combo-box-search"
           options={stocks}
-          sx={{ width: 600, heigth: '25%'}}
-          renderInput={(params) => <TextField {...params} placeholder="Search" />}
+          sx={{ width: 600}}
+          autoSelect={true}
+          onChange={(event, newValue) => {
+              const fetchWatchList = async () => {
+                await fetch(STOCK_URL, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type' : 'application/json',
+                    },
+                    body: JSON.stringify({
+                        code: newValue.code,
+                        customerId: "4028811d7fd4db27017fd4db6fb70000"
+                    })
+                })
+              }
+
+              fetchWatchList().catch(error => {
+                  console.log(error);
+              })
+            console.log(newValue.code);
+          }}
+          renderInput={(params) => <TextField {...params} placeholder="Search" variant='standard'/> }
         />
       );
 }

@@ -7,4 +7,5 @@ public interface StockService {
 
     List<Stock> findAllStocks();
 
+    Stock findByCode(String code);
 }
