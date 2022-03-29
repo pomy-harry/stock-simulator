@@ -40,8 +40,7 @@ public class CustomerController {
     public ResponseEntity<?> createCustomer(@RequestBody(required = true) CustomerDTO customer) {
 
         try {
-            Customer c = customerService
-                    .create(new Customer(customer.getName(), customer.getEmail(), customer.getPassword()));
+            Customer c = customerService.create(new Customer(customer.getName(), customer.getEmail(), customer.getPassword()));
             return ResponseEntity.ok().body(c);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
