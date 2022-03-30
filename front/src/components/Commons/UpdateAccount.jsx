@@ -28,6 +28,8 @@ const UpdateAccount = (props) => {
             })
         })
 
+        console.log(props.id);
+        console.log(updateName);
         console.log("업데이트 complete");
 
         window.location.reload();

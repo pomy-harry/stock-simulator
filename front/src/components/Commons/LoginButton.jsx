@@ -79,6 +79,7 @@ const LoginButton = (props) => {
                 console.log(res2.id);
                 setUserStatus(res2.id);
                 sessionStorage.setItem('USER', res2.id);
+                window.location.reload();
             }))
             }
         }
@@ -160,21 +161,22 @@ const LoginButton = (props) => {
   return (
       <>
         <div className={classes.header__loginbutton}>
-            {(!userStatus) ? (
-                <Button className={classes.button} variant="outline-light" onClick={props.onClick}>로그인</Button>
-                ) : (
+            {(sessionStorage.getItem('USER') !== null) ? (
                 <>
-                    <Button className={classes.button} variant="outline-light">
+                <Button className={classes.button} variant="outline-light">
                     <Link to="/MyPage" className={classes.link}>마이페이지</Link>
-                    </Button>
-                    <Button className={classes.button} variant="outline-light" onClick={() => {
+                </Button>
+                <Button className={classes.button} variant="outline-light" onClick={() => {
                     setUserStatus(null);
                     sessionStorage.removeItem('USER');
-                    }}>
+                    window.location.reload();
+                }}>
                     <Link to="/" className={classes.link}>로그아웃</Link>
-                    </Button>
+                </Button>
                 </>
-            )}
+            ) : (
+            <Button className={classes.button} variant="outline-light" onClick={props.onClick}>로그인</Button>
+            ) }
         </div>
 
         <Modal open={props.open} onClose={props.onClose}>

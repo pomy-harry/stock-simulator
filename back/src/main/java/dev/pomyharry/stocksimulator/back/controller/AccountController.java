@@ -23,24 +23,27 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping()
+    @RequestMapping("/api/v1/createaccount")
+    @PostMapping
     public ResponseEntity<?> insertAccount(@RequestBody AccountDTO accountDTO) {
+        System.out.println(accountDTO);
 
         try {
             accountService.insertAccount(accountDTO);
             return ResponseEntity.ok().body(accountDTO);
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-        
+
     }
 
-    @RequestMapping("/info/account")
-    @PostMapping
+    @PostMapping("/info/account")
     public ResponseEntity<?> getAccountInfo(@RequestBody(required = true) AccountDTO account) {
         System.out.println(account + "getCustomerId");
         Account acc = accountService.findByCustomerId(account);
+
+        System.out.println(acc);
 
         if (acc == null) {
             return ResponseEntity.ok().body(new AccountDTO());

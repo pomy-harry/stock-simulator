@@ -33,10 +33,10 @@ const Main = () => {
           'Content-Type' : 'application/json',
         },
         body: JSON.stringify({
-          id: "4028ad847fd313f1017fd31445f10000",
-          email: "minki0415@naver.com",
-          name: "김민기",
-          password: "!1234"
+          id: sessionStorage.getItem('USER'),
+          // email: "minki0415@naver.com",
+          // name: "김민기",
+          // password: "!1234"
         })
       }).then((res) => {
         if(res.ok){

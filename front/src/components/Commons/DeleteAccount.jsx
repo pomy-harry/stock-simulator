@@ -18,6 +18,7 @@ const DeleteAccount = (props) => {
         })
 
         console.log("삭제 complete");
+        window.location.reload();
 
         props.onClose();
     }  
