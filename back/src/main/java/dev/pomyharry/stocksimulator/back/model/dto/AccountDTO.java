@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountDTO {
@@ -18,11 +19,9 @@ public class AccountDTO {
         this.deposit = deposit;
     }
 
-    public AccountDTO(String id, String name, int deposit, String customerId) {
-        this.id = id;
+    public AccountDTO(String id, String name, int deposit) {
         this.name = name;
         this.deposit = deposit;
-        this.customerId = customerId;
     }
 
     public String getName() {
