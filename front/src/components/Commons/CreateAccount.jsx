@@ -62,12 +62,14 @@ const CreateAccount = () => {
       setAccountName('');
       setDeposit('');
 
+      window.location.reload();
+
     };  
   return (
     <div className="App">
 
 
-      <p className='test'>테스트 문구 입니다.</p>
+      <p className='test'>계좌 정보가 없습니다.</p>
 
 
       {/* 계좌생성 Modal */}
@@ -113,8 +115,6 @@ const CreateAccount = () => {
 
       
       <div className='accountInfo'>
-
-        <p>계좌 정보</p>
 
         {/* 계좌생성 버튼 */}
         <Button 

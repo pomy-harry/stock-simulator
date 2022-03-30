@@ -33,31 +33,31 @@ const StockList = () => {
 
     return (
         <Autocomplete
-          disablePortal
-          id="combo-box-search"
-          options={stocks}
-          sx={{ width: 600}}
-          autoSelect={true}
-          onChange={(event, newValue) => {
-              const fetchWatchList = async () => {
+        disablePortal
+        id="combo-box-search"
+        options={stocks}
+        sx={{ width: 1}}
+        autoSelect={true}
+        onChange={(event, newValue) => {
+            const fetchWatchList = async () => {
                 await fetch(STOCK_URL, {
                     method: 'POST',
                     headers: {
-                      'Content-Type' : 'application/json',
+                    'Content-Type' : 'application/json',
                     },
                     body: JSON.stringify({
                         code: newValue.code,
                         customerId: sessionStorage.getItem('USER')
                     })
                 })
-              }
+            }
 
-              fetchWatchList().catch(error => {
-                  console.log(error);
-              })
+            fetchWatchList().catch(error => {
+                console.log(error);
+            })
             console.log(newValue.code);
-          }}
-          renderInput={(params) => <TextField {...params} placeholder="Search" variant='standard'/> }
+        }}
+        renderInput={(params) => <TextField {...params} placeholder="Search" variant='standard'/> }
         />
       );
 }
