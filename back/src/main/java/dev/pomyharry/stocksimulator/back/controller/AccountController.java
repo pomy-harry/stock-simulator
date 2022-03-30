@@ -1,17 +1,20 @@
 package dev.pomyharry.stocksimulator.back.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.pomyharry.stocksimulator.back.model.dto.AccountDTO;
+import dev.pomyharry.stocksimulator.back.model.entity.Account;
 import dev.pomyharry.stocksimulator.back.service.AccountService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/v1/createaccount")
 public class AccountController {
 
     private final AccountService accountService;
@@ -20,10 +23,46 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping()
+    @RequestMapping("/api/v1/createaccount")
+    @PostMapping
     public void insertAccount(@RequestBody AccountDTO accountDTO) {
         accountService.insertAccount(accountDTO);
         System.out.println(accountDTO);
     }
-    
+
+    @RequestMapping("/info/account")
+    @PostMapping
+    public ResponseEntity<?> getAccountInfo(@RequestBody(required = true) AccountDTO account) {
+        System.out.println(account + "getCustomerId");
+        Account acc = accountService.findByCustomerId(account);
+
+        if (acc == null) {
+            return ResponseEntity.ok().body(new AccountDTO());
+        } else {
+            return ResponseEntity.ok().body(new AccountDTO(acc.getId(), acc.getName(), acc.getDeposit()));
+        }
+    }
+
+    @PutMapping("/info/account")
+    public ResponseEntity<?> updateAccount(@RequestBody(required = true) AccountDTO account) {
+        try {
+            Account acc = accountService.updateAccount(account);
+            return ResponseEntity.ok().body(acc);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/info/account")
+    public ResponseEntity<?> deleteAccount(@RequestBody(required = true) AccountDTO account) {
+        try {
+            accountService.deleteAccount(account);
+            return ResponseEntity.ok().body("성공");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

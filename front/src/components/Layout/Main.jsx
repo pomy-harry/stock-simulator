@@ -12,7 +12,6 @@ const Main = () => {
         <form className={classes.chart__search}>
             {/* <Input className={classes.chart__search__input} placeholder="검색" type='text' /> */}
             <StockList className={classes.chart__search__input}></StockList>
-            <Button className={classes.chart__search__button1}>버튼1</Button>
             <Button className={classes.chart__search__button2}>버튼2</Button>
         </form>
         <div className={classes.chart__list}>

@@ -157,9 +157,7 @@ const Header = (props) => {
       </Link>   
 
       <div className={classes.header__loginbutton}>
-        {(!userStatus) ? (
-          <Button className={classes.button} variant="outline-light" onClick={props.onClick}>로그인</Button>
-          ) : (
+        {(sessionStorage.getItem('USER') !== null) ? (
             <>
               <Button className={classes.button} variant="outline-light">
                 <Link to="/MyPage" className={classes.link}>마이페이지</Link>
@@ -171,7 +169,9 @@ const Header = (props) => {
                 <Link to="/" className={classes.link}>로그아웃</Link>
               </Button>
             </>
-        )}
+        ) : (
+          <Button className={classes.button} variant="outline-light" onClick={props.onClick}>로그인</Button>
+          ) }
       </div>
       
       

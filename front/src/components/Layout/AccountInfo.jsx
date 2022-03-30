@@ -1,11 +1,15 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
+import CreateAccount from '../Commons/CreateAccount'
+import ShowAccount from '../Commons/ShowAccount';
 
-const BASE_URL = 'http://localhost:8090/info/customer';
+const BASE_URL = 'http://localhost:8090/info/account';
 
-const CustomerInfo = () => {
+const AccountInfo = () => {
+    const [id, setId] = useState("");
     const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
+    const [deposit, setDeposit] = useState("");
+    const [balance, setBalance] = useState("");
 
     useEffect(() => {
         const fetchCustomerInfo = async () => {
@@ -15,14 +19,16 @@ const CustomerInfo = () => {
                     'Content-Type' : 'application/json',
                 },
                 body: JSON.stringify({
-                    id: sessionStorage.getItem('USER')
+                    customerId: sessionStorage.getItem('USER')
                 })
             }).then((res) => {
                 if(res.ok){
                     res.json().then((res2 => {
                         console.log(res2.name);
+                        setId(res2.id);
                         setName(res2.name);
-                        setEmail(res2.email);
+                        setDeposit(res2.deposit);
+                        setBalance("0000");
                     }))
                 }
             })
@@ -33,19 +39,10 @@ const CustomerInfo = () => {
         })
     }, []);
 
-  return (
-    <>
-        <div>고객정보</div>
-        <div>
-            <div>이름</div> 
-            <div>{name}</div>
-        </div>
-        <div>
-            <div>이메일</div>
-            <div>{email}</div>
-        </div>
-    </>
-  )
+    
+    return (name === null) ? 
+        <CreateAccount /> : <ShowAccount id={id} name={name} deposit={deposit} balance={balance}/>
+    
 }
 
-export default CustomerInfo
+export default AccountInfo

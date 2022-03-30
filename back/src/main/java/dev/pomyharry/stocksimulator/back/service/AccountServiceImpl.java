@@ -26,4 +26,27 @@ public class AccountServiceImpl implements AccountService {
 
         accountRepository.save(account);
     }
+
+    @Override
+    public Account findByCustomerId(AccountDTO acc) {
+        try {
+            return accountRepository.findByCustomerId(acc.getCustomerId());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + " 오류입니다.");
+        }
+        return null;
+    }
+
+    @Override
+    public Account updateAccount(AccountDTO acc) {
+        Account account = accountRepository.getById(acc.getId());
+        account.setName(acc.getName());
+
+        return accountRepository.save(account);
+    }
+
+    @Override
+    public void deleteAccount(AccountDTO acc) {
+        accountRepository.deleteById(acc.getId());
+    }
 }
