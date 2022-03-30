@@ -70,6 +70,7 @@ const Header = (props) => {
             console.log(res2.id);
             setUserStatus(res2.id);
             sessionStorage.setItem('USER', res2.id);
+            window.location.reload();
           }))
         }
       }
@@ -165,6 +166,7 @@ const Header = (props) => {
               <Button className={classes.button} variant="outline-light" onClick={() => {
                 setUserStatus(null);
                 sessionStorage.removeItem('USER');
+                window.location.reload();
               }}>
                 <Link to="/" className={classes.link}>로그아웃</Link>
               </Button>

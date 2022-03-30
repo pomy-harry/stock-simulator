@@ -30,6 +30,8 @@ const UpdateAccount = (props) => {
 
         console.log("업데이트 complete");
 
+        window.location.reload();
+
         props.onClose();
     }
 
