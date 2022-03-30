@@ -52,15 +52,32 @@
 .chart__list {
   width: calc(100%-20px);
   height: 100vh;
+  border: 1px solid darkblue;
+  padding: 1rem;
 }
 
-.chart__list_one {
+.chart__list__one {
   width: calc(100%-20px);
-  padding-top: 50%;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 20px;
-  border: 3px solid blueviolet;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid lightgray;
+}
+
+.chart__list__one__header {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 25rem;
+  margin-bottom: 1.4rem;
+  align-items: center;
+}
+
+.chart__list__one__body {
+  display: flex;
+  margin: 1rem 0;
+}
+
+.chart__list__one__body h3 {
+  margin-right: 2rem;
 }
 
 .info {
