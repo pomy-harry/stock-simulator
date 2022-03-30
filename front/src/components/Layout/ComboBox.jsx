@@ -50,6 +50,7 @@ const StockList = () => {
                         customerId: sessionStorage.getItem('USER')
                     })
                 })
+                window.location.reload();
             }
 
             fetchWatchList().catch(error => {

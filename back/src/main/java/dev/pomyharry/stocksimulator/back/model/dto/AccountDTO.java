@@ -20,6 +20,7 @@ public class AccountDTO {
     }
 
     public AccountDTO(String id, String name, int deposit) {
+        this.id = id;
         this.name = name;
         this.deposit = deposit;
     }

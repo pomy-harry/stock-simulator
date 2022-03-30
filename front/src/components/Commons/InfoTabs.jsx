@@ -103,7 +103,7 @@ const InfoTabs = () => {
             'Content-Type' : 'application/json',
         },
         body: JSON.stringify({
-            id: "402880827fd9d69a017fd9d891380000"
+            id: sessionStorage.getItem('USER')
         })
         })
         .then((res) => res.json())
