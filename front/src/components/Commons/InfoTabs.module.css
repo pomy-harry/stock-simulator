@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+  }
+  
+
+.info__tabs {
+    width: calc(100%-20px);
+    height: 100vh;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 3px solid blueviolet;
+  }

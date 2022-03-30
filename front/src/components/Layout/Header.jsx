@@ -1,49 +1,12 @@
-import React, { useRef, useState } from 'react';
-import Modal from '@mui/material/Modal';
-import { Button, Input, Tab, Tabs, Box, Typography } from '@mui/material';
+import React from 'react';
 import classes from "./Header.module.css";
-import PropTypes from 'prop-types';
 import logo_img from '../../images/logo1.png'
 import { Link } from 'react-router-dom';
+import LoginButton from '../Commons/LoginButton';
 
-// --- Tab 관련 부분 -----------------------------------------------------
-const TabPanel = (props) => {
-  const { children, value, index, ...other } = props;
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-const a11yProps = (index) => {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-// -------------------------------------------------------------------
-
-
-
-const LOGIN_URL = 'http://localhost:8090/login';
-const SIGNUP_URL = 'http://localhost:8090/join';
 
 const Header = (props) => {
+/*
 
   const [userStatus, setUserStatus] = useState(null);
 
@@ -148,13 +111,19 @@ const Header = (props) => {
   };
 
 
+=======
+*/
   return (
+
     <header className={classes.header}>
+
       <Link to="/" className={classes.link}>
         <div className={classes.header__logo}>
           <img src={logo_img} alt="logo" />
           <h2>주린이 구원소</h2>     
         </div>
+/*
+
       </Link>   
 
       <div className={classes.header__loginbutton}>
@@ -209,11 +178,13 @@ const Header = (props) => {
           </TabPanel>
         </div>        
       </Modal>
+=======*/
+      </Link>
 
+      <LoginButton onClick={props.onClick} open={props.open} onClose={props.onClose} />
       
     </header>
   )
 }
-
 
 export default Header;

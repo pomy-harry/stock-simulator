@@ -23,11 +23,17 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @RequestMapping("/api/v1/createaccount")
-    @PostMapping
-    public void insertAccount(@RequestBody AccountDTO accountDTO) {
-        accountService.insertAccount(accountDTO);
-        System.out.println(accountDTO);
+    @PostMapping()
+    public ResponseEntity<?> insertAccount(@RequestBody AccountDTO accountDTO) {
+
+        try {
+            accountService.insertAccount(accountDTO);
+            return ResponseEntity.ok().body(accountDTO);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        
     }
 
     @RequestMapping("/info/account")
