@@ -110,9 +110,8 @@ const Header = (props) => {
     setValue(newValue);
   };
 
-
-=======
 */
+
   return (
 
     <header className={classes.header}>
@@ -122,9 +121,12 @@ const Header = (props) => {
           <img src={logo_img} alt="logo" />
           <h2>주린이 구원소</h2>     
         </div>
-/*
+      </Link>
 
-      </Link>   
+
+
+
+      {/*    
 
       <div className={classes.header__loginbutton}>
         {(sessionStorage.getItem('USER') !== null) ? (
@@ -143,10 +145,7 @@ const Header = (props) => {
         ) : (
           <Button className={classes.button} variant="outline-light" onClick={props.onClick}>로그인</Button>
           ) }
-      </div>
-      
-      
-      
+      </div>      
 
       <Modal open={props.open} onClose={props.onClose}>
         <div className={classes.loginModal}>
@@ -177,9 +176,7 @@ const Header = (props) => {
             </form>
           </TabPanel>
         </div>        
-      </Modal>
-=======*/
-      </Link>
+      </Modal> */}
 
       <LoginButton onClick={props.onClick} open={props.open} onClose={props.onClose} />
       
