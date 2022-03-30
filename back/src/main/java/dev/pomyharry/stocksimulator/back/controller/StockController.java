@@ -33,7 +33,7 @@ public class StockController {
 
             return stocks;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }

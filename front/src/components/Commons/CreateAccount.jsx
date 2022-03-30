@@ -51,6 +51,7 @@ const CreateAccount = () => {
             'Content-Type' : 'application/json',
           },
           body: JSON.stringify({
+            id: sessionStorage.getItem('USER'),
             name: accountName,
             deposit: deposit,
           })

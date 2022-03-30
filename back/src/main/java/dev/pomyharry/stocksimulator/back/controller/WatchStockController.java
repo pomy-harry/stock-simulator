@@ -36,7 +36,7 @@ public class WatchStockController {
             Stock stock = stockService.findByCode(watchStock.getCode());
             watchStockService.createWatchList(new WatchStock(stock, customer));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
