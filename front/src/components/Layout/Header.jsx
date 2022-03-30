@@ -69,6 +69,7 @@ const Header = (props) => {
           res.json().then((res2 => {
             console.log(res2.id);
             setUserStatus(res2.id);
+            sessionStorage.setItem('USER', res2.id);
           }))
         }
       }
@@ -156,14 +157,19 @@ const Header = (props) => {
       </Link>   
 
       <div className={classes.header__loginbutton}>
-        {!userStatus ? (
+        {(!userStatus) ? (
           <Button className={classes.button} variant="outline-light" onClick={props.onClick}>로그인</Button>
           ) : (
             <>
               <Button className={classes.button} variant="outline-light">
                 <Link to="/MyPage" className={classes.link}>마이페이지</Link>
               </Button>
-              <Button className={classes.button} variant="outline-light" onClick={() => setUserStatus(null)}>로그아웃</Button>
+              <Button className={classes.button} variant="outline-light" onClick={() => {
+                setUserStatus(null);
+                sessionStorage.removeItem('USER');
+              }}>
+                <Link to="/" className={classes.link}>로그아웃</Link>
+              </Button>
             </>
         )}
       </div>

@@ -47,7 +47,7 @@ const StockList = () => {
                     },
                     body: JSON.stringify({
                         code: newValue.code,
-                        customerId: "4028811d7fd4db27017fd4db6fb70000"
+                        customerId: sessionStorage.getItem('USER')
                     })
                 })
               }

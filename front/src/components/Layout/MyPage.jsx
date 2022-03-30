@@ -1,6 +1,7 @@
 import React from 'react'
 import classes from './MyPage.module.css'
 import CreateAccount from '../Commons/CreateAccount'
+import CustomerInfo from './CustomerInfo'
 
 const MyPage = () => {
     
@@ -19,7 +20,7 @@ const MyPage = () => {
                 빈공간
             </div>
             <div className={classes.customerinfo}>
-                고객정보
+                <CustomerInfo />
             </div>
             <div className={classes.stockinfo}>
                 계좌정보
