@@ -23,7 +23,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = new Account();
         account.setName(accountDTO.getName());
         account.setDeposit(accountDTO.getDeposit());
-        account.setCustomer(customerService.findById(accountDTO.getId()));
+        account.setCustomer(customerService.findById(accountDTO.getCustomerId()));
 
         accountRepository.save(account);
     }

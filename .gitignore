@@ -69,3 +69,6 @@ build/
 !**/src/main/resources/static/
 !**/src/main/resources/templates/
 application.properties
+
+
+crawling/

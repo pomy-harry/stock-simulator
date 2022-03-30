@@ -1,7 +1,11 @@
 package dev.pomyharry.stocksimulator.back.model.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class AccountDTO {
 
@@ -10,17 +14,14 @@ public class AccountDTO {
     private int deposit;
     private String customerId;
 
-    public AccountDTO(String id, String name, int deposit) {
-        this.id = id;
+    public AccountDTO(String name, int deposit) {
         this.name = name;
         this.deposit = deposit;
     }
 
-    public AccountDTO(String id, String name, int deposit, String customerId) {
-        this.id = id;
+    public AccountDTO(String id, String name, int deposit) {
         this.name = name;
         this.deposit = deposit;
-        this.customerId = customerId;
     }
 
     public String getName() {
@@ -60,5 +61,4 @@ public class AccountDTO {
         return "AccountDTO [id = " + id + ", deposit=" + deposit + ", name=" + name + ", customer = " + customerId
                 + "]";
     }
-
 }
