@@ -24,4 +24,8 @@ public class StockDTO {
         this.code = code;
         this.name = name;
     }
+
+    public StockDTO(String code) {
+        this.code = code;
+    }
 }

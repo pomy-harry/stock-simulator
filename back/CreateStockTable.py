@@ -24,27 +24,26 @@ def createStockTable(hosturl, username, password, database) :
 
     # MySQL SQL문 실행
 
-    # DROP TABLE
+    #DROP TABLE
     # sql_drop_stock_table = (
 
     #     "DROP TABLE STOCK"
 
     # )
-
     # mycursor.execute(sql_drop_stock_table)
 
     # CREATE TABLE
-    sql_create_stock_table = (
+    # sql_create_stock_table = (
 
-        "CREATE TABLE STOCK (" +
-            "STOCK_CODE VARCHAR(255) NOT NULL, " +
-            "STOCK_NAME VARCHAR(255) NOT NULL, " +
-            "PRIMARY KEY (STOCK_CODE) " +
-        ")"
+    #     "CREATE TABLE STOCK (" +
+    #         "STOCK_CODE VARCHAR(255) NOT NULL, " +
+    #         "STOCK_NAME VARCHAR(255) NOT NULL, " +
+    #         "PRIMARY KEY (STOCK_CODE) " +
+    #     ")"
 
-    )
+    # )
 
-    mycursor.execute(sql_create_stock_table)
+    # mycursor.execute(sql_create_stock_table)
 
     # INSERT DATA
     sql_insert_stock = "INSERT INTO STOCK (STOCK_CODE, STOCK_NAME) VALUES (%s, %s)"

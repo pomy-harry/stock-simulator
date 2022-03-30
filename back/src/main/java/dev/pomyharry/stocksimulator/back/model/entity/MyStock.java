@@ -14,25 +14,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class Account {
+public class MyStock {
 
     @Id
-    @Column(name = "ACCOUNT_ID")
-    @GeneratedValue(generator = "account-uuid")
-    @GenericGenerator(name = "account-uuid", strategy = "uuid2")
-    private String id;
+    @Column(name = "MYSTOCK_ID")
+    @GeneratedValue(generator = "mystock-uuid")
+    @GenericGenerator(name = "mystock-uuid", strategy = "uuid2")
+    private String Id;
 
-    @Column(name = "ACCOUNT_NAME")
-    private String name;
+    @Column(name = "BUY_PRICE")
+    private long buyPrice;
 
-    @Column(name = "DEPOSIT")
-    private int deposit;
+    @Column(name = "AMOUNT")
+    private int amount;
 
     @ManyToOne
     @JoinColumn(name = "CUSTOMER_ID")
     private Customer customer;
 
+    @ManyToOne
+    @JoinColumn(name = "STOCK_CODE")
+    private Stock stock;
+    
 }

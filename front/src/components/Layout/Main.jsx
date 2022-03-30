@@ -2,6 +2,7 @@ import React from 'react'
 import classes from "./Main.module.css";
 import { Button} from '@mui/material';
 import StockList from './ComboBox';
+import InfoTabs from '../Commons/InfoTabs';
 
 const Main = () => {
 
@@ -37,9 +38,7 @@ const Main = () => {
           내 주식 정보
         </div>
 
-        <div className={classes.info__tabs}>
-          시장정보, 모의투자 탭 만들기 스크롤 가능하게 하기
-        </div>
+        <InfoTabs />
       </div>
 
     </div>

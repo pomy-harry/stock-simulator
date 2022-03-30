@@ -1,5 +1,6 @@
 package dev.pomyharry.stocksimulator.back.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +22,16 @@ public class AccountController {
     }
 
     @PostMapping()
-    public void insertAccount(@RequestBody AccountDTO accountDTO) {
-        accountService.insertAccount(accountDTO);
-        System.out.println(accountDTO);
+    public ResponseEntity<?> insertAccount(@RequestBody AccountDTO accountDTO) {
+
+        try {
+            accountService.insertAccount(accountDTO);
+            return ResponseEntity.ok().body(accountDTO);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        
     }
     
 }

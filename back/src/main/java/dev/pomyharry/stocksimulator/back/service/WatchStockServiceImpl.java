@@ -1,8 +1,12 @@
 package dev.pomyharry.stocksimulator.back.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dev.pomyharry.stocksimulator.back.model.dto.WatchStockDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.WatchStock;
 import dev.pomyharry.stocksimulator.back.repository.WatchStockRepository;
 import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
@@ -23,5 +27,17 @@ public class WatchStockServiceImpl implements WatchStockService {
         System.out.println(stock);
         return watchStockRepository.save(stock);
     }
+
+    @Override
+    public List<WatchStockDTO> findAllWatchStockByCustomerId(String customerId) {
+        
+        List<WatchStock> watchStockList = watchStockRepository.findAllByCustomerId(customerId);
+        List<WatchStockDTO> watchStockDTOList = watchStockList.stream().map(r -> new WatchStockDTO(r, r.getStock().getName())).collect(Collectors.toList());
+
+
+        return watchStockDTOList;
+    }
+
+    
 
 }
