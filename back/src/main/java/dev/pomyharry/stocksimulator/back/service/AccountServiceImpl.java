@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import dev.pomyharry.stocksimulator.back.model.dto.AccountDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Account;
+import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.repository.AccountRepository;
 
 @Service
@@ -48,5 +49,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void deleteAccount(AccountDTO acc) {
         accountRepository.deleteById(acc.getId());
+    }
+
+    @Override
+    public void deleteAllAccount(Customer customer) {
+        accountRepository.deleteAllByCustomer(customer);
     }
 }

@@ -2,6 +2,7 @@ package dev.pomyharry.stocksimulator.back.service;
 
 import dev.pomyharry.stocksimulator.back.model.dto.AccountDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Account;
+import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 
 public interface AccountService {
 
@@ -12,4 +13,6 @@ public interface AccountService {
     Account updateAccount(AccountDTO acc);
 
     void deleteAccount(AccountDTO acc);
+
+    void deleteAllAccount(Customer customer);
 }

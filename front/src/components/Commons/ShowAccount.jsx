@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import UpdateAccount from './UpdateAccount';
 import DeleteAccount from './DeleteAccount';
+import classes from '../Layout/Info.module.css';
 
 const style = {
     position: 'absolute',
@@ -28,33 +29,35 @@ const ShowAccount = (props) => {
     const handleDelClose = () => setDel(false);
 
   return (
-    <>
-        <div>계좌정보</div>
-        <div>
-            <div>이름</div> 
-            <div>{props.name}</div>
+    <div className={classes.main}>
+        <div className={classes.title}> 계좌정보</div>
+        <div className={classes.row}>
+            <p>이름</p> 
+            <p>{props.name}</p>
         </div>
-        <div>
-            <div>예수금</div>
-            <div>{props.deposit}</div>
+        <div className={classes.row}>
+            <p>예수금</p>
+            <p>{props.deposit}</p>
         </div>
-        <div>
-            <div>잔고</div>
-            <div>{props.balance}</div>
+        <div className={classes.row}> 
+            <p>잔고</p>
+            <p>{props.balance}</p>
         </div>
-        <Button onClick={handleUpdateOpen}>수정</Button>
-        <Modal open={update} onClose={handleUpdateClose}>
-            <Box sx={style}>
-                <UpdateAccount id={props.id} onClose={handleUpdateClose}></UpdateAccount>
-            </Box>
-        </Modal>
-        <Button onClick={handleDelOpen}>삭제</Button>
-        <Modal open={del} onClose={handleDelClose}>
-            <Box sx={style}>
-                <DeleteAccount id={props.id} name={props.name} onClose={handleDelClose}/>
-            </Box>
-        </Modal>
-    </>
+        <div className={classes.bottom}>
+            <Button onClick={handleUpdateOpen}>수정</Button>
+            <Modal open={update} onClose={handleUpdateClose}>
+                <Box sx={style}>
+                    <UpdateAccount id={props.id} onClose={handleUpdateClose}></UpdateAccount>
+                </Box>
+            </Modal>
+            <Button onClick={handleDelOpen}>삭제</Button>
+            <Modal open={del} onClose={handleDelClose}>
+                <Box sx={style}>
+                    <DeleteAccount id={props.id} name={props.name} onClose={handleDelClose}/>
+                </Box>
+            </Modal>
+        </div>
+    </div>
   )
 }
 

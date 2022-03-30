@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button } from '@mui/material';
-import classes from './Account.module.css';
+import classes from './Customer.module.css';
 
-const BASE_URL = 'http://localhost:8090/info/account'
+const BASE_URL = 'http://localhost:8090/info/customer'
 
-const DeleteAccount = (props) => {
+const DeleteCustomer = (props) => {
 
     const clickDelHandler = async() => {
         await fetch(BASE_URL, {
@@ -13,8 +13,11 @@ const DeleteAccount = (props) => {
                 'Content-Type' : 'application/json',
             },
             body: JSON.stringify({
-                id: props.id
+                id: sessionStorage.getItem('USER')
             })
+        }).then((res) => {
+            sessionStorage.removeItem('USER');
+            window.location.reload();
         })
 
         console.log("삭제 complete");
@@ -24,9 +27,9 @@ const DeleteAccount = (props) => {
 
   return (
     <div className={classes.main}>
-        <p>{props.name} 계좌를 삭제하시겠습니까?</p>
+        <p>{props.email} 계정을 삭제하시겠습니까?</p>
         <div className={classes.bottom}>
-            <Button onClick={clickDelHandler}>삭제</Button>
+            <Button onClick={clickDelHandler}>회원 탈퇴</Button>
             <Button onClick={props.onClose}>취소</Button>
         </div>
     </div>
@@ -34,4 +37,4 @@ const DeleteAccount = (props) => {
 
 }
 
-export default DeleteAccount
+export default DeleteCustomer

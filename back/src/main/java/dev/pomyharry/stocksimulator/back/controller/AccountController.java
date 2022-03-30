@@ -46,8 +46,8 @@ public class AccountController {
     @PutMapping("/info/account")
     public ResponseEntity<?> updateAccount(@RequestBody(required = true) AccountDTO account) {
         try {
-            Account acc = accountService.updateAccount(account);
-            return ResponseEntity.ok().body(acc);
+            accountService.updateAccount(account);
+            return ResponseEntity.ok().body("성공");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());
