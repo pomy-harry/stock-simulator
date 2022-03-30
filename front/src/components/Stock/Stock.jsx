@@ -13,9 +13,6 @@ const Stock = (props) => {
                 <h4>{props.change}</h4>
             </div>
           </div>
-          {/* <div className={classes.stock_data__body}>
-            <h3>{props.change}</h3>
-          </div> */}
           <div className={classes.stock_data__chart}>
             <img src={props.chartUrl} alt="" />
           </div>
