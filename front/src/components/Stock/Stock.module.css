@@ -1,40 +1,46 @@
 .stock_data {
-    margin-bottom: 2rem;
-    border: 1px solid lightgray;
-    padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid lightgray;
+  padding: 1rem 2rem;
 }
 
 .stock_data_closebutton {
-    margin: 0;
-    padding: 0;
-    border: 0px;
-    background-color: white;
-    margin-left: 42rem;
+  margin: 0;
+  padding: 0;
+  border: 0px;
+  background-color: white;
+  margin-left: 42rem;
 }
 
 .stock_data__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20rem;
 }
 
-.stock_data__header_sub {
-    display: flex;
-    color: #dd2626;
-    align-items: center;
+.stock_data__header_sub__red {
+  display: flex;
+  color: #dd2626;
+  align-items: center;
+}
+
+.stock_data__header_sub__blue {
+  display: flex;
+  color: blue;
+  align-items: center;
 }
 
 .stock_data__header_sub h4 {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 .stock_data__body h3 {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .stock_data__chart {
-    border-top: 1px solid lightgray;
-    padding-top: 1rem;
-    margin-top: 1rem;
+  border-top: 1px solid lightgray;
+  padding-top: 1rem;
+  margin-top: 1rem;
 }

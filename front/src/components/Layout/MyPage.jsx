@@ -9,18 +9,9 @@ const MyPage = () => {
   return (
     <div className={classes.MyPage}>
         <div className={classes.MyPage__mystockinfo}>
-            <div className={classes.rate}>
-                현재 수익률
-            </div>
-            <div className={classes.stockdetail}>
-                주식 잔고 상세조회
-                <MyStockInfo />
-            </div>
+            <MyStockInfo />
         </div>
         <div className={classes.MyPage__myinfo}>
-            <div className={classes.emptySpace}>
-                빈공간
-            </div>
             <div className={classes.customerinfo}>
                 <CustomerInfo />
             </div>

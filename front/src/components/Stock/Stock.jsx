@@ -20,13 +20,20 @@ const Stock = (props) => {
     window.location.reload();
   }
 
+const rate = props.changeRate;
+const sub = typeof rate === 'string'?rate.substr(0, 1) : '';
+
   return (
       <div className={classes.stock_data}>
         <button onClick={clickDelHandler} className={classes.stock_data_closebutton}>X</button>
         <div>
           <div className={classes.stock_data__header}>
             <h1>{props.name}</h1>
-            <div className={classes.stock_data__header_sub}>
+            <div className={
+              (sub === '+') 
+              ? classes.stock_data__header_sub__red
+              : classes.stock_data__header_sub__blue
+              }>
                 <h2>{props.price}</h2>
                 <h4>{props.changeRate}</h4>
                 <h4>{props.change}</h4>

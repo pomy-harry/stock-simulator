@@ -1,0 +1,54 @@
+ul {
+  padding: 0;
+}
+
+.box {
+  height: 80vh;
+  padding: 20px;
+  padding-top: 30px;
+  overflow: auto;
+}
+
+.box::-webkit-scrollbar {
+  width: 10px;
+}
+
+.box::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 20px;
+}
+
+.box::-webkit-scrollbar-track {
+  background-color: white;
+}
+
+.profit {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 10%;
+  border: 1px solid lightgray;
+  padding: 10px;
+  margin: 0 10px 30px 10px;
+  color: #333333;
+  font-size: 1.5rem;
+}
+
+.profit__main {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  padding: 10px;
+  margin: 0 10px 30px 10px;
+  color: #333333;
+  font-size: 1.5rem;
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
