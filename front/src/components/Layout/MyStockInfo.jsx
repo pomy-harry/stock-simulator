@@ -67,7 +67,7 @@ const MyStockInfo = (props) => {
                     <span className={(price - buyPrice)>0 ? classes.red : classes.blue}>{((price - buyPrice) / buyPrice * 100).toFixed(3)}%</span>
                     <span>{(price - buyPrice)}원</span>
                 </div>
-                <div>
+                <div className={classes.profit__box}>
                     <ul>{myStockList}</ul>
                 </div> 
             </div>
