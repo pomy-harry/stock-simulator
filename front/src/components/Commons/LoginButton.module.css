@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.loginModal {
+.login__modal {
   position: absolute;
   width: 400px;
   height: 450px;
@@ -22,7 +22,7 @@
   transform: translate(-50%, -50%);
 }
 
-.loginModal__header {
+.login__modal__header {
   display: flex;
   width: 100%;
   margin-bottom: 40px;
@@ -30,45 +30,45 @@
   justify-content: center;
 }
 
-.loginModal__header img {
+.login__modal__header img {
   width: 40px;
   height: 40px;
 }
 
-.loginModal__header img {
+.login__modal__header img {
   font-size: 23px;
 }
 
-.loginModal__Tabs {
+.login__modal__tabs {
   display: flex;
   margin-top: 20px;
   text-align: center;
   flex-direction: column;
 }
 
-.loginModal__Tab {
+.login__modal__tab {
   flex: 1;
 }
 
-.loginModal__form {
+.login__modal__form {
   display: flex;
   flex-direction: column;
 }
 
-.loginModal__form Input {
+.login__modal__form Input {
   margin-top: 20px;
   margin-bottom: 2px;
   width: 100%;
 }
 
-.loginModal__form Button {
+.login__modal__form Button {
   margin-top: 25px;
   font-size: 17px;
   background-color: #1976d2;
   color: white;
 }
 
-.loginModal__form Button:hover {
+.login__modal__form Button:hover {
   color: #1976d2;
 }
 

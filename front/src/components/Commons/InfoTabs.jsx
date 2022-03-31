@@ -112,7 +112,6 @@ const InfoTabs = () => {
         .then((res) => {          
           const dataList = [];
           for(const key in res){
-            // console.log("ressss" + res[key].code);
             dataList.push({
               code: res[key].code,
               name: res[key].name
@@ -134,7 +133,6 @@ const InfoTabs = () => {
 
         await fetch(MARKET_INFO_URL).then((res) => {
           res.json().then((res2) => {
-            // console.log(res2);
             setMarketInfo(res2);
           })
         });
@@ -156,18 +154,16 @@ const InfoTabs = () => {
       />
     ));
 
-    // console.log(watchStocks);
     const watchStockList = watchStocks.map((value) => (
       <MenuItem value={value}>{(value.name)}</MenuItem>      
     ));
     
-    
 
   return (
     <div className={classes.info__tabs}>
-        <Tabs value={tabValue} onChange={handleInfoTabChange} className={classes.info__tabs_tab}>  
-                    <Tab label="모의투자" {...a11yProps(0)} className={classes.info__tabs_tab_stocktrading} />
-                    <Tab label="시장정보" {...a11yProps(1)} className={classes.info__tabs_tab_marketinfo} />
+        <Tabs value={tabValue} onChange={handleInfoTabChange}>  
+                    <Tab label="모의투자" {...a11yProps(0)} className={classes.info__tabs__tab}/>
+                    <Tab label="시장정보" {...a11yProps(1)}/>
                 </Tabs>
                 
                 <TabPanel className={classes.info__tabs__tabpanel} value={tabValue} index={0}>
@@ -194,9 +190,6 @@ const InfoTabs = () => {
                         </div>
                       </div>
                       <div>
-                        {/* <div>
-                          수량 :
-                        </div>   */}
                         <Input
                           className={classes.info__tabs__body__amount}
                           placeholder='          구매 수량 (주)'
@@ -206,9 +199,6 @@ const InfoTabs = () => {
                         />
                       </div>
                       <div>
-                        {/* <div>
-                          총 가격 :
-                        </div> */}
                         <div className={classes.info__tabs__body_totalprice}>
                           300,000원
                         </div>
