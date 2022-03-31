@@ -14,7 +14,7 @@ const Header = (props) => {
       <Link to="/" className={classes.link}>
         <div className={classes.header__logo}>
           <img src={logo_img} alt="logo" />
-          <h2>주린이 구원소</h2>     
+          <h2>주린이집</h2>     
         </div>
       </Link>
 

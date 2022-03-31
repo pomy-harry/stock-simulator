@@ -8,8 +8,8 @@ const BASE_URL = 'http://localhost:8090/info/account';
 const AccountInfo = () => {
     const [id, setId] = useState("");
     const [name, setName] = useState("");
-    const [deposit, setDeposit] = useState("");
-    const [balance, setBalance] = useState("");
+    const [deposit, setDeposit] = useState(0);
+    const [balance, setBalance] = useState(0);
 
     useEffect(() => {
         const fetchCustomerInfo = async () => {
@@ -28,7 +28,7 @@ const AccountInfo = () => {
                         setId(res2.id);
                         setName(res2.name);
                         setDeposit(res2.deposit);
-                        setBalance("0000");
+                        setBalance(res2.sumTotalNowPrice + res2.deposit);
                     }))
                 }
             })

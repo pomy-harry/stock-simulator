@@ -37,11 +37,11 @@ const ShowAccount = (props) => {
         </div>
         <div className={classes.row}>
             <p>예수금</p>
-            <p>{props.deposit}</p>
+            <p>{props.deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원</p>
         </div>
         <div className={classes.row}> 
             <p>잔고</p>
-            <p>{props.balance}</p>
+            <p>{props.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') } 원</p>
         </div>
         <div className={classes.bottom}>
             <Button onClick={handleUpdateOpen}>수정</Button>

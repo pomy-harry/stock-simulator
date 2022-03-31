@@ -1,5 +1,7 @@
 package dev.pomyharry.stocksimulator.back.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,17 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.pomyharry.stocksimulator.back.model.dto.AccountDTO;
+import dev.pomyharry.stocksimulator.back.model.dto.MyStockDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Account;
 import dev.pomyharry.stocksimulator.back.service.AccountService;
+import dev.pomyharry.stocksimulator.back.service.MyStockService;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class AccountController {
 
     private final AccountService accountService;
+    private final MyStockService myStockService;
 
-    public AccountController(AccountService accountService) {
+    public AccountController(AccountService accountService, MyStockService myStockService) {
         this.accountService = accountService;
+        this.myStockService = myStockService;
     }
 
     @RequestMapping("/api/v1/createaccount")
@@ -40,15 +46,20 @@ public class AccountController {
 
     @PostMapping("/info/account")
     public ResponseEntity<?> getAccountInfo(@RequestBody(required = true) AccountDTO account) {
-        System.out.println(account + "getCustomerId");
+        
         Account acc = accountService.findByCustomerId(account);
+        List<MyStockDTO> mystock = myStockService.findAllMyStockByCustomerId(account.getCustomerId());
+        long sumTotalNowPrice = 0;
+        for (MyStockDTO myStockDTO : mystock) {
+            sumTotalNowPrice += myStockDTO.getNowPrice()*myStockDTO.getAmount();
+        }
 
         System.out.println(acc);
 
         if (acc == null) {
             return ResponseEntity.ok().body(new AccountDTO());
         } else {
-            return ResponseEntity.ok().body(new AccountDTO(acc.getId(), acc.getName(), acc.getDeposit()));
+            return ResponseEntity.ok().body(new AccountDTO(acc.getId(), acc.getName(), acc.getDeposit(), sumTotalNowPrice));
         }
     }
 

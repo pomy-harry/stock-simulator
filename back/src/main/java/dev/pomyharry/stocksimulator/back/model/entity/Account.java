@@ -31,8 +31,11 @@ public class Account {
     @Column(name = "DEPOSIT")
     private long deposit;
 
+    @Column(name = "SEED_MONEY")
+    private long seedMoney;
+
     @ManyToOne
     @JoinColumn(name = "CUSTOMER_ID")
-    private Customer customer;
+    private Customer customer;    
 
 }

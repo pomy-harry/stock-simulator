@@ -16,7 +16,7 @@ public class MyStockDTO {
     private String stockCode;
     private long buyPrice;
     private String name;
-    private long price;
+    private long nowPrice;
 
     public MyStockDTO (int amount, String customerId, String stockCode, long buyPrice) {
         this.amount = amount;
@@ -39,11 +39,11 @@ public class MyStockDTO {
         this.amount = amount;
     }
 
-    public MyStockDTO(long buyPrice, int amount, String name, long price) {
-        this.buyPrice = buyPrice;
+    public MyStockDTO(long totalBuyPrice, int amount, String name, long nowPrice) {
+        this.totalBuyPrice = totalBuyPrice;
         this.amount = amount;
         this.name = name;
-        this.price = price;
+        this.nowPrice = nowPrice;
     }
 
 }

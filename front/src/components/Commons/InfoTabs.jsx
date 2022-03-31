@@ -206,6 +206,12 @@ const InfoTabs = (props) => {
             })
           })
 
+          setBuyStockName("start");
+          setBuyStockPrice(0);
+          setBuyStockAmount('');
+          setBuyStockTotalPrice(0);
+          window.location.reload();
+
         } else {
           console.log("수량 : 0");
         }
@@ -257,7 +263,7 @@ const InfoTabs = (props) => {
                           className={classes.info__tabs__body__amount}
                           placeholder='          구매 수량 (주)'
                           inputComponent={NumberFormatCustom}
-                          value={buyStockAmount.numberformat}
+                          value={buyStockAmount}
                           onChange={handleAmountChange}              
                         />
                       </div>

@@ -12,17 +12,32 @@ public class AccountDTO {
     private String id;
     private String name;
     private long deposit;
+    private long seedMoney;
     private String customerId;
+    private long sumTotalNowPrice;
 
-    public AccountDTO(String name, long deposit) {
+    public AccountDTO(String name, long deposit, long seedMoney, String customerId) {
         this.name = name;
         this.deposit = deposit;
+        this.seedMoney = seedMoney;
+        this.customerId = customerId;
     }
 
     public AccountDTO(String id, String name, long deposit) {
         this.id = id;
         this.name = name;
+        this.deposit = deposit;        
+    }
+
+    public AccountDTO(String id, String name, long deposit, long sumTotalNowPrice) {
+        this.id = id;
+        this.name = name;
         this.deposit = deposit;
+        this.sumTotalNowPrice = sumTotalNowPrice;     
+    }
+
+    public AccountDTO(String customerId){
+        this.customerId = customerId;
     }
 
     public String getName() {
@@ -59,7 +74,8 @@ public class AccountDTO {
 
     @Override
     public String toString() {
-        return "AccountDTO [id = " + id + ", deposit=" + deposit + ", name=" + name + ", customer = " + customerId
-                + "]";
+        return "AccountDTO [customerId=" + customerId + ", deposit=" + deposit + ", id=" + id + ", name=" + name
+                + ", seedMoney=" + seedMoney + "]";
     }
+    
 }
