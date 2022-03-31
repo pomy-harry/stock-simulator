@@ -2,11 +2,27 @@ import { Button } from '@mui/material'
 import React from 'react'
 import classes from './Stock.module.css'
 
+const BASE_URL = 'http://localhost:8090/stocks/watch'
+
 const Stock = (props) => {
+
+  const clickDelHandler = async() => {
+    await fetch(BASE_URL, {
+      method: 'Delete',
+      headers: {
+        'Content-Type' : 'application/json',
+      },
+      body: JSON.stringify({
+        code: props.code
+      })
+    })
+
+    window.location.reload();
+  }
 
   return (
       <div className={classes.stock_data}>
-        <button className={classes.stock_data_closebutton}>X</button>
+        <button onClick={clickDelHandler} className={classes.stock_data_closebutton}>X</button>
         <div>
           <div className={classes.stock_data__header}>
             <h1>{props.name}</h1>

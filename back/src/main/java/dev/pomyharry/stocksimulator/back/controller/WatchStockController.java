@@ -2,14 +2,19 @@ package dev.pomyharry.stocksimulator.back.controller;
 
 import java.util.List;
 
+import javax.xml.ws.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
+import dev.pomyharry.stocksimulator.back.model.dto.StockDTO;
 import dev.pomyharry.stocksimulator.back.model.dto.WatchStockDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.model.entity.Stock;
@@ -42,15 +47,26 @@ public class WatchStockController {
             System.out.println(e.getMessage());
         }
     }
+
     @RequestMapping("/findAllWatchStockByCustomerId")
     @PostMapping
     public List<WatchStockDTO> findAllWatchStockByCustomerId(@RequestBody CustomerDTO customerDTO) {
         try {
             String customerId = customerDTO.getId();
-            return watchStockService.findAllWatchStockByCustomerId(customerId);      
+            return watchStockService.findAllWatchStockByCustomerId(customerId);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+
+    @DeleteMapping("/watch")
+    public ResponseEntity<?> deleteByStockCode(@RequestBody StockDTO stock) {
+        try {
+            watchStockService.deleteByStockCode(stock.getCode());
+            return ResponseEntity.ok().body("success");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

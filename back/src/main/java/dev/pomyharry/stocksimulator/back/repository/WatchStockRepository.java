@@ -17,4 +17,7 @@ public interface WatchStockRepository extends JpaRepository<WatchStock, String> 
 
     List<WatchStock> findAllByCustomerId(String customerId);
 
+    @Transactional
+    void deleteByStockCode(String code);
+
 }

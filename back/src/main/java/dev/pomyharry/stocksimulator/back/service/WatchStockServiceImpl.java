@@ -44,4 +44,9 @@ public class WatchStockServiceImpl implements WatchStockService {
         return watchStockDTOList;
     }
 
+    @Override
+    public void deleteByStockCode(String code) {
+        watchStockRepository.deleteByStockCode(code);
+    }
+
 }
