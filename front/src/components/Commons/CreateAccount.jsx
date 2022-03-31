@@ -101,10 +101,8 @@ const CreateAccount = () => {
           </form>
         </div>
       </Modal>
-
-      
+ 
       <div className='accountInfo'>
-
         {/* 계좌생성 버튼 */}
         <Button 
           variant='contained'
