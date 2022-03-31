@@ -6,13 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dev.pomyharry.stocksimulator.back.exception.AccountNotFoundException;
 import dev.pomyharry.stocksimulator.back.controller.component.StockDataComponent;
+import dev.pomyharry.stocksimulator.back.exception.AccountNotFoundException;
 import dev.pomyharry.stocksimulator.back.model.dto.MyStockDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Account;
-import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.model.entity.MyStock;
-import dev.pomyharry.stocksimulator.back.model.entity.Stock;
 import dev.pomyharry.stocksimulator.back.model.entity.WatchStock;
 import dev.pomyharry.stocksimulator.back.repository.AccountRepository;
 import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
