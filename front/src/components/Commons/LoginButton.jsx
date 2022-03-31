@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import classes from './LoginButton.module.css'
 import Modal from '@mui/material/Modal';
 import { Button, Input, Tab, Tabs, Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import logo_img from '../../images/logo1.png'
+import logo_img from '../../static/images/logo1.png'
 
 // --- Tab관련 부분 -------------------------------------------------------
 const TabPanel = (props) => {

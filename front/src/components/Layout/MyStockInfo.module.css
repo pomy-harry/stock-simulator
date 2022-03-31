@@ -3,26 +3,24 @@ ul {
 }
 
 .box {
-  height: 80vh;
-  padding: 20px;
-  padding-top: 30px;
+  align-items: center;
+  border: 1px solid lightgray;
+  margin: 10px;
+  padding: 2rem 0;
 }
 
 .profit {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 10%;
-  border: 1px solid lightgray;
-  padding: 10px;
-  margin: 0 10px 30px 10px;
   color: #333333;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
 .profit__box {
   overflow: auto;
-  height: 90%;
+  height: 100%;
 }
 
 .profit__box::-webkit-scrollbar {
@@ -34,16 +32,14 @@ ul {
   justify-content: space-evenly;
   align-items: center;
   height: 100%;
-  padding: 10px;
-  margin: 0 10px 30px 10px;
   color: #333333;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .red {
-  color: red;
+  color: #DD2626;
 }
 
 .blue {
-  color: blue;
+  color: #4364E8;
 }

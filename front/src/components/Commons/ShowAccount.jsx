@@ -44,13 +44,17 @@ const ShowAccount = (props) => {
             <p>{props.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') } 원</p>
         </div>
         <div className={classes.bottom}>
-            <Button onClick={handleUpdateOpen}>수정</Button>
+            <Box m ={2}>
+                <Button variant='contained' onClick={handleUpdateOpen}>수정</Button>
+            </Box>
             <Modal open={update} onClose={handleUpdateClose}>
                 <Box sx={style}>
                     <UpdateAccount id={props.id} onClose={handleUpdateClose}></UpdateAccount>
                 </Box>
             </Modal>
-            <Button onClick={handleDelOpen}>삭제</Button>
+            <Box m={2}>
+                <Button variant='outlined' onClick={handleDelOpen}>삭제</Button>
+            </Box>
             <Modal open={del} onClose={handleDelClose}>
                 <Box sx={style}>
                     <DeleteAccount id={props.id} name={props.name} onClose={handleDelClose}/>

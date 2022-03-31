@@ -7,15 +7,15 @@ import MyStockInfo from './MyStockInfo'
 const MyPage = () => {
     
   return (
-    <div className={classes.MyPage}>
-        <div className={classes.MyPage__mystockinfo}>
+    <div className={classes.mypage}>
+        <div className={classes.mypage__mystockinfo}>
             <MyStockInfo />
         </div>
-        <div className={classes.MyPage__myinfo}>
-            <div className={classes.customerinfo}>
+        <div className={classes.mypage__myinfo}>
+            <div className={classes.customer__info}>
                 <CustomerInfo />
             </div>
-            <div className={classes.stockinfo}>
+            <div className={classes.stock__info}>
                 <AccountInfo />
             </div>
         </div>

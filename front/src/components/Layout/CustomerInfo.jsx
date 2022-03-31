@@ -17,7 +17,6 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '0.25px solid #000',
     boxShadow: '5px',
     p: 4,
   };
@@ -79,13 +78,17 @@ const CustomerInfo = () => {
                 <p>{email}</p>
             </div>
             <div className={classes.bottom}>
-                <Button onClick={handleUpdateOpen}>수정</Button>
+                <Box m={2}>
+                    <Button variant='contained' onClick={handleUpdateOpen}>수정</Button>
+                </Box>
                 <Modal open={update} onClose={handleUpdateClose}>
                     <Box sx={style}>
                         <UpdateCustomer id={sessionStorage.getItem('USER')} onClose={handleUpdateClose} />
                     </Box>
                 </Modal>
-                <Button onClick={handleDelOpen}>회원 탈퇴</Button>
+                <Box m={2}>
+                    <Button variant='outlined' onClick={handleDelOpen}>회원 탈퇴</Button>
+                </Box>
                 <Modal open={del} onClose={handleDelClose}>
                     <Box sx={style}>
                         <DeleteCustomer email={email} onClose={handleDelClose}/>

@@ -74,13 +74,6 @@ ul {
 
 .info {
   width: 40%;
-
   min-width: 300px;
 }
 
-.info__myinfo {
-  width: calc(100%-20px);
-  height: 47px;
-  margin: 10px;
-  border: 1px solid lightgray;
-}

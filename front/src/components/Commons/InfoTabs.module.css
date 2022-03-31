@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  font-family: "IBM Plex Sans KR";
 }
 
 .info__tabs {
@@ -16,8 +17,9 @@
 }
 
 .info__tabs__body__price {
-  margin-top: 2rem;
   color: lightslategray;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
 }
 
 .info__tabs__body__pricevalue {
@@ -27,7 +29,7 @@
 
 .info__tabs__body__amount {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
 .info__tabs__body_totalprice {
