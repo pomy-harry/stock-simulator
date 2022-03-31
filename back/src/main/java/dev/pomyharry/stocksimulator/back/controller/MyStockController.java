@@ -22,27 +22,15 @@ public class MyStockController {
         this.myStockService = myStockService;
     }
 
-<<<<<<< HEAD
     
     @RequestMapping("/buystock")
-=======
-    @RequestMapping("/api/v1/createmystock")
->>>>>>> a70ddc57d2ae854fff8d302df9ff4ef1dbc67571
     @PostMapping
     public void buyStock(@RequestBody MyStockDTO myStockDTO) {
 
-<<<<<<< HEAD
         try{            
             myStockService.buyStock(myStockDTO);
             
         }catch(Exception e) {
-=======
-        try {
-            myStockService.buyStock(myStockDTO);
-            return ResponseEntity.ok().body(myStockDTO);
-
-        } catch (Exception e) {
->>>>>>> a70ddc57d2ae854fff8d302df9ff4ef1dbc67571
             System.out.println(e.getMessage());
         }
 
