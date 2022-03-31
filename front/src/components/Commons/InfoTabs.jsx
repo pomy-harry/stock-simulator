@@ -133,7 +133,6 @@ const InfoTabs = (props) => {
         .then((res) => {          
           const dataList = [];
           for(const key in res){
-
             dataList.push({
               code: res[key].code,
               name: res[key].name
@@ -155,7 +154,6 @@ const InfoTabs = (props) => {
 
         await fetch(MARKET_INFO_URL).then((res) => {
           res.json().then((res2) => {
-            // console.log(res2);
             setMarketInfo(res2);
           })
         });
@@ -177,7 +175,6 @@ const InfoTabs = (props) => {
       />
     ));
 
-    // console.log(watchStocks);
     const watchStockList = watchStocks.map((value) => (
       <MenuItem value={value}>{(value.name)}</MenuItem>      
     ));
@@ -223,13 +220,12 @@ const InfoTabs = (props) => {
 
     };
     
-    
 
   return (
     <div className={classes.info__tabs}>
-        <Tabs value={tabValue} onChange={handleInfoTabChange} className={classes.info__tabs_tab}>  
-                    <Tab label="모의투자" {...a11yProps(0)} className={classes.info__tabs_tab_stocktrading} />
-                    <Tab label="시장정보" {...a11yProps(1)} className={classes.info__tabs_tab_marketinfo} />
+        <Tabs value={tabValue} onChange={handleInfoTabChange}>  
+                    <Tab label="모의투자" {...a11yProps(0)} className={classes.info__tabs__tab}/>
+                    <Tab label="시장정보" {...a11yProps(1)}/>
                 </Tabs>
                 
                 <TabPanel className={classes.info__tabs__tabpanel} value={tabValue} index={0}>
@@ -256,9 +252,6 @@ const InfoTabs = (props) => {
                         </div>
                       </div>
                       <div>
-                        {/* <div>
-                          수량 :
-                        </div>   */}
                         <Input
                           className={classes.info__tabs__body__amount}
                           placeholder='          구매 수량 (주)'
@@ -268,10 +261,7 @@ const InfoTabs = (props) => {
                         />
                       </div>
                       <div>
-                        <div>
-                          총 가격 :
-                        </div>
-                        <div>
+                        <div className={classes.info__tabs__body_totalprice}>
                           {buyStockTotalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
                         </div>
                       </div>

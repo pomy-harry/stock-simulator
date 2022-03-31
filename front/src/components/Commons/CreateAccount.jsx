@@ -39,9 +39,7 @@ const CreateAccount = () => {
     const [deposit, setDeposit] = useState('');
     
     const createAccount = async (event) => {
-      event.preventDefault(); // Refresh 방지
-      // console.log(accountName)
-      // console.log(deposit);
+      event.preventDefault();
 
       await fetch (
         CREATE_ACCOUNT_URL,
