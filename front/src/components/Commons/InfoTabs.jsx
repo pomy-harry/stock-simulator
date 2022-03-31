@@ -74,29 +74,50 @@ const NumberFormatCustom = forwardRef((props, ref) => {
 
 
 
-const InfoTabs = () => {
+const InfoTabs = (props) => {
+  
 
     const [tabValue, setTabValue] = useState(0);
     const handleInfoTabChange = (event, newTabValue) => {
       setTabValue(newTabValue);
     };
 
+    const [buyStockName, setBuyStockName] = useState("start");
+    const [buyStockPrice, setBuyStockPrice] = useState(0);
+    const [buyStockAmount, setBuyStockAmount] = useState('');
+    const [buyStockTotalPrice, setBuyStockTotalPrice] = useState(0)
+    const [stockCode, setStockCode] = useState('')
 
-    const [age, setAge] = React.useState('');
     const handleSelectChange = (event) => {
-      setAge(event.target.value);
+
+      setBuyStockName(event.target.value);      
+      if (event.target.value !== "start") {
+        const selectedWatchStock = props.stockData.find(stock => stock.code === event.target.value.code);
+        setBuyStockPrice(parseInt(selectedWatchStock.price.replace(',', '')))
+        setStockCode(selectedWatchStock.code)  
+      } else {
+        setBuyStockPrice(0)
+        setStockCode('')
+      }       
     };
 
-    const [buyStockAmount, setBuyStockAmount] = useState('');
+    const handleAmountChange = (event) => {
+      setBuyStockAmount(event.target.value)
+    };
+    
+    useEffect(() => {
+      if (buyStockAmount === ''){
+        setBuyStockTotalPrice(0)
+      } else{
+        setBuyStockTotalPrice(buyStockPrice*parseInt(buyStockAmount))    
+      }
+    })
+    
 
-
-    const buyStock = () => {};
-
+    
     const findAllWatchStockByCustomerId_URL = "http://localhost:8090/stocks/findAllWatchStockByCustomerId";
-    
-    
     const [watchStocks, setWatchStocks] = useState([]);
-
+    
     useEffect(async() => {
 
       await fetch(findAllWatchStockByCustomerId_URL, {
@@ -157,6 +178,41 @@ const InfoTabs = () => {
     const watchStockList = watchStocks.map((value) => (
       <MenuItem value={value}>{(value.name)}</MenuItem>      
     ));
+
+    
+
+    const buyStock_URL = "http://localhost:8090/buystock";
+
+    const buyStock = async(event) => {
+      event.preventDefault();
+
+      if (stockCode !== '') {
+
+        if (buyStockAmount !== '' &&  buyStockAmount !== 0) {
+
+          await fetch(buyStock_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify({
+                amount: buyStockAmount,
+                customerId: sessionStorage.getItem('USER'),
+                stockCode: stockCode,
+                buyPrice : buyStockTotalPrice
+            })
+          })
+
+        } else {
+          console.log("수량 : 0");
+        }
+
+
+      } else {
+        console.log("종목 선택 안됨");
+      }
+
+    };
     
 
   return (
@@ -170,23 +226,23 @@ const InfoTabs = () => {
                   <div>                    
                     <FormControl fullWidth>
                       <Select
-                        value={age}
+                        value={buyStockName}
                         onChange={handleSelectChange}
                         displayEmpty
                         inputProps={{ 'aria-label': 'Without label' }}
                       >
-                        <MenuItem value="">종목 선택</MenuItem>
+                        <MenuItem value="start">종목 선택</MenuItem>
                         {watchStockList}
                       </Select>
                     </FormControl>
 
-                    <form className={classes.info__tabs__body}>
+                    <form>
                       <div>
                         <div className={classes.info__tabs__body__price}>
                           현재가격
                         </div>
-                        <div className={classes.info__tabs__body__pricevalue}>
-                          30,000원
+                        <div>
+                          {buyStockPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
                         </div>
                       </div>
                       <div>
@@ -195,12 +251,12 @@ const InfoTabs = () => {
                           placeholder='          구매 수량 (주)'
                           inputComponent={NumberFormatCustom}
                           value={buyStockAmount.numberformat}
-                          onChange={(e) => {setBuyStockAmount(e.target.value)}}              
+                          onChange={handleAmountChange}              
                         />
                       </div>
                       <div>
                         <div className={classes.info__tabs__body_totalprice}>
-                          300,000원
+                          {buyStockTotalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
                         </div>
                       </div>
                       <Button 

@@ -11,15 +11,15 @@ public class AccountDTO {
 
     private String id;
     private String name;
-    private int deposit;
+    private long deposit;
     private String customerId;
 
-    public AccountDTO(String name, int deposit) {
+    public AccountDTO(String name, long deposit) {
         this.name = name;
         this.deposit = deposit;
     }
 
-    public AccountDTO(String id, String name, int deposit) {
+    public AccountDTO(String id, String name, long deposit) {
         this.id = id;
         this.name = name;
         this.deposit = deposit;
@@ -33,11 +33,11 @@ public class AccountDTO {
         this.name = name;
     }
 
-    public int getDeposit() {
+    public long getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(int deposit) {
+    public void setDeposit(long deposit) {
         this.deposit = deposit;
     }
 

@@ -32,7 +32,6 @@ const Main = () => {
       })
     }
 
-    
     fetchWatchStocks().catch(error => {
       console.log(error);
     })
@@ -70,7 +69,7 @@ const Main = () => {
           <MyStockInfo main="true" />
         </div>
 
-        <InfoTabs />
+        <InfoTabs stockData={watchStocks} />
       </div>
 
     </div>

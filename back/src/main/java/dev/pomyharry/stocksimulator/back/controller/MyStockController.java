@@ -22,17 +22,16 @@ public class MyStockController {
         this.myStockService = myStockService;
     }
 
-    @RequestMapping("/api/v1/createmystock")
+    
+    @RequestMapping("/buystock")
     @PostMapping
-    public ResponseEntity<?> buyStock(@RequestBody MyStockDTO myStockDTO) {
+    public void buyStock(@RequestBody MyStockDTO myStockDTO) {
 
-        try {
+        try{            
             myStockService.buyStock(myStockDTO);
-            return ResponseEntity.ok().body(myStockDTO);
-
-        } catch (Exception e) {
+            
+        }catch(Exception e) {
             System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
         }
 
     }
