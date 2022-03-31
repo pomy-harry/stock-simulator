@@ -149,6 +149,7 @@ const InfoTabs = () => {
       <MarketInfo
         key={news.id}
         img={news.img}
+        link={news.link}
         title={news.title}
         description={news.description}
       />

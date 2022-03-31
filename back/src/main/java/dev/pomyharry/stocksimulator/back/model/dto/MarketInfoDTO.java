@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class MarketInfoDTO {
     
     private String img;
+    private String link;
     private String title;
     private String description;
 }

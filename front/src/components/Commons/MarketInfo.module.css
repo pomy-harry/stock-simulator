@@ -2,6 +2,8 @@
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
+    text-decoration-line: none;
+    color: black;
 }
 
 .marketinfo__img {
