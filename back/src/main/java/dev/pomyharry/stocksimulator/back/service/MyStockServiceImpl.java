@@ -6,21 +6,15 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
 import dev.pomyharry.stocksimulator.back.exception.AccountNotFoundException;
-=======
 import dev.pomyharry.stocksimulator.back.controller.component.StockDataComponent;
->>>>>>> a70ddc57d2ae854fff8d302df9ff4ef1dbc67571
 import dev.pomyharry.stocksimulator.back.model.dto.MyStockDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Account;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.model.entity.MyStock;
 import dev.pomyharry.stocksimulator.back.model.entity.Stock;
-<<<<<<< HEAD
-import dev.pomyharry.stocksimulator.back.repository.AccountRepository;
-=======
 import dev.pomyharry.stocksimulator.back.model.entity.WatchStock;
->>>>>>> a70ddc57d2ae854fff8d302df9ff4ef1dbc67571
+import dev.pomyharry.stocksimulator.back.repository.AccountRepository;
 import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
 import dev.pomyharry.stocksimulator.back.repository.MyStockRepository;
 import dev.pomyharry.stocksimulator.back.repository.StockRepository;
@@ -38,8 +32,11 @@ public class MyStockServiceImpl implements MyStockService {
     StockRepository stockRepository;
 
     @Autowired
-<<<<<<< HEAD
     AccountRepository accountRepository;
+
+    @Autowired
+    StockDataComponent stockChartComponent;
+
 
 
     @Override
@@ -47,14 +44,6 @@ public class MyStockServiceImpl implements MyStockService {
         
         // 계좌 찾기
         Account account = accountRepository.findByCustomerId(myStockDTO.getCustomerId());
-=======
-    StockDataComponent stockChartComponent;
-
-    @Override
-    public void buyStock(MyStockDTO myStockDTO) {
-
-        MyStock myStock = new MyStock();
->>>>>>> a70ddc57d2ae854fff8d302df9ff4ef1dbc67571
 
         System.out.println(myStockDTO.getCustomerId());
         System.out.println(myStockDTO.getAmount());
@@ -91,7 +80,7 @@ public class MyStockServiceImpl implements MyStockService {
         List<MyStock> stocks = myStockRepository.findAllByCustomerId(customerId);
 
         List<MyStockDTO> myStockList = stocks.stream()
-                .map(stock -> new MyStockDTO(stock.getBuyPrice(), stock.getAmount(), stock.getStock().getName(),
+                .map(stock -> new MyStockDTO(stock.getTotalBuyPrice(), stock.getAmount(), stock.getStock().getName(),
                         Long.parseLong(stockChartComponent.getStockChart(new WatchStock(stock.getStock())).getPrice()
                                 .replace(",", ""))))
                 .collect(Collectors.toList());

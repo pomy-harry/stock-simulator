@@ -14,29 +14,17 @@ public class MyStockDTO {
     private int amount;
     private String customerId;
     private String stockCode;
-<<<<<<< HEAD
     private long buyPrice;
+    private String name;
+    private long price;
 
     public MyStockDTO (int amount, String customerId, String stockCode, long buyPrice) {
         this.amount = amount;
         this.customerId = customerId;
         this.stockCode = stockCode;
-=======
-    private String name;
-    private long price;
-
-    public MyStockDTO(long buyPrice, int amount, String customerId, String stockCode) {
-        this.buyPrice = buyPrice;
-        this.amount = amount;
-        this.customerId = customerId;
-        this.stockCode = stockCode;
-    }
-
-    public MyStockDTO(String id, long buyPrice, int amount) {
-        this.id = id;
->>>>>>> a70ddc57d2ae854fff8d302df9ff4ef1dbc67571
         this.buyPrice = buyPrice;
     }
+
 
     public MyStockDTO (int amount, long totalBuyPrice, String customerId, String stockCode) {
         this.amount = amount;
