@@ -29,7 +29,7 @@ public class Account {
     private String name;
 
     @Column(name = "DEPOSIT")
-    private int deposit;
+    private long deposit;
 
     @ManyToOne
     @JoinColumn(name = "CUSTOMER_ID")

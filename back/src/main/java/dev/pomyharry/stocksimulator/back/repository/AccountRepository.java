@@ -7,6 +7,7 @@ import dev.pomyharry.stocksimulator.back.model.entity.Account;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 
 public interface AccountRepository extends JpaRepository<Account, String> {
+    
     Account findByCustomerId(String id);
 
     @Transactional

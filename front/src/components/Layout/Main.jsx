@@ -48,7 +48,6 @@ const Main = () => {
       })
     }
 
-    
     fetchWatchStocks().catch(error => {
       console.log(error);
     })
@@ -92,7 +91,7 @@ const Main = () => {
           내 주식 정보
         </div>
 
-        <InfoTabs />
+        <InfoTabs stockData={watchStocks} />
       </div>
 
     </div>
