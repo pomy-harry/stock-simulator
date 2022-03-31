@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import dev.pomyharry.stocksimulator.back.model.dto.WatchStockDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.WatchStock;
+import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.repository.WatchStockRepository;
 import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
 
@@ -29,6 +30,10 @@ public class WatchStockServiceImpl implements WatchStockService {
     }
 
     @Override
+
+    public void deleteAllWatchList(Customer customer) {
+        watchStockRepository.deleteAllByCustomer(customer);
+    }
     public List<WatchStockDTO> findAllWatchStockByCustomerId(String customerId) {
         
         List<WatchStock> watchStockList = watchStockRepository.findAllByCustomerId(customerId);
@@ -37,7 +42,5 @@ public class WatchStockServiceImpl implements WatchStockService {
 
         return watchStockDTOList;
     }
-
-    
 
 }

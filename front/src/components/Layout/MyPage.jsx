@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './MyPage.module.css'
-import CreateAccount from '../Commons/CreateAccount'
 import CustomerInfo from './CustomerInfo'
+import AccountInfo from './AccountInfo'
 
 const MyPage = () => {
     
@@ -23,8 +23,7 @@ const MyPage = () => {
                 <CustomerInfo />
             </div>
             <div className={classes.stockinfo}>
-                계좌정보
-                <CreateAccount />
+                <AccountInfo />
             </div>
         </div>
     </div>

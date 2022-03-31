@@ -33,10 +33,10 @@ const Main = () => {
           'Content-Type' : 'application/json',
         },
         body: JSON.stringify({
-          id: "4028ad847fd313f1017fd31445f10000",
-          email: "minki0415@naver.com",
-          name: "김민기",
-          password: "!1234"
+          id: sessionStorage.getItem('USER'),
+          // email: "minki0415@naver.com",
+          // name: "김민기",
+          // password: "!1234"
         })
       }).then((res) => {
         if(res.ok){
@@ -78,7 +78,6 @@ const Main = () => {
         <form className={classes.chart__search}>
             {/* <Input className={classes.chart__search__input} placeholder="검색" type='text' /> */}
             <StockList className={classes.chart__search__input}></StockList>
-            <Button className={classes.chart__search__button1}>버튼1</Button>
             <Button className={classes.chart__search__button2}>버튼2</Button>
         </form>
         <div className={classes.chart__list}>

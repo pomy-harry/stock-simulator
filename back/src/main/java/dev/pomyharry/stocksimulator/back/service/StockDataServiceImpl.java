@@ -22,10 +22,12 @@ public class StockDataServiceImpl implements StockDataService {
     @Override
     public List<WatchStock> findAllStocks(CustomerDTO customerDto) {
 
-        Customer customer = new Customer(customerDto.getId(), customerDto.getName(), customerDto.getEmail(), customerDto.getPassword());
+        // Customer customer = new Customer(customerDto.getId(), customerDto.getName(),
+        // customerDto.getEmail(),
+        // customerDto.getPassword());
 
         // customerId 로 wathchlist에 있는 watchStocks(stockName, StockCode) 조회
-        List<WatchStock> watchStocks = stockDataRepository.findAllByCustomer(customer);
+        List<WatchStock> watchStocks = stockDataRepository.findAllByCustomerId(customerDto.getId());
         return watchStocks;
 
     }
@@ -40,14 +42,12 @@ public class StockDataServiceImpl implements StockDataService {
 
         List<StockDTO> stockDataList = new ArrayList<StockDTO>();
 
-        //watchStock에서 종목 코드와 종목 이름 추출해서 크롤링 데이터 DTO 형태로 반환
-        for(WatchStock w : watchStocks) {
+        // watchStock에서 종목 코드와 종목 이름 추출해서 크롤링 데이터 DTO 형태로 반환
+        for (WatchStock w : watchStocks) {
             stockDataList.add(stockChartComponent.getStockChart(w));
         }
 
         return stockDataList;
     }
-
-
 
 }

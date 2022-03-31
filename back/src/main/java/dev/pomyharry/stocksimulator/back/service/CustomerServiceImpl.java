@@ -50,4 +50,18 @@ public class CustomerServiceImpl implements CustomerService {
         return customer;
     }
 
+    @Override
+    public Customer updateCustomerInfo(CustomerDTO customer) {
+        Customer c = customerRepository.findById(customer.getId()).get();
+        c.setName(customer.getName());
+        customerRepository.save(c);
+
+        return c;
+    }
+
+    @Override
+    public void deleteCustomerInfO(CustomerDTO customer) {
+        customerRepository.deleteById(customer.getId());
+    }
+
 }
