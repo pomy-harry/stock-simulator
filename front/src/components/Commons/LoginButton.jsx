@@ -76,6 +76,8 @@ const LoginButton = (props) => {
                     sessionStorage.setItem('USER', res2.id);
                     window.location.reload();
                 }))
+            }else{
+                window.alert("로그인에 실패했습니다.\n로그인 정보를 확인해주세요");
             }
         }
         );
@@ -100,12 +102,6 @@ const LoginButton = (props) => {
     };
 
     const signUpHandler = async(userData) => {
-        console.log(userData);
-        console.log(JSON.stringify({
-            name: userData.name,
-            email: userData.email,
-            password: userData.password,
-        }));
 
         await fetch(SIGNUP_URL, {
             method: 'POST',
@@ -117,6 +113,14 @@ const LoginButton = (props) => {
                 email: userData.email,
                 password: userData.password,
             })
+        }).then((res) => {
+            if(res.ok){
+
+            }else{
+                res.json().then((res2 => {
+                    console.log(res2);
+                }))
+            }
         })
     };
 

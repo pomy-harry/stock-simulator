@@ -15,6 +15,7 @@ import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.service.CustomerService;
 import dev.pomyharry.stocksimulator.back.service.AccountService;
 import dev.pomyharry.stocksimulator.back.service.WatchStockService;
+import dev.pomyharry.stocksimulator.back.service.MyStockService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -90,6 +91,7 @@ public class CustomerController {
 
             accountService.deleteAllAccount(c);
             watchStockService.deleteAllWatchList(c);
+
             customerService.deleteCustomerInfO(customer);
 
             return ResponseEntity.ok().body("success");

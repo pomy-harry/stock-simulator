@@ -13,12 +13,17 @@ const DeleteAccount = (props) => {
                 'Content-Type' : 'application/json',
             },
             body: JSON.stringify({
-                id: props.id
+                id: props.id,
+                customerId: sessionStorage.getItem('USER')
             })
+        }).then((res) => {
+            if(res.ok){
+                console.log("삭제 complete");
+                window.location.reload();
+            }else{
+                window.alert("삭제에 실패했습니다. 다시 시도해주세요");
+            }
         })
-
-        console.log("삭제 complete");
-        window.location.reload();
 
         props.onClose();
     }  

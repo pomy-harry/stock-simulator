@@ -36,13 +36,16 @@ public class WatchStockController {
     private StockService stockService;
 
     @PostMapping("/watch")
-    public void createWatchList(@RequestBody WatchStockDTO watchStock) {
+    public ResponseEntity<?> createWatchList(@RequestBody WatchStockDTO watchStock) {
         try {
             Customer customer = customerService.findById(watchStock.getCustomerId());
             Stock stock = stockService.findByCode(watchStock.getCode());
             watchStockService.createWatchList(new WatchStock(stock, customer));
+
+            return ResponseEntity.ok().body("success");
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 

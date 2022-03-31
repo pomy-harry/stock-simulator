@@ -28,6 +28,8 @@ const Main = () => {
           res.json().then((res2) => {
             setWatchStocks(res2);
           })
+        }else{
+          res.json().then((res2) => console.log(res2));
         }
       })
     }

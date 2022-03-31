@@ -17,6 +17,9 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     CustomerService customerService;
 
+    @Autowired
+    MyStockService myStockService;
+
     @Override
     public void insertAccount(AccountDTO accountDTO) {
 
@@ -49,11 +52,13 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void deleteAccount(AccountDTO acc) {
+        myStockService.deleteByCustomerId(acc.getCustomerId());
         accountRepository.deleteById(acc.getId());
     }
 
     @Override
     public void deleteAllAccount(Customer customer) {
+        myStockService.deleteAllByCustomer(customer);
         accountRepository.deleteAllByCustomer(customer);
     }
 }

@@ -11,19 +11,21 @@ const StockList = () => {
 
     useEffect(() => {
         const fetchStocks = async () => {
-            const response = await fetch(BASE_URL);
+            await fetch(BASE_URL).then((res) => {
+                if(res.ok){
+                    res.json().then((res2 => {
+                        const stockData = [];
 
-            const responseData = await response.json();
-
-            const stockData = [];
-            for(const key in responseData){
-                stockData.push({
-                    label: responseData[key].name,
-                    code: responseData[key].code
-                });
-            }
-
-            setStocks(stockData);
+                        for(const key in res2){
+                            stockData.push({
+                                label: res2[key].name,
+                                code: res2[key].code
+                            });
+                        }
+                        setStocks(stockData);
+                    }))
+                }
+            })
         }
 
         fetchStocks().catch(error => {
@@ -49,14 +51,21 @@ const StockList = () => {
                         code: newValue.code,
                         customerId: sessionStorage.getItem('USER')
                     })
+                }).then((res) => {
+                    if(res.ok){
+                        res.json().then((res2 => {
+                            console.log(res2);
+                        }))
+                        window.location.reload();
+                    }else{
+                        window.alert("로그인을 해주세요");
+                    }
                 })
-                window.location.reload();
             }
 
             fetchWatchList().catch(error => {
                 console.log(error);
             })
-            console.log(newValue.code);
         }}
         renderInput={(params) => <TextField {...params} placeholder="Search" variant='standard'/> }
         />

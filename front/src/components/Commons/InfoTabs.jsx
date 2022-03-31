@@ -153,9 +153,11 @@ const InfoTabs = (props) => {
       const fetchMarketInfo = async () => {
 
         await fetch(MARKET_INFO_URL).then((res) => {
-          res.json().then((res2) => {
-            setMarketInfo(res2);
-          })
+          if(res.ok){
+            res.json().then((res2) => {
+              setMarketInfo(res2);
+            })
+          }
         });
 
       }

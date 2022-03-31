@@ -2,6 +2,7 @@ package dev.pomyharry.stocksimulator.back.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +23,24 @@ public class MarketInfoController {
     }
 
     @GetMapping
-    public List<MarketInfoDTO> getMarketInfo() {
+    /*
+     * public List<MarketInfoDTO> getMarketInfo() {
+     * try {
+     * return marketInfoService.getMarketInfo();
+     * } catch (Exception e) {
+     * System.out.println(e.getMessage());
+     * }
+     * return null;
+     * }
+     */
+    public ResponseEntity<?> getMarketInfo() {
         try {
-            return marketInfoService.getMarketInfo();
+            List<MarketInfoDTO> market = marketInfoService.getMarketInfo();
+            return ResponseEntity.ok().body(market);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return null;
     }
-    
+
 }
