@@ -4,6 +4,7 @@ import StockList from './ComboBox';
 import InfoTabs from '../Commons/InfoTabs';
 import Stock from '../Stock/Stock';
 import classes from "./Main.module.css";
+import MyStockInfo from './MyStockInfo';
 
 const BASE_URL = 'http://localhost:8090/stockData'
 
@@ -25,7 +26,7 @@ const Main = () => {
   useEffect(() => {
     const fetchWatchStocks = async (userData) => {
 
-      console.log("호출");
+      // console.log("호출");
 
       const response = await fetch(BASE_URL, {
         method: 'POST',
@@ -41,7 +42,7 @@ const Main = () => {
       }).then((res) => {
         if(res.ok){
           res.json().then((res2) => {
-            console.log(res2);
+            // console.log(res2);
             setWatchStocks(res2);
           })
         }
@@ -53,12 +54,14 @@ const Main = () => {
     })
   }, []);
   
-  const watchStock1 = watchStocks[0];
-  const watchStock2 = watchStocks[1];
-  console.log("watchstocks1", watchStock1);
-
+  // const watchStock1 = watchStocks[0];
+  // const watchStock2 = watchStocks[1];
+  // console.log("watchstocks1", watchStock1);
+  
   const watchStock3 = watchStocks.map((stock) => (
+
     <Stock 
+      key={stock.id}
       code={stock.code}
       name={stock.name}
       price={stock.price}
@@ -68,16 +71,14 @@ const Main = () => {
     />
   ));
 
-  console.log(watchStock3);
+  // console.log(watchStock3);
 
   return (
     <div className={classes.main}>
 
       <div className={classes.chart}>
         <form className={classes.chart__search}>
-            {/* <Input className={classes.chart__search__input} placeholder="검색" type='text' /> */}
             <StockList className={classes.chart__search__input}></StockList>
-            <Button className={classes.chart__search__button2}>버튼2</Button>
         </form>
         <div className={classes.chart__list}>
           <ul>
@@ -88,7 +89,7 @@ const Main = () => {
 
       <div className={classes.info}>
         <div className={classes.info__myinfo}>
-          내 주식 정보
+          <MyStockInfo main="true" />
         </div>
 
         <InfoTabs stockData={watchStocks} />

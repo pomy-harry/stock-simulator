@@ -1,4 +1,4 @@
-package dev.pomyharry.stocksimulator.back.component;
+package dev.pomyharry.stocksimulator.back.controller.component;
 
 import java.io.IOException;
 
@@ -36,6 +36,11 @@ public class StockDataComponent {
   
             String price = stockPriceBody.select("strong#_nowVal").text();
             String change = stockPriceBody.select("strong#_diff").text();
+            if(change.charAt(0) == '상'){
+              change = change.replace("상승", "▲");
+            }else if(change.charAt(0) == '하') {
+              change = change.replace("하락", "▼");
+            }
             String changeRate = stockPriceBody.select("strong#_rate").text();
   
             return new StockDTO(stockCode, stockName, price, change, changeRate ,chartUrl);

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dev.pomyharry.stocksimulator.back.component.StockDataComponent;
+import dev.pomyharry.stocksimulator.back.controller.component.StockDataComponent;
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.dto.StockDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.WatchStock;

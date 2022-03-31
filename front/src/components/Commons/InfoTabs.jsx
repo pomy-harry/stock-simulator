@@ -3,6 +3,7 @@ import classes from './InfoTabs.module.css'
 import { Tab, Tabs, Box, Typography, InputLabel, Select, MenuItem, FormControl, Input, Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
+import MarketInfo from './MarketInfo';
 
 // --- Tab관련 부분 -------------------------------------------------------
 const TabPanel = (props) => {
@@ -11,6 +12,7 @@ const TabPanel = (props) => {
   
   return (
     <div
+      className={classes.tab__body__news}
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -131,6 +133,7 @@ const InfoTabs = (props) => {
         .then((res) => {          
           const dataList = [];
           for(const key in res){
+
             dataList.push({
               code: res[key].code,
               name: res[key].name
@@ -143,6 +146,38 @@ const InfoTabs = (props) => {
 
     }, []);
 
+    const MARKET_INFO_URL = 'http://localhost:8090/marketInfo';
+
+    const [marketInfo, setMarketInfo] = useState([{}]);
+
+    useEffect(() => {
+      const fetchMarketInfo = async () => {
+
+        await fetch(MARKET_INFO_URL).then((res) => {
+          res.json().then((res2) => {
+            // console.log(res2);
+            setMarketInfo(res2);
+          })
+        });
+
+      }
+      fetchMarketInfo().catch(error => {
+        console.log(error);
+      })
+    }, [])
+
+
+    const MarketInfoNews = marketInfo.map((news) => (
+      <MarketInfo
+        key={news.id}
+        img={news.img}
+        link={news.link}
+        title={news.title}
+        description={news.description}
+      />
+    ));
+
+    // console.log(watchStocks);
     const watchStockList = watchStocks.map((value) => (
       <MenuItem value={value}>{(value.name)}</MenuItem>      
     ));
@@ -186,12 +221,12 @@ const InfoTabs = (props) => {
 
   return (
     <div className={classes.info__tabs}>
-        <Tabs value={tabValue} onChange={handleInfoTabChange} className={classes.loginModal__Tabs}>  
-                    <Tab label="모의투자" {...a11yProps(0)} className={classes.loginModal__Tab} />
-                    <Tab label="시장정보" {...a11yProps(1)} className={classes.loginModal__Tab} />
+        <Tabs value={tabValue} onChange={handleInfoTabChange} className={classes.info__tabs_tab}>  
+                    <Tab label="모의투자" {...a11yProps(0)} className={classes.info__tabs_tab_stocktrading} />
+                    <Tab label="시장정보" {...a11yProps(1)} className={classes.info__tabs_tab_marketinfo} />
                 </Tabs>
                 
-                <TabPanel value={tabValue} index={0}>
+                <TabPanel className={classes.info__tabs__tabpanel} value={tabValue} index={0}>
                   <div>                    
                     <FormControl fullWidth>
                       <Select
@@ -207,19 +242,20 @@ const InfoTabs = (props) => {
 
                     <form>
                       <div>
-                        <div>
-                          가격 :
+                        <div className={classes.info__tabs__body__price}>
+                          현재가격
                         </div>
                         <div>
                           {buyStockPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
                         </div>
                       </div>
                       <div>
-                        <div>
+                        {/* <div>
                           수량 :
-                        </div>  
+                        </div>   */}
                         <Input
-                          placeholder='구매 수량 (주)'
+                          className={classes.info__tabs__body__amount}
+                          placeholder='          구매 수량 (주)'
                           inputComponent={NumberFormatCustom}
                           value={buyStockAmount.numberformat}
                           onChange={handleAmountChange}              
@@ -233,14 +269,20 @@ const InfoTabs = (props) => {
                           {buyStockTotalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
                         </div>
                       </div>
-                      <Button type='submit' onClick={buyStock}>구매</Button>
+                      <Button 
+                        fullWidth='true'
+                        type='submit'
+                        variant='contained'
+                        onClick={buyStock}>
+                          구매
+                      </Button>
                     </form>
                     
 
                   </div>
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
-                    시장정보
+                  {MarketInfoNews}                  
                 </TabPanel>
     </div>
   )
