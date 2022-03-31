@@ -1,22 +1,25 @@
 .stock_data {
     margin-bottom: 2rem;
     border: 1px solid lightgray;
-    padding: 1rem 2rem;
+    /* padding: 1rem 2rem; */
+    display: flex;
+    flex-direction: column;
+    width: 732px;
 }
 
 .stock_data_closebutton {
     margin: 0;
-    padding: 0;
+    padding: 5px 5px 0 0;
     border: 0px;
     background-color: white;
-    margin-left: 42rem;
+    float: right;
 }
 
 .stock_data__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 20rem;
+    padding: 0 1rem;
 }
 
 .stock_data__header_sub {
@@ -35,6 +38,11 @@
 
 .stock_data__chart {
     border-top: 1px solid lightgray;
-    padding-top: 1rem;
+    padding: 1rem 0rem 1rem 2rem;
     margin-top: 1rem;
+    display: flex;
+}
+
+.stock_data__chart img {
+    display: flex;
 }

@@ -3,6 +3,7 @@ import classes from './InfoTabs.module.css'
 import { Tab, Tabs, Box, Typography, InputLabel, Select, MenuItem, FormControl, Input, Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
+import MarketInfo from './MarketInfo';
 
 // --- Tab관련 부분 -------------------------------------------------------
 const TabPanel = (props) => {
@@ -123,7 +124,38 @@ const InfoTabs = () => {
 
     }, []);
 
-    console.log(watchStocks);
+    const MARKET_INFO_URL = 'http://localhost:8090/marketInfo';
+
+    const [marketInfo, setMarketInfo] = useState([{}]);
+
+    useEffect(() => {
+      const fetchMarketInfo = async () => {
+
+        await fetch(MARKET_INFO_URL).then((res) => {
+          res.json().then((res2) => {
+            // console.log(res2);
+            setMarketInfo(res2);
+          })
+        });
+
+      }
+      fetchMarketInfo().catch(error => {
+        console.log(error);
+      })
+    }, [])
+
+
+    const MarketInfoNews = marketInfo.map((news) => (
+      <MarketInfo
+        key={news.id}
+        img={news.img}
+        link={news.link}
+        title={news.title}
+        description={news.description}
+      />
+    ));
+
+    // console.log(watchStocks);
     const watchStockList = watchStocks.map((value) => (
       <MenuItem value={value}>{(value.name)}</MenuItem>      
     ));
@@ -137,7 +169,7 @@ const InfoTabs = () => {
                     <Tab label="시장정보" {...a11yProps(1)} className={classes.info__tabs_tab_marketinfo} />
                 </Tabs>
                 
-                <TabPanel value={tabValue} index={0}>
+                <TabPanel className={classes.info__tabs__tabpanel} value={tabValue} index={0}>
                   <div>                    
                     <FormControl fullWidth>
                       <Select
@@ -166,7 +198,7 @@ const InfoTabs = () => {
                         </div>   */}
                         <Input
                           className={classes.info__tabs__body__amount}
-                          placeholder='구매 수량 (주)'
+                          placeholder='          구매 수량 (주)'
                           inputComponent={NumberFormatCustom}
                           value={buyStockAmount.numberformat}
                           onChange={(e) => {setBuyStockAmount(e.target.value)}}              
@@ -181,8 +213,9 @@ const InfoTabs = () => {
                         </div>
                       </div>
                       <Button 
+                        fullWidth='true'
                         type='submit'
-                        variant='outlined'
+                        variant='contained'
                         onClick={buyStock}>
                           구매
                       </Button>
@@ -192,7 +225,7 @@ const InfoTabs = () => {
                   </div>
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
-                    시장정보
+                  {MarketInfoNews}                  
                 </TabPanel>
     </div>
   )
