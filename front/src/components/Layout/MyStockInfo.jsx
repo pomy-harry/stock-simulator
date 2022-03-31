@@ -14,23 +14,24 @@ const MyStockInfo = () => {
                     'Content-Type' : 'application/json',
                 },
                 body: JSON.stringify({
-                    id: sessionStorage.getItem('USER')
+                    customerId: sessionStorage.getItem('USER')
                 })
             }).then((res) => {
                 if(res.ok){
-                    const stockData = [];
+                    res.json().then((res2 => {
+                        const stockData = [];
 
-                    for(const key in res){
-                        stockData.push({
-                            title : res[key].title,
-                            buyPrice : res[key].buyPrice,
-                            amount : res[key].amount,
-                            totalPrice : res[key].totalPrice,
-                            profitRate : res[key].profitRate,
-                            profit : res[key].profit
-                        });
-                    }
-                    setStocks(stockData);
+
+                        for(const key in res2){
+                            stockData.push({
+                                name : res2[key].name,
+                                buyPrice : res2[key].buyPrice,
+                                amount : res2[key].amount,
+                                price: res2[key].price
+                            });
+                        }
+                        setStocks(stockData);
+                    }))
                 }
             })
         }
@@ -42,15 +43,12 @@ const MyStockInfo = () => {
 
     const myStockList = stocks.map((stock) => (
         <MyStock 
-            title={stock.title}
+            name={stock.name}
             buyPrice={stock.buyPrice}
             amount={stock.amount}
-            totalPrice={stock.totalPrice}
-            profitRate={stock.profitRate}
-            profit={stock.profit}
+            price={stock.price}
         />
     ));
-
 
   return (
     <>

@@ -2,6 +2,7 @@ import React from 'react'
 import classes from './MyPage.module.css'
 import CustomerInfo from './CustomerInfo'
 import AccountInfo from './AccountInfo'
+import MyStockInfo from './MyStockInfo'
 
 const MyPage = () => {
     
@@ -13,6 +14,7 @@ const MyPage = () => {
             </div>
             <div className={classes.stockdetail}>
                 주식 잔고 상세조회
+                <MyStockInfo />
             </div>
         </div>
         <div className={classes.MyPage__myinfo}>
