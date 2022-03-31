@@ -2,33 +2,42 @@ import { Button } from '@mui/material'
 import React, { useState } from 'react'
 import classes from './Stock.module.css'
 
-
+const BASE_URL = 'http://localhost:8090/stocks/watch'
 
 const Stock = (props) => {
   
   // let state = "";
 
-  // if(props.change.charAt(0) === "▲") {
-  //   state = true;
-  //   console.log(state);
-  // } else if(props.change.charAt(0) === "▼") {
-  //   state = false;
-  //   console.log(state);
-  // } else {
-  //   state = "normal";
-  //   console.log(state);
-  // }
-  
+  const clickDelHandler = async() => {
+    await fetch(BASE_URL, {
+      method: 'Delete',
+      headers: {
+        'Content-Type' : 'application/json',
+      },
+      body: JSON.stringify({
+        code: props.code
+      })
+    })
+
+    window.location.reload();
+  }
+
+const rate = props.changeRate;
+const sub = typeof rate === 'string'?rate.substr(0, 1) : '';
+
   return (
       <div className={classes.stock_data}>
-        <div>
-          <button className={classes.stock_data_closebutton}>X</button> 
-        </div>
+        <button onClick={clickDelHandler} className={classes.stock_data_closebutton}>X</button>
         <div>
           <div className={classes.stock_data__header}>
             <h1>{props.name}</h1>
-            {/* <div className={state=="normal" ? classes.stock_data__header_sub3 : state==true ? classes.stock_data__header_sub1 : classes.stock_data__header_sub2}> */}
-            <div className={classes.stock_data__header_sub1}>
+            <div className={
+              (sub === '+') 
+              ? classes.stock_data__header_sub__red
+              : (sub === '0')
+              ? classes.stock_data__header_sub__black
+              : classes.stock_data__header_sub__blue
+              }>
                 <h2>{props.price}</h2>
                 <h4>{props.changeRate}</h4>
                 <h4>{props.change}</h4>

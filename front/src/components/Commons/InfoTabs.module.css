@@ -1,7 +1,6 @@
 * {
-    margin: 0;
-  }
-
+  margin: 0;
+}
 
 .info__tabs {
   /* width: calc(100%-20px); */
@@ -15,7 +14,6 @@
   padding: 0;
   text-align: center;
 }
-
 
 .info__tabs__body__price {
   margin-top: 2rem;
@@ -34,4 +32,14 @@
 .info__tabs__body_totalprice {
   font-size: 2rem;
   margin-bottom: 2rem;
+}
+
+.tab__body__news {
+  height: 70vh;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.tab__body__news::-webkit-scrollbar {
+  display: none;
 }

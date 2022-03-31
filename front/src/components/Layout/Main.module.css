@@ -1,5 +1,5 @@
 * {
-  margin: 0
+  margin: 0;
 }
 
 ul {
@@ -9,6 +9,7 @@ ul {
 .main {
   display: flex;
   padding: 0 15rem;
+  height: 80%;
 }
 
 .chart {
@@ -17,7 +18,6 @@ ul {
   height: cal(100vh-60px);
   background-color: white;
   flex-direction: column;
-  border: solid skyblue;
 }
 
 .chart__search {
@@ -27,7 +27,6 @@ ul {
   margin-top: 15px;
   margin-bottom: 15px;
   margin-left: 10px;
-  /* border: 3px solid greenyellow; */
 }
 
 .chart__search__input {
@@ -56,19 +55,32 @@ ul {
 
 .chart__list {
   width: calc(100%-20px);
+  height: 80vh;
+  overflow: auto;
+}
+
+.chart__list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chart__list::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 20px;
+}
+
+.chart__list::-webkit-scrollbar-track {
+  background-color: white;
 }
 
 .info {
   width: 40%;
+
   min-width: 300px;
-  border: solid skyblue;
 }
 
 .info__myinfo {
   width: calc(100%-20px);
   height: 47px;
   margin: 10px;
-  border: 2px solid sienna;
+  border: 1px solid lightgray;
 }
-
-

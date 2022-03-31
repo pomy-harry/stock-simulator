@@ -43,4 +43,8 @@ public class WatchStock {
         this.customer = customer;
     }
 
+    public WatchStock(Stock stock) {
+        this.stock = stock;
+    }
+
 }

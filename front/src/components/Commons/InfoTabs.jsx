@@ -12,6 +12,7 @@ const TabPanel = (props) => {
   
   return (
     <div
+      className={classes.tab__body__news}
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}

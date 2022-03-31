@@ -75,12 +75,12 @@ const LoginButton = (props) => {
         })
         }).then((res) => {
             if(res.ok){
-            res.json().then((res2 => {
-                console.log(res2.id);
-                setUserStatus(res2.id);
-                sessionStorage.setItem('USER', res2.id);
-                window.location.reload();
-            }))
+                res.json().then((res2 => {
+                    console.log(res2.id);
+                    setUserStatus(res2.id);
+                    sessionStorage.setItem('USER', res2.id);
+                    window.location.reload();
+                }))
             }
         }
         );
