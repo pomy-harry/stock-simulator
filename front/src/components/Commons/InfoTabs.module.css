@@ -1,14 +1,18 @@
 * {
     margin: 0;
   }
-  
+
 
 .info__tabs {
-  width: calc(100%-20px);
-  height: 100vh;
+  /* width: calc(100%-20px); */
   margin-left: 10px;
   margin-right: 10px;
-  border: 3px solid blueviolet;;
+  border: 1px solid lightgray;
+  padding: 1rem;
+}
+
+.info__tabs__tabpanel {
+  padding: 0;
   text-align: center;
 }
 
@@ -24,9 +28,10 @@
 }
 
 .info__tabs__body__amount {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .info__tabs__body_totalprice {
+  font-size: 2rem;
   margin-bottom: 2rem;
 }

@@ -1,12 +1,16 @@
 import { Button } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import classes from './Stock.module.css'
 
-const Stock = (props) => {
+
+let Stock = (props) => {
+  
 
   return (
       <div className={classes.stock_data}>
-        <button className={classes.stock_data_closebutton}>X</button>
+        <div>
+          <button className={classes.stock_data_closebutton}>X</button>
+        </div>
         <div>
           <div className={classes.stock_data__header}>
             <h1>{props.name}</h1>

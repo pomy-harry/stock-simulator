@@ -25,7 +25,7 @@ const Main = () => {
   useEffect(() => {
     const fetchWatchStocks = async (userData) => {
 
-      console.log("호출");
+      // console.log("호출");
 
       const response = await fetch(BASE_URL, {
         method: 'POST',
@@ -41,7 +41,7 @@ const Main = () => {
       }).then((res) => {
         if(res.ok){
           res.json().then((res2) => {
-            console.log(res2);
+            // console.log(res2);
             setWatchStocks(res2);
           })
         }
@@ -54,10 +54,10 @@ const Main = () => {
     })
   }, []);
   
-  const watchStock1 = watchStocks[0];
-  const watchStock2 = watchStocks[1];
-  console.log("watchstocks1", watchStock1);
-
+  // const watchStock1 = watchStocks[0];
+  // const watchStock2 = watchStocks[1];
+  // console.log("watchstocks1", watchStock1);
+  
   const watchStock3 = watchStocks.map((stock) => (
     <Stock 
       code={stock.code}
@@ -69,7 +69,7 @@ const Main = () => {
     />
   ));
 
-  console.log(watchStock3);
+  // console.log(watchStock3);
 
   return (
     <div className={classes.main}>

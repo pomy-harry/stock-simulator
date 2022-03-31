@@ -13,7 +13,7 @@ ul {
 
 .chart {
   width: 60%;
-  min-width: 800px;
+  min-width: 780px;
   height: cal(100vh-60px);
   background-color: white;
   flex-direction: column;
@@ -60,7 +60,7 @@ ul {
 
 .info {
   width: 40%;
-  min-width: 500px;
+  min-width: 300px;
   border: solid skyblue;
 }
 
