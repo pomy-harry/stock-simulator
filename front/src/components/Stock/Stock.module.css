@@ -22,18 +22,32 @@
     padding: 0 1rem;
 }
 
-.stock_data__header_sub {
+.stock_data__header_sub1 {
     display: flex;
     color: #dd2626;
     align-items: center;
 }
 
-.stock_data__header_sub h4 {
-    margin-left: 1rem;
+.stock_data__header_sub2 {
+    display: flex;
+    color: #4364E8;
+    align-items: center;
 }
 
-.stock_data__body h3 {
-    margin-top: 1rem;
+.stock_data__header_sub3 {
+    display: flex;
+    color: black;
+    align-items: center;
+}
+
+.stock_data__header_sub1 h4 {
+    margin-left: 1rem;
+}
+.stock_data__header_sub2 h4 {
+    margin-left: 1rem;
+}
+.stock_data__header_sub3 h4 {
+    margin-left: 1rem;
 }
 
 .stock_data__chart {

@@ -111,7 +111,7 @@ const InfoTabs = () => {
         .then((res) => {          
           const dataList = [];
           for(const key in res){
-            console.log("ressss" + res[key].code);
+            // console.log("ressss" + res[key].code);
             dataList.push({
               code: res[key].code,
               name: res[key].name

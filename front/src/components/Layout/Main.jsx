@@ -59,7 +59,9 @@ const Main = () => {
   // console.log("watchstocks1", watchStock1);
   
   const watchStock3 = watchStocks.map((stock) => (
+
     <Stock 
+      key={stock.id}
       code={stock.code}
       name={stock.name}
       price={stock.price}
