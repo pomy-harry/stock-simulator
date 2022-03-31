@@ -1,4 +1,4 @@
-package dev.pomyharry.stocksimulator.back.component;
+package dev.pomyharry.stocksimulator.back.controller.component;
 
 import java.io.IOException;
 

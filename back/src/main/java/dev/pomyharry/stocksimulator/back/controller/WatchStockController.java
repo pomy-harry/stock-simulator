@@ -1,14 +1,5 @@
 package dev.pomyharry.stocksimulator.back.controller;
 
-import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
-import dev.pomyharry.stocksimulator.back.model.dto.WatchStockDTO;
-import dev.pomyharry.stocksimulator.back.model.entity.WatchStock;
-import dev.pomyharry.stocksimulator.back.model.entity.Customer;
-import dev.pomyharry.stocksimulator.back.model.entity.Stock;
-import dev.pomyharry.stocksimulator.back.service.WatchStockService;
-import dev.pomyharry.stocksimulator.back.service.CustomerService;
-import dev.pomyharry.stocksimulator.back.service.StockService;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
+import dev.pomyharry.stocksimulator.back.model.dto.WatchStockDTO;
+import dev.pomyharry.stocksimulator.back.model.entity.Customer;
+import dev.pomyharry.stocksimulator.back.model.entity.Stock;
+import dev.pomyharry.stocksimulator.back.model.entity.WatchStock;
+import dev.pomyharry.stocksimulator.back.service.CustomerService;
+import dev.pomyharry.stocksimulator.back.service.StockService;
+import dev.pomyharry.stocksimulator.back.service.WatchStockService;
 
 @CrossOrigin(origins = "*")
 @RestController

@@ -4,7 +4,7 @@
 
 .header {
     min-width: 800px;
-    padding: 10px 0;
+    padding: 0.7rem 15rem;
     background-color: white;    
     display: flex;
     justify-content: space-between;

@@ -132,9 +132,9 @@ const InfoTabs = () => {
 
   return (
     <div className={classes.info__tabs}>
-        <Tabs value={tabValue} onChange={handleInfoTabChange} className={classes.loginModal__Tabs}>  
-                    <Tab label="모의투자" {...a11yProps(0)} className={classes.loginModal__Tab} />
-                    <Tab label="시장정보" {...a11yProps(1)} className={classes.loginModal__Tab} />
+        <Tabs value={tabValue} onChange={handleInfoTabChange} className={classes.info__tabs_tab}>  
+                    <Tab label="모의투자" {...a11yProps(0)} className={classes.info__tabs_tab_stocktrading} />
+                    <Tab label="시장정보" {...a11yProps(1)} className={classes.info__tabs_tab_marketinfo} />
                 </Tabs>
                 
                 <TabPanel value={tabValue} index={0}>
@@ -151,20 +151,21 @@ const InfoTabs = () => {
                       </Select>
                     </FormControl>
 
-                    <form className={classes.loginModal__form}>
+                    <form className={classes.info__tabs__body}>
                       <div>
-                        <div>
-                          가격 :
+                        <div className={classes.info__tabs__body__price}>
+                          현재가격
                         </div>
-                        <div>
+                        <div className={classes.info__tabs__body__pricevalue}>
                           30,000원
                         </div>
                       </div>
                       <div>
-                        <div>
+                        {/* <div>
                           수량 :
-                        </div>  
+                        </div>   */}
                         <Input
+                          className={classes.info__tabs__body__amount}
                           placeholder='구매 수량 (주)'
                           inputComponent={NumberFormatCustom}
                           value={buyStockAmount.numberformat}
@@ -172,14 +173,19 @@ const InfoTabs = () => {
                         />
                       </div>
                       <div>
-                        <div>
+                        {/* <div>
                           총 가격 :
-                        </div>
-                        <div>
+                        </div> */}
+                        <div className={classes.info__tabs__body_totalprice}>
                           300,000원
                         </div>
                       </div>
-                      <Button type='submit' onClick={buyStock}>구매</Button>
+                      <Button 
+                        type='submit'
+                        variant='outlined'
+                        onClick={buyStock}>
+                          구매
+                      </Button>
                     </form>
                     
 

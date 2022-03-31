@@ -1,7 +1,15 @@
 .stock_data {
     margin-bottom: 2rem;
     border: 1px solid lightgray;
-    padding: 2rem;
+    padding: 1rem 2rem;
+}
+
+.stock_data_closebutton {
+    margin: 0;
+    padding: 0;
+    border: 0px;
+    background-color: white;
+    margin-left: 42rem;
 }
 
 .stock_data__header {
