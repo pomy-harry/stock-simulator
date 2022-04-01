@@ -114,12 +114,8 @@ const LoginButton = (props) => {
                 password: userData.password,
             })
         }).then((res) => {
-            if(res.ok){
-
-            }else{
-                res.json().then((res2 => {
-                    console.log(res2);
-                }))
+            if(!res.ok){
+                window.alert("이미 가입된 이메일입니다.");
             }
         })
     };
