@@ -5,11 +5,13 @@
 .header { 
     background-color: white;    
     display: flex;
-    justify-content: center;    
+    justify-content: center;
+    padding: 0.7rem 0;
+    border-bottom: solid 1px black;
 }
 
 .header__content{
-    padding: 0.7rem 0;
+    
     font-family: "IBM Plex Sans KR";
     min-width: 700px;
     width: 1180px;
@@ -17,7 +19,7 @@
     justify-content: space-between;
     z-index: 10;
     align-items: center;
-    border-bottom: solid 1px black;
+    
 }
 
 .header__logo {
