@@ -2,24 +2,56 @@
     margin: 0;
   }
 
-.header { 
-    background-color: white;    
-    display: flex;
-    justify-content: center;
+.header{
     padding: 0.7rem 0;
+    display: flex;
+    justify-content : center;
     border-bottom: solid 1px black;
 }
 
-.header__content{
-    
+@media (max-width: 750px) {
+    .header {
+        width: 1200px;
+        padding: 0.7rem 0;
+        display: flex;
+        justify-content : left;
+        border-bottom: solid 1px black;        
+    }
+}
+
+.header__border {
+    background-color: white;    
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 1200px) {
+    .header__border {
+        min-width: 100vh;
+        background-color: white;    
+        display: flex;
+        justify-content: left;
+    }
+}
+
+@media (max-width: 750px) {
+    .header__border {
+        max-width: 700px;
+        background-color: white;    
+        display: flex;
+        justify-content: left;
+    }
+}
+
+
+.header__content{    
     font-family: "IBM Plex Sans KR";
     min-width: 700px;
     width: 1180px;
     display: flex;
     justify-content: space-between;
     z-index: 10;
-    align-items: center;
-    
+    align-items: center;    
 }
 
 .header__logo {
