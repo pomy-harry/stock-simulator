@@ -116,7 +116,7 @@ const InfoTabs = (props) => {
     
 
     
-    const findAllWatchStockByCustomerId_URL = "http://localhost:8090/stocks/findAllWatchStockByCustomerId";
+    const findAllWatchStockByCustomerId_URL = "http://localhost:8090/stocks/watch-list";
     const [watchStocks, setWatchStocks] = useState([]);
     const [myDeposit, setMyDeposit] = useState(0);
 
@@ -150,7 +150,7 @@ const InfoTabs = (props) => {
 
     }, []);
 
-    const MARKET_INFO_URL = 'http://localhost:8090/marketInfo';
+    const MARKET_INFO_URL = 'http://localhost:8090/market-info';
 
     const [marketInfo, setMarketInfo] = useState([{}]);
 
@@ -211,11 +211,8 @@ const InfoTabs = (props) => {
       <MenuItem value={value}>{(value.name)}</MenuItem>      
     ));
 
-    
+    const buyStock_URL = "http://localhost:8090/stocks/buy-stock";
     const accountInfo_URL = 'http://localhost:8090/info/account';
-    const buyStock_URL = "http://localhost:8090/buystock";
-
-    
 
     const buyStock = async(event) => {
       event.preventDefault();

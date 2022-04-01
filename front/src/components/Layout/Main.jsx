@@ -5,7 +5,7 @@ import Stock from '../Stock/Stock';
 import classes from "./Main.module.css";
 import MyStockInfo from './MyStockInfo';
 
-const BASE_URL = 'http://localhost:8090/stockData'
+const BASE_URL = 'http://localhost:8090/stock-data'
 
 const Main = () => {
 

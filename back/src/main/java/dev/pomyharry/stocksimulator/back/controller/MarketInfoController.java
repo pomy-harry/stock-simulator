@@ -13,7 +13,7 @@ import dev.pomyharry.stocksimulator.back.service.MarketInfoService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/marketInfo")
+@RequestMapping("/market-info")
 public class MarketInfoController {
 
     private final MarketInfoService marketInfoService;

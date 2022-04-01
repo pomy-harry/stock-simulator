@@ -17,19 +17,19 @@ import dev.pomyharry.stocksimulator.back.service.StockDataService;
 @CrossOrigin(origins = "*")
 @RestController
 public class StockDataController {
-    
+
     private final StockDataService stockChartService;
-    
+
     public StockDataController(StockDataService stockChartService) {
         this.stockChartService = stockChartService;
     }
 
-    @RequestMapping("/stockData")
+    @RequestMapping("/stock-data")
     @PostMapping
-    public ResponseEntity<?> getStockChart(@RequestBody(required = true) CustomerDTO customer){
+    public ResponseEntity<?> getStockChart(@RequestBody(required = true) CustomerDTO customer) {
         List<WatchStock> watch = stockChartService.findAllStocks(customer);
         List<StockDTO> s = stockChartService.getStockChart(watch);
-        
+
         return ResponseEntity.ok().body(s);
     }
 }

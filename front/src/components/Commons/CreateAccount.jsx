@@ -4,7 +4,7 @@ import React, { forwardRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import classes from './CreateAccount.module.css';
 
-const CREATE_ACCOUNT_URL = 'http://localhost:8090/api/v1/createaccount';
+const CREATE_ACCOUNT_URL = 'http://localhost:8090/account';
 
 // 기존의 Input 형식의 변경없이 숫자 형식 변경 ( ex) 1000 -> ￦1,000 )
 const NumberFormatCustom = forwardRef((props, ref) => {

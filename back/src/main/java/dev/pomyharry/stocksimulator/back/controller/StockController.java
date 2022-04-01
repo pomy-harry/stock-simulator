@@ -41,7 +41,6 @@ public class StockController {
         }
     }
 
-    @RequestMapping("/stock/findByCode")
     @PostMapping
     public StockDTO findByCode(@RequestBody StockDTO stockDTO) {
         try {

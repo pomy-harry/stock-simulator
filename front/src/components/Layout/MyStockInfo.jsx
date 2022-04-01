@@ -3,7 +3,7 @@ import "../../static/fonts/font.css"
 import MyStock from './MyStock';
 import classes from './MyStockInfo.module.css'
 
-const BASE_URL = 'http://localhost:8090/my-stock'
+const BASE_URL = 'http://localhost:8090/stocks/my-stock'
 
 const MyStockInfo = (props) => {
     const [stocks, setStocks] = useState([]);
