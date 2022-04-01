@@ -227,4 +227,16 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 <br>
 
 ## Trouble Shooting
+1. 스프링 빈 순환 참조 에러 (The dependencies of some of the beans in the application context from a cycle)
+    - 한 service 파일에서 customerRepository를 @Autowired로 연결하려고 했을 때 해당 에러가 발생
+    → 둘 이상의 Bean이 생성자를 통해 서로를 주입하려고 할 때 발생하는 문제라고해서 repository를 바로 import하는 것이 아니라 
+    customerSerivce 파일을 사용해 필요한 처리를 함으로써 문제를 해결함
+  
+2. fetch의 결과 값이 Promise 객체로 생성되어 데이터에 접근이 안됐던 오류
+    - fetch 결과로 반환된 Promise 에서 .then 을 통해 Respnse object에 접근하고 한번 더 .then을 사용한 후 .json()을 통해 데이터에 접근할 수 있었음
+
+3. React 에서 배열형태의 데이터를 .map 함수를 통해 컴포넌트에 props로 내려주는 과정에서 { } 를 사용하면 return 에서 컴포넌트가 작동하지 않았던 오류
+      const watchStock = watchStocks.map((stock) => { // {} -> () 로 변경하여 해결
+          <Stock key={stock.id} code={stock.code} name={stock.name}/>
+      });
 
