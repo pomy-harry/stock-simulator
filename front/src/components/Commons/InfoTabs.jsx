@@ -308,7 +308,8 @@ const InfoTabs = (props) => {
 
                       <div>
                         <div className={classes.info__tabs__body__myDeposit}>
-                          내 예수금 : {myDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
+                          <p>내 예수금</p>
+                          {myDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
                         </div>
                       </div>
                       

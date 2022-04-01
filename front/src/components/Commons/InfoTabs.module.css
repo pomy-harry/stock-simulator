@@ -37,9 +37,16 @@
   margin-bottom: 2rem;
 }
 
+.info__tabs__body__myDeposit p {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: lightslategray;
+
+}
+
 .info__tabs__body__myDeposit{
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .tab__body__news {
