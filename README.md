@@ -2,8 +2,8 @@
 <br>
 
 ## 👨‍👨‍👧 팀원
-- 김민기
-- 윤소희
+- [김민기](https://github.com/minki0415)
+- [윤소희](https://github.com/mandariny)
 - [장우재](https://github.com/WoojaeJang)
 <br>
 
