@@ -1,5 +1,4 @@
-import { Button } from '@mui/material'
-import React, { useState } from 'react'
+import "../../static/fonts/font.css"
 import classes from './Stock.module.css'
 
 const BASE_URL = 'http://localhost:8090/stocks/watch'

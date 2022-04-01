@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import "../../static/fonts/font.css"
 import MyStock from './MyStock';
 import classes from './MyStockInfo.module.css'
 
@@ -79,11 +80,13 @@ const MyStockInfo = (props) => {
           )
     }else{
         return(
+          <div className={classes.box}>
             <div className={classes.profit__main}>
                 <span>현재 수익률</span>
                 <span className={(sumTotalNowPrice - sumTotalBuyPrice)>0 ? classes.red : classes.blue}>{sumTotalBuyPrice!==0? ((sumTotalNowPrice - sumTotalBuyPrice) / sumTotalBuyPrice * 100).toFixed(3) : 0} %</span>
                 <span>{(sumTotalNowPrice - sumTotalBuyPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원</span>
             </div>
+          </div>
         )
     }
   

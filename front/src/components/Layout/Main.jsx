@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import StockList from './ComboBox';
 import InfoTabs from '../Commons/InfoTabs';
@@ -15,7 +14,7 @@ const Main = () => {
   useEffect(() => {
     const fetchWatchStocks = async (userData) => {
 
-      const response = await fetch(BASE_URL, {
+      await fetch(BASE_URL, {
         method: 'POST',
         headers: {
           'Content-Type' : 'application/json',

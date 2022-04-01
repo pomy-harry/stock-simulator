@@ -1,6 +1,7 @@
 import React, { forwardRef, useEffect, useState } from 'react'
+import "../../static/fonts/font.css"
 import classes from './InfoTabs.module.css'
-import { Tab, Tabs, Box, Typography, InputLabel, Select, MenuItem, FormControl, Input, Button } from '@mui/material';
+import { Tab, Tabs, Box, Typography, Select, MenuItem, FormControl, Input, Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
 import MarketInfo from './MarketInfo';
@@ -249,7 +250,7 @@ const InfoTabs = (props) => {
                         <div className={classes.info__tabs__body__price}>
                           현재가격
                         </div>
-                        <div>
+                        <div className={classes.info__tabs__body__pricevalue}>
                           {buyStockPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
                         </div>
                       </div>

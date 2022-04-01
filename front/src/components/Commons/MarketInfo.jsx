@@ -3,7 +3,7 @@ import classes from './MarketInfo.module.css'
 
 const MarketInfo = (props) => {
   return (
-    <a className={classes.marketinfo} href={props.link} target='_blank'>
+    <a className={classes.marketinfo} href={props.link} target='_blank' rel="noreferrer">
         <div className={classes.marketinfo__img}>
         <img src={props.img} alt="" />
         </div>

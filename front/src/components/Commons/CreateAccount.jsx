@@ -1,8 +1,8 @@
-import React from 'react'
-import { forwardRef, useState } from 'react';
-import NumberFormat from 'react-number-format';
-import Modal from '@mui/material/Modal';
 import { Button, Input } from '@mui/material';
+import Modal from '@mui/material/Modal';
+import React, { forwardRef, useState } from 'react';
+import NumberFormat from 'react-number-format';
+import classes from './CreateAccount.module.css';
 
 const CREATE_ACCOUNT_URL = 'http://localhost:8090/api/v1/createaccount';
 
@@ -65,11 +65,8 @@ const CreateAccount = () => {
 
     };  
   return (
-    <div className="App">
-
-
-      <p className='test'>계좌 정보가 없습니다.</p>
-
+    <div className={classes.create__account}>
+      <p>계좌 정보가 없습니다.</p>
 
       {/* 계좌생성 Modal */}
       <Modal
@@ -81,13 +78,10 @@ const CreateAccount = () => {
         }}
       >
         <div className='createAccountModal'>
-
           <div className="createAccountModal__header">
-            모의 계좌 만들기
+            모의투자 계좌 생성
           </div>
-
           <form className='createAccountModal__form'>
-            
             {/* 계좌이름 입력 Input */}
             <Input
               placeholder='계좌 이름 (별명)'
@@ -95,7 +89,6 @@ const CreateAccount = () => {
               value={accountName}
               onChange={(e) => {setAccountName(e.target.value)}}
             />
-            
             {/* 예산 입력 Input */}
             <Input
               placeholder='예산 (원)'
@@ -103,24 +96,20 @@ const CreateAccount = () => {
               value={deposit.numberformat}
               onChange={(e) => {setDeposit(e.target.value)}}              
             />
-            
             {/* 계좌 생성 버튼 */}
-            <Button type='submit' onClick={createAccount}>계좌 생성</Button>
-
+            <Button variant='contained' type='submit' onClick={createAccount}>계좌 생성</Button>
           </form>
         </div>
-
       </Modal>
-
-      
+ 
       <div className='accountInfo'>
-
         {/* 계좌생성 버튼 */}
         <Button 
+          variant='contained'
           className='createAccountButton'
           onClick={() => setOpenCreateAccount(true)}
         >
-          계좌 만들기
+          계좌 생성
         </Button>
       </div>
 

@@ -38,7 +38,7 @@ const StockList = () => {
         disablePortal
         id="combo-box-search"
         options={stocks}
-        sx={{ width: 1}}
+        sx={{ width: 0.9}}
         autoSelect={true}
         onChange={(event, newValue) => {
             const fetchWatchList = async () => {
