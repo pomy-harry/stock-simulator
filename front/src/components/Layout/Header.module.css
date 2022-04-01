@@ -9,6 +9,16 @@
     border-bottom: solid 1px black;
 }
 
+@media (max-width: 1200px) {
+    .header {
+        width: 1200px;
+        padding: 0.7rem 0;
+        display: flex;
+        justify-content : left;
+        border-bottom: solid 1px black;        
+    }
+}
+
 @media (max-width: 750px) {
     .header {
         width: 1200px;
@@ -27,7 +37,7 @@
 
 @media (max-width: 1200px) {
     .header__border {
-        min-width: 100vh;
+        width: 97vw;
         background-color: white;    
         display: flex;
         justify-content: left;
