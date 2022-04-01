@@ -264,48 +264,48 @@ const InfoTabs = (props) => {
   return (
     <div className={classes.info__tabs}>
         <Tabs value={tabValue} onChange={handleInfoTabChange}>  
-                    <Tab label="모의투자" {...a11yProps(0)} className={classes.info__tabs__tab}/>
-                    <Tab label="시장정보" {...a11yProps(1)}/>
-                </Tabs>
-                
-                <TabPanel className={classes.info__tabs__tabpanel} value={tabValue} index={0}>
-                  <div>                    
-                    <FormControl fullWidth>
-                      <Select
-                        value={buyStockName}
-                        onChange={handleSelectChange}
-                        displayEmpty
-                        inputProps={{ 'aria-label': 'Without label' }}
-                      >
-                        <MenuItem value="start">종목 선택</MenuItem>
-                        {watchStockList}
-                      </Select>
-                    </FormControl>
+          <Tab label="모의투자" {...a11yProps(0)} className={classes.info__tabs__tab}/>
+          <Tab label="시장정보" {...a11yProps(1)}/>
+        </Tabs>
+            
+        <TabPanel className={classes.info__tabs__tabpanel} value={tabValue} index={0}>
+          <div>                    
+            <FormControl fullWidth>
+              <Select
+                value={buyStockName}
+                onChange={handleSelectChange}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Without label' }}
+              >
+                <MenuItem value="start">종목 선택</MenuItem>
+                {watchStockList}
+              </Select>
+            </FormControl>
 
-                    <form>
-                      <div>
-                        <div className={classes.info__tabs__body__price}>
-                          현재가격
-                        </div>
-                        <div className={classes.info__tabs__body__pricevalue}>
-                          {buyStockPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
-                        </div>
-                      </div>
-                      <div>
-                        <Input
-                          className={classes.info__tabs__body__amount}
-                          placeholder='          구매 수량 (주)'
-                          inputComponent={NumberFormatCustom}
-                          value={buyStockAmount}
-                          onChange={handleAmountChange}              
-                        />
-                      </div>
-                      <div>
-                        <div className={classes.info__tabs__body_totalprice}>
-                          {buyStockTotalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
-                        </div>
-                      </div>
-
+            <form>
+              <div>
+                <div className={classes.info__tabs__body__price}>
+                  현재가격
+                </div>
+                <div className={classes.info__tabs__body__pricevalue}>
+                  {buyStockPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
+                </div>
+              </div>
+              <div>
+                <Input
+                  className={classes.info__tabs__body__amount}
+                  placeholder='구매 수량 (주)'
+                  inputComponent={NumberFormatCustom}
+                  value={buyStockAmount}
+                  onChange={handleAmountChange} 
+                  sx={{input: {textAlign: "center"}}}            
+                />
+              </div>
+              <div>
+                <div className={classes.info__tabs__body_totalprice}>
+                  {buyStockTotalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
+                </div>
+              </div>
                       <div>
                         <div className={classes.info__tabs__body__myDeposit}>
                           <p>내 예수금</p>
@@ -321,13 +321,11 @@ const InfoTabs = (props) => {
                           구매
                       </Button>
                     </form>
-                    
-
-                  </div>
-                </TabPanel>
-                <TabPanel value={tabValue} index={1}>
-                  {MarketInfoNews}                  
-                </TabPanel>
+          </div>
+        </TabPanel>
+        <TabPanel value={tabValue} index={1}>
+          {MarketInfoNews}                  
+        </TabPanel>
     </div>
   )
 }
