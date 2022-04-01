@@ -17,12 +17,20 @@ public class MyStockDTO {
     private long buyPrice;
     private String name;
     private long nowPrice;
+    private long sellPrice;
 
     public MyStockDTO (int amount, String customerId, String stockCode, long buyPrice) {
         this.amount = amount;
         this.customerId = customerId;
         this.stockCode = stockCode;
         this.buyPrice = buyPrice;
+    }
+
+    public MyStockDTO (long sellPrice, int amount, String customerId, String stockCode) {
+        this.sellPrice = sellPrice;
+        this.amount = amount;
+        this.customerId = customerId;
+        this.stockCode = stockCode;
     }
 
 
@@ -39,9 +47,10 @@ public class MyStockDTO {
         this.amount = amount;
     }
 
-    public MyStockDTO(long totalBuyPrice, int amount, String name, long nowPrice) {
+    public MyStockDTO(long totalBuyPrice, int amount, String stockCode, String name, long nowPrice) {
         this.totalBuyPrice = totalBuyPrice;
         this.amount = amount;
+        this.stockCode = stockCode;
         this.name = name;
         this.nowPrice = nowPrice;
     }

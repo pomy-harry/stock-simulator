@@ -9,6 +9,8 @@ public interface MyStockService {
 
     void buyStock(MyStockDTO myStockDTO);
 
+    void sellStock(MyStockDTO myStockDTO);
+
     List<MyStockDTO> findAllMyStockByCustomerId(String customerId);
 
     void deleteAllByCustomer(Customer customer);

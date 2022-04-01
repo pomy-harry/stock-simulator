@@ -37,6 +37,20 @@ public class MyStockController {
 
     }
 
+    @RequestMapping("/sell-stock")
+    @PostMapping
+    public ResponseEntity<?> sellStock(@RequestBody MyStockDTO myStockDTO) {
+
+        try {
+            myStockService.sellStock(myStockDTO);
+            return ResponseEntity.ok().body("success");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+    }
+
     @PostMapping("my-stock")
     public ResponseEntity<?> searchStock(@RequestBody MyStockDTO myStock) {
 

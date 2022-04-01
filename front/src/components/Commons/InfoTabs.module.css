@@ -11,6 +11,27 @@
   padding: 1rem;
 }
 
+.info__tabs__tabs{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.info__tabs__tab{
+  flex: 0.7;
+}
+
+.info__tabs__tabs__BS{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.info__tabs__tab__BS{
+  flex: 0.7;
+}
+
 .info__tabs__tabpanel {
   padding: 0;
   text-align: center;
