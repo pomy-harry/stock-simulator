@@ -242,7 +242,7 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
     - const watchStock = watchStocks.map((stock) => { ~~ });
     - -> - const watchStock = watchStocks.map((stock) => ( ~~ ));
 
-## 개선해볼 사항
+## 개선할 점
 - 매도 기능 추가
 - 로그인 유효성 검사 추가
 - 코드 리팩토링
