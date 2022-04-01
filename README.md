@@ -55,6 +55,8 @@
 
 ### ERD
 ![image](https://user-images.githubusercontent.com/93183070/161184291-50873fc8-cd4e-4a36-895c-4c091bef11d1.png)
+![image](https://user-images.githubusercontent.com/93183070/161215928-26bd227d-ff79-4ee9-94b2-ead72e0843f9.png)
+
 
 |Table|Row|설명|
 |---|---|---|
