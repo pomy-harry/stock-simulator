@@ -116,7 +116,7 @@ const InfoTabs = (props) => {
     
 
     
-    const findAllWatchStockByCustomerId_URL = "http://localhost:8090/stocks/findAllWatchStockByCustomerId";
+    const findAllWatchStockByCustomerId_URL = "http://localhost:8090/stocks/watch-list";
     const [watchStocks, setWatchStocks] = useState([]);
     
     useEffect(async() => {
@@ -149,7 +149,7 @@ const InfoTabs = (props) => {
 
     }, []);
 
-    const MARKET_INFO_URL = 'http://localhost:8090/marketInfo';
+    const MARKET_INFO_URL = 'http://localhost:8090/market-info';
 
     const [marketInfo, setMarketInfo] = useState([{}]);
 
@@ -187,7 +187,7 @@ const InfoTabs = (props) => {
 
     
 
-    const buyStock_URL = "http://localhost:8090/buystock";
+    const buyStock_URL = "http://localhost:8090/stocks/buy-stock";
 
     const buyStock = async(event) => {
       event.preventDefault();

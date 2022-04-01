@@ -29,7 +29,7 @@ public class AccountController {
         this.myStockService = myStockService;
     }
 
-    @RequestMapping("/api/v1/createaccount")
+    @RequestMapping("account")
     @PostMapping
     public ResponseEntity<?> insertAccount(@RequestBody AccountDTO accountDTO) {
         System.out.println(accountDTO);
@@ -46,12 +46,12 @@ public class AccountController {
 
     @PostMapping("/info/account")
     public ResponseEntity<?> getAccountInfo(@RequestBody(required = true) AccountDTO account) {
-        
+
         Account acc = accountService.findByCustomerId(account);
         List<MyStockDTO> mystock = myStockService.findAllMyStockByCustomerId(account.getCustomerId());
         long sumTotalNowPrice = 0;
         for (MyStockDTO myStockDTO : mystock) {
-            sumTotalNowPrice += myStockDTO.getNowPrice()*myStockDTO.getAmount();
+            sumTotalNowPrice += myStockDTO.getNowPrice() * myStockDTO.getAmount();
         }
 
         System.out.println(acc);
@@ -59,7 +59,8 @@ public class AccountController {
         if (acc == null) {
             return ResponseEntity.ok().body(new AccountDTO());
         } else {
-            return ResponseEntity.ok().body(new AccountDTO(acc.getId(), acc.getName(), acc.getDeposit(), sumTotalNowPrice));
+            return ResponseEntity.ok()
+                    .body(new AccountDTO(acc.getId(), acc.getName(), acc.getDeposit(), sumTotalNowPrice));
         }
     }
 

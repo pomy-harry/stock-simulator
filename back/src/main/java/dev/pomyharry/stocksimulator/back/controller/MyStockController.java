@@ -14,6 +14,7 @@ import dev.pomyharry.stocksimulator.back.service.MyStockService;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("/stocks")
 public class MyStockController {
 
     private final MyStockService myStockService;
@@ -22,7 +23,7 @@ public class MyStockController {
         this.myStockService = myStockService;
     }
 
-    @RequestMapping("/buystock")
+    @RequestMapping("/buy-stock")
     @PostMapping
     public ResponseEntity<?> buyStock(@RequestBody MyStockDTO myStockDTO) {
 

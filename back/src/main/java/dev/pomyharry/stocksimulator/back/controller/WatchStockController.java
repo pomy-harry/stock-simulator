@@ -56,7 +56,7 @@ public class WatchStockController {
         }
     }
 
-    @RequestMapping("/findAllWatchStockByCustomerId")
+    @RequestMapping("/watch-list")
     @PostMapping
     public ResponseEntity<?> findAllWatchStockByCustomerId(@RequestBody CustomerDTO customerDTO) {
         try {
