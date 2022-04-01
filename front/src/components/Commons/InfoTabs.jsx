@@ -118,7 +118,8 @@ const InfoTabs = (props) => {
     
     const findAllWatchStockByCustomerId_URL = "http://localhost:8090/stocks/findAllWatchStockByCustomerId";
     const [watchStocks, setWatchStocks] = useState([]);
-    
+    const [myDeposit, setMyDeposit] = useState(0);
+
     useEffect(async() => {
 
       await fetch(findAllWatchStockByCustomerId_URL, {
@@ -162,12 +163,37 @@ const InfoTabs = (props) => {
               setMarketInfo(res2);
             })
           }
-        });
+        });       
 
       }
       fetchMarketInfo().catch(error => {
         console.log(error);
       })
+
+
+      const myDepositInfo = async() => {
+
+        await fetch(accountInfo_URL, {
+          method: 'POST',
+          headers: {
+              'Content-Type' : 'application/json',
+          },
+          body: JSON.stringify({
+              customerId: sessionStorage.getItem('USER')
+          })
+        }).then((res) => {
+          if(res.ok){
+              res.json().then((res2 => {
+                  setMyDeposit(res2.deposit);
+              }))
+          }
+        });
+      }
+      myDepositInfo().catch(error => {
+        console.log(error);
+      })
+
+
     }, [])
 
 
@@ -186,39 +212,46 @@ const InfoTabs = (props) => {
     ));
 
     
-
+    const accountInfo_URL = 'http://localhost:8090/info/account';
     const buyStock_URL = "http://localhost:8090/buystock";
+
+    
 
     const buyStock = async(event) => {
       event.preventDefault();
 
       if (stockCode !== '') {
 
-        if (buyStockAmount !== '' &&  buyStockAmount !== 0) {
+        if (buyStockAmount !== '' &&  buyStockAmount !== 0) {          
 
-          await fetch(buyStock_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
-            body: JSON.stringify({
-                amount: buyStockAmount,
-                customerId: sessionStorage.getItem('USER'),
-                stockCode: stockCode,
-                buyPrice : buyStockTotalPrice
+          if (myDeposit >= buyStockTotalPrice) {
+            await fetch(buyStock_URL, {
+              method: 'POST',
+              headers: {
+                  'Content-Type' : 'application/json',
+              },
+              body: JSON.stringify({
+                  amount: buyStockAmount,
+                  customerId: sessionStorage.getItem('USER'),
+                  stockCode: stockCode,
+                  buyPrice : buyStockTotalPrice
+              })
+            }).then((res) => {
+              if(res.ok){
+                setBuyStockName("start");
+                setBuyStockPrice(0);
+                setBuyStockAmount('');
+                setBuyStockTotalPrice(0);
+                window.location.reload();
+              }else{
+                window.alert("가상 계좌를 생성해주세요.");
+                window.location.reload();
+              }
             })
-          }).then((res) => {
-            if(res.ok){
-              setBuyStockName("start");
-              setBuyStockPrice(0);
-              setBuyStockAmount('');
-              setBuyStockTotalPrice(0);
-              window.location.reload();
-            }else{
-              window.alert("가상 계좌를 생성해주세요.");
-              window.location.reload();
-            }
-          })
+
+          } else {
+            window.alert("잔액 부족.");
+          }
 
         } else {
           console.log("수량 : 0");
@@ -276,6 +309,13 @@ const InfoTabs = (props) => {
                           {buyStockTotalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
                         </div>
                       </div>
+
+                      <div>
+                        <div className={classes.info__tabs__body__myDeposit}>
+                          내 예수금 : {myDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
+                        </div>
+                      </div>
+                      
                       <Button 
                         fullWidth='true'
                         type='submit'
