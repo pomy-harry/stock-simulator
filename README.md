@@ -8,7 +8,7 @@
 <br>
 
 ## 🗓 프로젝트 기간
-- 2022.04.24 ~ (진행 중)
+- 2022.03.24 ~ (진행 중)
 <br>
 
 ## 📃 프로젝트 개요
@@ -21,6 +21,7 @@
 - 깃허브를 최대한 활용하여 의사소통 진행
   - ISSUE 활용하여 기능 별 의사소통 진행
   - PROJECT 탭 활용하여 기능별 진행사항 확인
+  - 기능별로 branch 분류, 기능 완성되면 dev에 merge, 최종본은 main branch 에 
 
 - 기능별 역할 분담 
   - 요구사항 분석 단계에서 추출한 기능별로 역할을 나누어 프로젝트 진행
@@ -35,6 +36,9 @@
 ## 🛠 기술 스택
 - Spring
 - React
+- Java
+- MySQL
+- Python
 <br>
 
 ## 🧾 프로젝트 설계
@@ -52,6 +56,8 @@
 
 ### ERD
 ![image](https://user-images.githubusercontent.com/93183070/161184291-50873fc8-cd4e-4a36-895c-4c091bef11d1.png)
+![image](https://user-images.githubusercontent.com/93183070/161215928-26bd227d-ff79-4ee9-94b2-ead72e0843f9.png)
+
 
 |Table|Row|설명|
 |---|---|---|
@@ -232,10 +238,17 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
     → 둘 이상의 Bean이 생성자를 통해 서로를 주입하려고 할 때 발생하는 문제라고해서 repository를 바로 import하는 것이 아니라 
     customerSerivce 파일을 사용해 필요한 처리를 함으로써 문제를 해결함
   
-2. fetch의 결과 값이 Promise 객체로 생성되어 데이터에 접근이 안됐던 오류
-    - fetch 결과로 반환된 Promise 에서 .then 을 통해 Respnse object에 접근하고 한번 더 .then을 사용한 후 .json()을 통해 데이터에 접근할 수 있었음
+2. fetch의 결과 값이 Promise 객체로 생성되어 데이터에 접근이 안됐던 문제
+    - fetch 결과로 반환된 Promise 에서 .then 을 통해 Respnse object에 접근하고 한번 더 .then을 사용한 후 .json()을 사용하여 해결
 
-3. React 에서 배열형태의 데이터를 .map 함수를 통해 컴포넌트에 props로 내려주는 과정에서 { } 를 사용하면 return 에서 컴포넌트가 작동하지 않았던 오류<br>
+3. React 에서 배열형태의 데이터를 .map 함수를 통해 컴포넌트에 props로 내려주는 과정에서 { } 를 사용하면 return 에서 컴포넌트가 작동하지 않았던 문제<br>
     - const watchStock = watchStocks.map((stock) => { ~~ });
     - -> - const watchStock = watchStocks.map((stock) => ( ~~ ));
 
+## 개선할 점
+- 매도 기능 추가
+- 로그인 유효성 검사 추가
+- 코드 리팩토링
+- 세션을 활용하여 안전하게 유저 정보를 유지하고 전달하는 방법 찾아보기 
+- 알고리즘 투자
+- 크롤링 이외에 주식 정보를 가져올 수 있는 방법 고민 
