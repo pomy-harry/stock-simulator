@@ -23,16 +23,6 @@ public class MarketInfoController {
     }
 
     @GetMapping
-    /*
-     * public List<MarketInfoDTO> getMarketInfo() {
-     * try {
-     * return marketInfoService.getMarketInfo();
-     * } catch (Exception e) {
-     * System.out.println(e.getMessage());
-     * }
-     * return null;
-     * }
-     */
     public ResponseEntity<?> getMarketInfo() {
         try {
             List<MarketInfoDTO> market = marketInfoService.getMarketInfo();

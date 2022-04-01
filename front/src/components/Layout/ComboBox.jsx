@@ -58,7 +58,13 @@ const StockList = () => {
                         }))
                         window.location.reload();
                     }else{
-                        window.alert("로그인을 해주세요");
+                        res.json().then((res2 => {
+                            if(res2.message === null){
+                                window.alert("로그인을 해주세요.");
+                            }else{
+                                window.alert("이미 등록된 관심종목입니다.");
+                            }
+                        }))
                     }
                 })
             }
