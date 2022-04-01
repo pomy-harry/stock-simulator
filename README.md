@@ -35,6 +35,9 @@
 ## 🛠 기술 스택
 - Spring
 - React
+- Java
+- MySQL
+- Python
 <br>
 
 ## 🧾 프로젝트 설계
