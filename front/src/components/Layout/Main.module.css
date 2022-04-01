@@ -6,14 +6,26 @@ ul {
   padding: 1rem;
 }
 
+
 .main {
   display: flex;
-  padding: 0 15rem;
+  padding: 1rem;
   height: 80%;
+  justify-content: center;
 }
 
+@media (max-width: 1200px) {
+  .main {
+    display: flex;
+    padding: 1rem;
+    height: 80%;
+    justify-content: left;
+  }
+}
+
+
 .chart {
-  width: 60%;
+  width: 780px;
   min-width: 780px;
   height: cal(100vh-60px);
   background-color: white;
@@ -21,7 +33,7 @@ ul {
 }
 
 .chart__search {
-  width: calc(100%-20px);
+  width: calc(100%-10%);
   height: 35px;
   display: flex;
   margin-top: 15px;
@@ -73,7 +85,7 @@ ul {
 }
 
 .info {
-  width: 40%;
-  min-width: 300px;
+  width: 400px;
+  min-width: 400px;
 }
 

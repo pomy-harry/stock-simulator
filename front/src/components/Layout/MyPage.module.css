@@ -4,21 +4,29 @@
 
 .mypage {
   display: flex;
-  padding: 1rem 15rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+@media (max-width: 1200px) {
+  .mypage {
+    display: flex;
+    padding: 1rem;
+    justify-content: left;
+  }
 }
 
 .mypage__mystockinfo {
-  width: 60%;
-  min-width: 600px;
-  max-width: 800px;
+  width: 780px;
+  min-width: 780px;
   height: cal(100vh-60px);
   background-color: white;
   flex-direction: column;
 }
 
 .mypage__myinfo {
-  min-width: 500px;
-  max-width: 500px;
+  width: 400px;
+  min-width: 400px;
   border: 1px solid lightgray;
   height: auto;
   margin-top: 10px;
