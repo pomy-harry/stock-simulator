@@ -96,6 +96,11 @@
 - 모의 투자 종목별 수익률 조회
 <br>
 
+## Restful API Document
+https://documenter.getpostman.com/view/19511451/UVyrUcGR
+<br>
+
+
 ## 화면 구성 및 기능 소개
 
 ![image](https://user-images.githubusercontent.com/93183070/161186549-61668371-56f2-41ae-8adb-642803558c42.png)
@@ -218,3 +223,8 @@
 클릭 시 네이버 뉴스페이지로 이동  
 
 ![image](https://user-images.githubusercontent.com/93183070/161187466-74560fb8-c592-4786-8d73-895ca2257f0f.png)
+
+<br>
+
+## Trouble Shooting
+
