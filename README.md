@@ -42,6 +42,7 @@
 
 ### 요구사항 명세서
 ![image](https://user-images.githubusercontent.com/93183070/161183528-317c7d7f-34f8-4cb0-a4d7-14b7b420c381.png)
+
 <br>
 
 ### 화면구성도
@@ -107,6 +108,7 @@
 ![image](https://user-images.githubusercontent.com/93183070/161186704-e902f3b6-a11c-4ce5-9147-5cc5c591c90a.png)
 
 ![image](https://user-images.githubusercontent.com/93183070/161186684-7e8ec592-9411-4478-b8a2-65bceccd3efb.png)
+<br>
 
 ### 2. 로그인
 
@@ -117,6 +119,7 @@
 로그인 정보가 일치하지 않을 경우 로그인에 실패했다는 알림창이 생성된다.
 
 ![image](https://user-images.githubusercontent.com/93183070/161186750-d557480d-e380-43db-ae76-2f634b105377.png)
+<br>
 
 ### 3. 관심종목
 
@@ -125,7 +128,7 @@
     [대한민국 대표 기업공시채널 KIND](https://kind.krx.co.kr/corpgeneral/corpList.do?method=loadInitPage)
     
     기업 공시채널 KIND에서 주식 정보 다운 받아 Python을 통해 MySQL 과 연결하여 DB 생성
-    
+<br>
 
 **3.1 관심종목 등록**
 
@@ -148,6 +151,7 @@
 **3.3 관심종목 삭제**
 
 차트 오른쪽 상단의 닫기 버튼을 통해 관심종목으로 등록된 주식을 삭제할 수 있다. 
+<br>
 
 ### 4. 모의투자
 
@@ -160,6 +164,8 @@
 ![image](https://user-images.githubusercontent.com/93183070/161187092-3a91bde3-66cd-4d65-9092-85a57fc924de.png)
 
 ![image](https://user-images.githubusercontent.com/93183070/161187111-55002e22-7603-40dd-8b22-f3e7d6b7b57a.png)
+
+<br>
 
 **4.2 가상계좌 정보 수정 및 삭제**
 
@@ -179,7 +185,7 @@
 
 가상계좌를 생성하여 등록한 관심 종목 중에서 선택하여 매수할 수 있는 기능. 
 
-![image](https://user-images.githubusercontent.com/93183070/161187205-0d47353e-bd02-4553-8cbc-05b2332a302d.png)D
+![image](https://user-images.githubusercontent.com/93183070/161187205-0d47353e-bd02-4553-8cbc-05b2332a302d.png)
 
 마이페이지에서 가상계좌 미 생성 후 구매 버튼 클릭 시 ‘가상계좌를 생성해주세요’ 라는 알림창 생성
 
@@ -192,6 +198,7 @@
 잔고는 주식을 포함한 전체 자산 금액을 보여준다.
 
 ![image](https://user-images.githubusercontent.com/93183070/161187291-b232be25-5719-4d25-8ee2-cad9836372f1.png)
+<br>
 
 ### 5. 수익률 조회
 
@@ -202,6 +209,7 @@
 전체 수익률은 메인 페이지에서도 조회할 수 있다.
 
 ![image](https://user-images.githubusercontent.com/93183070/161187438-1053a306-2ca1-472e-bf79-7ab6cb155fd9.png)
+<br>
 
 ### 6. 시장 정보 조회
 
