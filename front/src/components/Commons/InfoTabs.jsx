@@ -219,36 +219,35 @@ const InfoTabs = (props) => {
 
       if (stockCode !== '') {
 
-        if (buyStockAmount !== '' &&  buyStockAmount !== 0) {          
+        if (buyStockAmount !== '' &&  buyStockAmount !== 0) {  
 
-          if (myDeposit >= buyStockTotalPrice) {
-            await fetch(buyStock_URL, {
-              method: 'POST',
-              headers: {
-                  'Content-Type' : 'application/json',
-              },
-              body: JSON.stringify({
-                  amount: buyStockAmount,
-                  customerId: sessionStorage.getItem('USER'),
-                  stockCode: stockCode,
-                  buyPrice : buyStockTotalPrice
-              })
-            }).then((res) => {
-              if(res.ok){
+          await fetch(buyStock_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify({
+                amount: buyStockAmount,
+                customerId: sessionStorage.getItem('USER'),
+                stockCode: stockCode,
+                buyPrice : buyStockTotalPrice
+            })
+          }).then((res) => {
+            if(res.ok){
+              if (myDeposit >= buyStockTotalPrice) {
                 setBuyStockName("start");
                 setBuyStockPrice(0);
                 setBuyStockAmount('');
                 setBuyStockTotalPrice(0);
-                window.location.reload();
-              }else{
-                window.alert("가상 계좌를 생성해주세요.");
-                window.location.reload();
+                window.location.reload(); 
+              } else {
+                window.alert("잔액 부족.");
               }
-            })
-
-          } else {
-            window.alert("잔액 부족.");
-          }
+            }else{
+              window.alert("가상 계좌를 생성해주세요.");
+              window.location.reload();
+            }
+          })
 
         } else {
           console.log("수량 : 0");
