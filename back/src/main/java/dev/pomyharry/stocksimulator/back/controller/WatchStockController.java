@@ -58,13 +58,14 @@ public class WatchStockController {
 
     @RequestMapping("/findAllWatchStockByCustomerId")
     @PostMapping
-    public List<WatchStockDTO> findAllWatchStockByCustomerId(@RequestBody CustomerDTO customerDTO) {
+    public ResponseEntity<?> findAllWatchStockByCustomerId(@RequestBody CustomerDTO customerDTO) {
         try {
             String customerId = customerDTO.getId();
-            return watchStockService.findAllWatchStockByCustomerId(customerId);
+            List<WatchStockDTO> watchList = watchStockService.findAllWatchStockByCustomerId(customerId);
+            return ResponseEntity.ok().body(watchList);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return null;
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
