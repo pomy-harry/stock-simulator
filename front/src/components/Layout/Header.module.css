@@ -2,11 +2,17 @@
     margin: 0;
   }
 
-.header {
-    font-family: "IBM Plex Sans KR";
-    padding: 0.7rem 0;
-    min-width: 700px;
+.header { 
     background-color: white;    
+    display: flex;
+    justify-content: center;    
+}
+
+.header__content{
+    padding: 0.7rem 0;
+    font-family: "IBM Plex Sans KR";
+    min-width: 700px;
+    width: 1180px;
     display: flex;
     justify-content: space-between;
     z-index: 10;
