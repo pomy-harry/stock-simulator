@@ -204,13 +204,17 @@ const InfoTabs = (props) => {
                 stockCode: stockCode,
                 buyPrice : buyStockTotalPrice
             })
+          }).then((res) => {
+            if(res.ok){
+              setBuyStockName("start");
+              setBuyStockPrice(0);
+              setBuyStockAmount('');
+              setBuyStockTotalPrice(0);
+              window.location.reload();
+            }else{
+              window.alert("가상 계좌를 생성해주세요.");
+            }
           })
-
-          setBuyStockName("start");
-          setBuyStockPrice(0);
-          setBuyStockAmount('');
-          setBuyStockTotalPrice(0);
-          window.location.reload();
 
         } else {
           console.log("수량 : 0");
