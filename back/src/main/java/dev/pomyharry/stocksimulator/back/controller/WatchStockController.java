@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
+import dev.pomyharry.stocksimulator.back.model.dto.ErrorResponseDTO;
 import dev.pomyharry.stocksimulator.back.model.dto.StockDTO;
 import dev.pomyharry.stocksimulator.back.model.dto.WatchStockDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
@@ -44,8 +46,13 @@ public class WatchStockController {
 
             return ResponseEntity.ok().body("success");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+            if (e instanceof DuplicationException) {
+                System.out.println(e.getMessage());
+                return ResponseEntity.badRequest().body(new ErrorResponseDTO(e.getMessage()));
+            } else {
+
+                return ResponseEntity.badRequest().body(new ErrorResponseDTO());
+            }
         }
     }
 
