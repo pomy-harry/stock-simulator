@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
-import dev.pomyharry.stocksimulator.back.service.CustomerService;
 import dev.pomyharry.stocksimulator.back.service.AccountService;
+import dev.pomyharry.stocksimulator.back.service.CustomerService;
 import dev.pomyharry.stocksimulator.back.service.WatchStockService;
-import dev.pomyharry.stocksimulator.back.service.MyStockService;
 
 @CrossOrigin(origins = "*")
 @RestController

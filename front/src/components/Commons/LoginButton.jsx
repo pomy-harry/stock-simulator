@@ -176,7 +176,7 @@ const LoginButton = (props) => {
 
                 <div className={classes.login__modal__header}>
                     <img src={logo_img} alt="logo" />
-                    <h2>주린이 구원소</h2>
+                    <h2>주린이집</h2>
                 </div>
                 
                 <Tabs value={value} onChange={handleChange} className={classes.login__modal__tabs}>  
