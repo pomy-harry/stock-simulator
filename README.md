@@ -236,5 +236,6 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
     - fetch 결과로 반환된 Promise 에서 .then 을 통해 Respnse object에 접근하고 한번 더 .then을 사용한 후 .json()을 통해 데이터에 접근할 수 있었음
 
 3. React 에서 배열형태의 데이터를 .map 함수를 통해 컴포넌트에 props로 내려주는 과정에서 { } 를 사용하면 return 에서 컴포넌트가 작동하지 않았던 오류<br>
-    - const watchStock = watchStocks.map((stock) => {<Stock key={stock.id} code={stock.code} name={stock.name}/>});
+    - const watchStock = watchStocks.map((stock) => { ~~ });
+    - -> - const watchStock = watchStocks.map((stock) => ( ~~ ));
 
