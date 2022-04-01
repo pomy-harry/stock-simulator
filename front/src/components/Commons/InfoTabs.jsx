@@ -130,16 +130,19 @@ const InfoTabs = (props) => {
             id: sessionStorage.getItem('USER')
         })
         })
-        .then((res) => res.json())
-        .then((res) => {          
-          const dataList = [];
-          for(const key in res){
-            dataList.push({
-              code: res[key].code,
-              name: res[key].name
-            });
-          }
-          setWatchStocks(dataList)
+        .then((res) => {
+          if(res.ok){
+            res.json().then((res2 => {
+              const dataList = [];
+              for(const key in res2){
+                dataList.push({
+                  code: res2[key].code,
+                  name: res2[key].name
+                });
+              }
+              setWatchStocks(dataList)
+            }))
+          } 
         })
         .then()
         .catch(error => console.error('Error:', error));
@@ -213,6 +216,7 @@ const InfoTabs = (props) => {
               window.location.reload();
             }else{
               window.alert("가상 계좌를 생성해주세요.");
+              window.location.reload();
             }
           })
 
