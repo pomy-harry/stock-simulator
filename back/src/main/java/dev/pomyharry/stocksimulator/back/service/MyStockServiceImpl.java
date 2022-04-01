@@ -49,24 +49,24 @@ public class MyStockServiceImpl implements MyStockService {
             throw new AccountNotFoundException("계좌가 존재하지 않습니다.");
         }
         // 보유 종목 찾기
-        MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(),
-                myStockDTO.getStockCode());
-        if (mystock == null) {
-            MyStock changedMyStock = new MyStock(
-                    myStockDTO.getAmount(),
-                    myStockDTO.getBuyPrice(),
-                    customerRepository.getOne(myStockDTO.getCustomerId()),
-                    stockRepository.getOne(myStockDTO.getStockCode()));
-            myStockRepository.save(changedMyStock);
-        } else {
-            mystock.setAmount(mystock.getAmount() + myStockDTO.getAmount());
-            mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() + myStockDTO.getBuyPrice());
-            myStockRepository.save(mystock);
+        MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(), myStockDTO.getStockCode());
+        if (account.getDeposit() > myStockDTO.getBuyPrice()) {
+            if (mystock == null) {
+                MyStock changedMyStock = new MyStock(
+                        myStockDTO.getAmount(),
+                        myStockDTO.getBuyPrice(),
+                        customerRepository.getOne(myStockDTO.getCustomerId()),
+                        stockRepository.getOne(myStockDTO.getStockCode()));
+                myStockRepository.save(changedMyStock);
+            } else {
+                mystock.setAmount(mystock.getAmount() + myStockDTO.getAmount());
+                mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() + myStockDTO.getBuyPrice());
+                myStockRepository.save(mystock);
+            }
+            account.setDeposit(account.getDeposit() - myStockDTO.getBuyPrice());
+            accountRepository.save(account);
         }
-        account.setDeposit(account.getDeposit() - myStockDTO.getBuyPrice());
-        accountRepository.save(account);
     }
-
 
     @Override
     public void sellStock(MyStockDTO myStockDTO) {
@@ -83,12 +83,14 @@ public class MyStockServiceImpl implements MyStockService {
             throw new AccountNotFoundException("해당 종목을 보유하지 않습니다.");
         } 
 
-        mystock.setAmount(mystock.getAmount() - myStockDTO.getAmount());
-        mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() - myStockDTO.getSellPrice());
-        myStockRepository.save(mystock);        
-
-        account.setDeposit(account.getDeposit() + myStockDTO.getSellPrice());
-        accountRepository.save(account);
+        if (mystock.getAmount() > myStockDTO.getAmount()) {
+            mystock.setAmount(mystock.getAmount() - myStockDTO.getAmount());
+            mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() - myStockDTO.getSellPrice());
+            myStockRepository.save(mystock);        
+    
+            account.setDeposit(account.getDeposit() + myStockDTO.getSellPrice());
+            accountRepository.save(account);
+        }
     }
 
     @Override
