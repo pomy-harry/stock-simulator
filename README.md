@@ -239,3 +239,10 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
     - const watchStock = watchStocks.map((stock) => { ~~ });
     - -> - const watchStock = watchStocks.map((stock) => ( ~~ ));
 
+## 개선해볼 사항
+- 매도 기능 추가
+- 로그인 유효성 검사 추가
+- 코드 리팩토링
+- 세션을 활용하여 안전하게 유저 정보를 유지하고 전달하는 방법 찾아보기 
+- 알고리즘 투자
+- 크롤링 이외에 주식 정보를 가져올 수 있는 방법 고민 
