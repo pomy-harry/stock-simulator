@@ -83,7 +83,7 @@ public class MyStockServiceImpl implements MyStockService {
             throw new AccountNotFoundException("해당 종목을 보유하지 않습니다.");
         } 
 
-        if (mystock.getAmount() > myStockDTO.getAmount()) {
+        if (mystock.getAmount() >= myStockDTO.getAmount()) {
             mystock.setAmount(mystock.getAmount() - myStockDTO.getAmount());
             mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() - myStockDTO.getSellPrice());
             myStockRepository.save(mystock);        
