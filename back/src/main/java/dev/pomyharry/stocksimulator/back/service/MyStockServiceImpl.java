@@ -146,10 +146,24 @@ public class MyStockServiceImpl implements MyStockService {
     public List<MyStockDTO> findAllMyStockByCustomerId(String customerId) {
         List<MyStock> stocks = myStockRepository.findAllByCustomerId(customerId);
 
+        /*
+         * List<MyStockDTO> myStockList = stocks.stream()
+         * .map(stock -> new MyStockDTO(stock.getTotalBuyPrice(), stock.getAmount(),
+         * stock.getStock().getCode(), stock.getStock().getName(),
+         * Long.parseLong(stockChartComponent.getStockChart(new
+         * WatchStock(stock.getStock())).getPrice().replace(",", ""))))
+         * .collect(Collectors.toList());
+         */
+
         List<MyStockDTO> myStockList = stocks.stream()
-                .map(stock -> new MyStockDTO(stock.getTotalBuyPrice(), stock.getAmount(), stock.getStock().getCode(), stock.getStock().getName(),
-                        Long.parseLong(stockChartComponent.getStockChart(new WatchStock(stock.getStock())).getPrice()
-                                .replace(",", ""))))
+                .map(stock -> MyStockDTO.builder()
+                        .totalBuyPrice(stock.getTotalBuyPrice())
+                        .amount(stock.getAmount())
+                        .stockCode(stock.getStock().getCode())
+                        .name(stock.getStock().getName())
+                        .nowPrice(Long.parseLong(stockChartComponent.getStockChart(new WatchStock(stock.getStock()))
+                                .getPrice().replace(",", "")))
+                        .build())
                 .collect(Collectors.toList());
 
         return myStockList;
