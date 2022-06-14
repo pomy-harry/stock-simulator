@@ -283,41 +283,72 @@ const InfoTabs = (props) => {
     const buyStock_URL = "http://localhost:8090/stocks/buy-stock";
     const buyStock = async(event) => {
       event.preventDefault();
-      if (buyStockCode !== '') {
-        if (buyStockAmount !== '' &&  buyStockAmount !== 0) {  
-          await fetch(buyStock_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
-            body: JSON.stringify({
-                amount: buyStockAmount,
-                customerId: sessionStorage.getItem('USER'),
-                stockCode: buyStockCode,
-                buyPrice : buyStockTotalPrice
-            })
-          }).then((res) => {
-            if(res.ok){
-              if (myDeposit >= buyStockTotalPrice) {
-                setBuyStockName("start");
-                setBuyStockPrice(0);
-                setBuyStockAmount('');
-                setBuyStockTotalPrice(0);
-                window.location.reload(); 
+
+      // 현재 한국 시간
+      const nowDate = new Date();
+      const utc = nowDate.getTime() + (nowDate.getTimezoneOffset() * 60 * 1000);
+      const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+      const nowDateKor = new Date(utc + (KR_TIME_DIFF));
+      
+      const nowHour = nowDateKor.getHours();
+      const nowMinutes = nowDateKor.getMinutes();
+      const nowSeconds = nowDateKor.getSeconds();
+
+      const limitStartHour = 9;
+      const limitStartMinutes = 0;
+      const limitStartSeconds = 0;
+
+      const limitEndHour = 16;
+      const limitEndMinutes = 0;
+      const limitEndSeconds = 0;
+
+      const nowTime = (nowHour * 3600) + (nowMinutes * 60) + nowSeconds;
+
+      const limitStartTime = (limitStartHour * 3600) + (limitStartMinutes * 60) + limitStartSeconds;
+      const limitEndTime = (limitEndHour * 3600) + (limitEndMinutes * 60) + limitEndSeconds;
+
+      if (nowTime >= limitStartTime && nowTime <= limitEndTime) {
+
+        if (buyStockCode !== '') {
+          if (buyStockAmount !== '' &&  buyStockAmount !== 0) {  
+            await fetch(buyStock_URL, {
+              method: 'POST',
+              headers: {
+                  'Content-Type' : 'application/json',
+              },
+              body: JSON.stringify({
+                  amount: buyStockAmount,
+                  customerId: sessionStorage.getItem('USER'),
+                  stockCode: buyStockCode,
+                  buyPrice : buyStockTotalPrice
+              })
+            }).then((res) => {
+              if(res.ok){
+                if (myDeposit >= buyStockTotalPrice) {
+                  setBuyStockName("start");
+                  setBuyStockPrice(0);
+                  setBuyStockAmount('');
+                  setBuyStockTotalPrice(0);
+                  window.location.reload(); 
+                } else {
+                  window.alert("잔액 부족.");
+                }
               } else {
-                window.alert("잔액 부족.");
+                window.alert("가상 계좌를 생성해주세요.");
+                window.location.reload();
               }
-            }else{
-              window.alert("가상 계좌를 생성해주세요.");
-              window.location.reload();
-            }
-          })
+            })
+          } else {
+            console.log("수량 : 0");
+          }
         } else {
-          console.log("수량 : 0");
+          console.log("종목 선택 안됨");
         }
       } else {
-        console.log("종목 선택 안됨");
+        window.alert("거래 가능시간이 아닙니다. \n거래 가능 시간 : 09:00:00 ~ 16:00:00");
+        window.location.reload();
       }
+
     };
 
     const sellStock_URL = "http://localhost:8090/stocks/sell-stock";
@@ -325,46 +356,76 @@ const InfoTabs = (props) => {
     const sellStock = async(event) => {
       event.preventDefault();
 
-      if (sellStockCode !== '') {
+      // 현재 한국 시간
+      const nowDate = new Date();
+      const utc = nowDate.getTime() + (nowDate.getTimezoneOffset() * 60 * 1000);
+      const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+      const nowDateKor = new Date(utc + (KR_TIME_DIFF));
+      
+      const nowHour = nowDateKor.getHours();
+      const nowMinutes = nowDateKor.getMinutes();
+      const nowSeconds = nowDateKor.getSeconds();
 
-        if (sellStockAmount !== '' &&  sellStockAmount !== 0) {  
+      const limitStartHour = 9;
+      const limitStartMinutes = 0;
+      const limitStartSeconds = 0;
 
-          await fetch(sellStock_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
-            body: JSON.stringify({
-                sellPrice : sellStockTotalPrice,
-                amount: sellStockAmount,
-                customerId: sessionStorage.getItem('USER'),
-                stockCode: sellStockCode
-            })
-          }).then((res) => {
-            if(res.ok){
-              if (sellStockAmount <= sellStockMaxAmount) {
-                setSellStockName("start");
-                setSellStockPrice(0);
-                setSellStockAmount('');
-                setSellStockTotalPrice(0);
-                window.location.reload(); 
-              } else {
-                window.alert("판매 가능 수량을 초과했습니다.");
+      const limitEndHour = 16;
+      const limitEndMinutes = 0;
+      const limitEndSeconds = 0;
+
+      const nowTime = (nowHour * 3600) + (nowMinutes * 60) + nowSeconds;
+
+      const limitStartTime = (limitStartHour * 3600) + (limitStartMinutes * 60) + limitStartSeconds;
+      const limitEndTime = (limitEndHour * 3600) + (limitEndMinutes * 60) + limitEndSeconds;
+
+      if (nowTime >= limitStartTime && nowTime <= limitEndTime) {
+
+        if (sellStockCode !== '') {
+  
+          if (sellStockAmount !== '' &&  sellStockAmount !== 0) {  
+  
+            await fetch(sellStock_URL, {
+              method: 'POST',
+              headers: {
+                  'Content-Type' : 'application/json',
+              },
+              body: JSON.stringify({
+                  sellPrice : sellStockTotalPrice,
+                  amount: sellStockAmount,
+                  customerId: sessionStorage.getItem('USER'),
+                  stockCode: sellStockCode
+              })
+            }).then((res) => {
+              if(res.ok){
+                if (sellStockAmount <= sellStockMaxAmount) {
+                  setSellStockName("start");
+                  setSellStockPrice(0);
+                  setSellStockAmount('');
+                  setSellStockTotalPrice(0);
+                  window.location.reload(); 
+                } else {
+                  window.alert("판매 가능 수량을 초과했습니다.");
+                }
+              }else{
+                window.alert("가상 계좌를 생성해주세요.");
+                window.location.reload();
               }
-            }else{
-              window.alert("가상 계좌를 생성해주세요.");
-              window.location.reload();
-            }
-          })
-
+            })
+  
+          } else {
+            console.log("수량 : 0");
+          }
+  
+  
         } else {
-          console.log("수량 : 0");
+          console.log("종목 선택 안됨");
         }
-
-
       } else {
-        console.log("종목 선택 안됨");
+        window.alert("거래 가능시간이 아닙니다. \n거래 가능 시간 : 09:00:00 ~ 16:00:00");
+        window.location.reload();
       }
+
 
     };
     
