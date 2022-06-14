@@ -49,7 +49,8 @@ public class MyStockServiceImpl implements MyStockService {
             throw new AccountNotFoundException("계좌가 존재하지 않습니다.");
         }
         // 보유 종목 찾기
-        MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(), myStockDTO.getStockCode());
+        MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(),
+                myStockDTO.getStockCode());
         if (account.getDeposit() > myStockDTO.getBuyPrice()) {
             if (mystock == null) {
                 MyStock changedMyStock = new MyStock(
@@ -78,16 +79,17 @@ public class MyStockServiceImpl implements MyStockService {
         }
 
         // 보유 종목 찾기
-        MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(), myStockDTO.getStockCode());
+        MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(),
+                myStockDTO.getStockCode());
         if (mystock == null) {
             throw new AccountNotFoundException("해당 종목을 보유하지 않습니다.");
-        } 
+        }
 
         if (mystock.getAmount() > myStockDTO.getAmount()) {
             mystock.setAmount(mystock.getAmount() - myStockDTO.getAmount());
             mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() - myStockDTO.getSellPrice());
-            myStockRepository.save(mystock);        
-    
+            myStockRepository.save(mystock);
+
             account.setDeposit(account.getDeposit() + myStockDTO.getSellPrice());
             accountRepository.save(account);
         }
@@ -97,10 +99,24 @@ public class MyStockServiceImpl implements MyStockService {
     public List<MyStockDTO> findAllMyStockByCustomerId(String customerId) {
         List<MyStock> stocks = myStockRepository.findAllByCustomerId(customerId);
 
+        /*
+         * List<MyStockDTO> myStockList = stocks.stream()
+         * .map(stock -> new MyStockDTO(stock.getTotalBuyPrice(), stock.getAmount(),
+         * stock.getStock().getCode(), stock.getStock().getName(),
+         * Long.parseLong(stockChartComponent.getStockChart(new
+         * WatchStock(stock.getStock())).getPrice().replace(",", ""))))
+         * .collect(Collectors.toList());
+         */
+
         List<MyStockDTO> myStockList = stocks.stream()
-                .map(stock -> new MyStockDTO(stock.getTotalBuyPrice(), stock.getAmount(), stock.getStock().getCode(), stock.getStock().getName(),
-                        Long.parseLong(stockChartComponent.getStockChart(new WatchStock(stock.getStock())).getPrice()
-                                .replace(",", ""))))
+                .map(stock -> MyStockDTO.builder()
+                        .totalBuyPrice(stock.getTotalBuyPrice())
+                        .amount(stock.getAmount())
+                        .stockCode(stock.getStock().getCode())
+                        .name(stock.getStock().getName())
+                        .nowPrice(Long.parseLong(stockChartComponent.getStockChart(new WatchStock(stock.getStock()))
+                                .getPrice().replace(",", "")))
+                        .build())
                 .collect(Collectors.toList());
 
         return myStockList;

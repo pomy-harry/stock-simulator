@@ -17,22 +17,4 @@ public class WatchStockDTO {
     private String name;
     private String customerId;
 
-    // public WatchStockDTO(String code, String customerId) {
-    // this.code = code;
-    // this.customerId = customerId;
-    // }
-
-    // public WatchStockDTO(WatchStock watchStock) {
-    // this.index = watchStock.getIndex();
-    // this.code = watchStock.getStock().getCode();
-    // this.customerId = watchStock.getCustomer().getId();
-    // }
-
-    // public WatchStockDTO(WatchStock watchStock, String name) {
-    // this.index = watchStock.getIndex();
-    // this.code = watchStock.getStock().getCode();
-    // this.customerId = watchStock.getCustomer().getId();
-    // this.name = name;
-    // }
-
 }

@@ -19,18 +19,4 @@ public class CustomerDTO {
 
     private String password;
 
-    // public CustomerDTO(String name, String email, String pw) {
-    // this.name = name;
-    // this.email = email;
-    // }
-
-    // public CustomerDTO(String email, String pw) {
-    // this.email = email;
-    // this.password = pw;
-    // }
-
-    // public CustomerDTO(String id) {
-    // this.id = id;
-    // }
-
 }

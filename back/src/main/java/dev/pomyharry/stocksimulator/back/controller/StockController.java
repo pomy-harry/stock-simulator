@@ -31,7 +31,11 @@ public class StockController {
         try {
             List<Stock> stockList = stockService.findAllStocks();
 
-            List<StockDTO> stocks = stockList.stream().map(stock -> new StockDTO(stock.getCode(), stock.getName()))
+            // List<StockDTO> stocks = stockList.stream().map(stock -> new
+            // StockDTO(stock.getCode(), stock.getName()))
+            // .collect(Collectors.toList());
+            List<StockDTO> stocks = stockList.stream()
+                    .map(stock -> StockDTO.builder().code(stock.getCode()).name(stock.getName()).build())
                     .collect(Collectors.toList());
 
             return ResponseEntity.ok().body(stocks);
@@ -45,7 +49,8 @@ public class StockController {
     public StockDTO findByCode(@RequestBody StockDTO stockDTO) {
         try {
             Stock stock = stockService.findByCode(stockDTO.getCode());
-            return new StockDTO(stock.getCode(), stock.getName());
+            // return new StockDTO(stock.getCode(), stock.getName());
+            return StockDTO.builder().code(stock.getCode()).name(stock.getName()).build();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
