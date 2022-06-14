@@ -70,7 +70,13 @@ public class CustomerController {
     public ResponseEntity<?> getCustomerInfo(@RequestBody(required = true) CustomerDTO customer) {
         try {
             Customer c = customerService.findById(customer.getId());
-            return ResponseEntity.ok().body(new CustomerDTO(c.getName(), c.getEmail(), c.getPassword()));
+            // return ResponseEntity.ok().body(new CustomerDTO(c.getName(), c.getEmail(),
+            // c.getPassword()));
+            return ResponseEntity.ok().body(CustomerDTO.builder()
+                    .name(c.getName())
+                    .email(c.getEmail())
+                    .password(c.getPassword())
+                    .build());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());

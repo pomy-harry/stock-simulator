@@ -120,6 +120,7 @@ const InfoTabs = (props) => {
         const selectedMyStock = props.stockData.find(stock => stock.code === event.target.value.code);
         setSellStockPrice(parseInt(selectedMyStock.price.replace(',', '')))
         setSellStockCode(selectedMyStock.code)
+        
         setSellStockMaxAmount(myStocks.find(stock => stock.code === event.target.value.code).amount); 
       } else {
         setSellStockPrice(0)

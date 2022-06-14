@@ -59,8 +59,16 @@ public class AccountController {
         if (acc == null) {
             return ResponseEntity.ok().body(new AccountDTO());
         } else {
-            return ResponseEntity.ok()
-                    .body(new AccountDTO(acc.getId(), acc.getName(), acc.getDeposit(), sumTotalNowPrice));
+            // return ResponseEntity.ok()
+            // .body(new AccountDTO(acc.getId(), acc.getName(), acc.getDeposit(),
+            // sumTotalNowPrice));
+
+            return ResponseEntity.ok().body(AccountDTO.builder()
+                    .id(acc.getId())
+                    .name(acc.getName())
+                    .deposit(acc.getDeposit())
+                    .sumTotalNowPrice(sumTotalNowPrice)
+                    .build());
         }
     }
 

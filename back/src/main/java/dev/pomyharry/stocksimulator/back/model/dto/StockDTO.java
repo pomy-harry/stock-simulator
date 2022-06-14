@@ -1,14 +1,16 @@
 package dev.pomyharry.stocksimulator.back.model.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class StockDTO {
-    
+
     private String code;
 
     private String name;
@@ -21,12 +23,4 @@ public class StockDTO {
 
     private String chartUrl;
 
-    public StockDTO(String code, String name) {
-        this.code = code;
-        this.name = name;
-    }
-
-    public StockDTO(String code) {
-        this.code = code;
-    }
 }
