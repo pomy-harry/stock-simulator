@@ -152,8 +152,14 @@ const LoginButton = (props) => {
         <div className={classes.header__loginbutton}>
             {(sessionStorage.getItem('USER') !== null) ? (
                 <>
-                <Button className={classes.button} variant="outline-light">
-                    <Link to="/MyPage" className={classes.link}>마이페이지</Link>
+                <Button className={classes.button} variant="outline-light" onClick={() => {
+                    window.location.reload();
+                }}>
+                    {(window.location.pathname === '/') ? (
+                        <Link to="/MyPage" className={classes.link}>마이페이지</Link>
+                    ) : (
+                        <Link to="/" className={classes.link}>홈으로</Link>
+                    )}
                 </Button>
                 <Button className={classes.button} variant="outline-light" onClick={() => {
                     sessionStorage.removeItem('USER');
