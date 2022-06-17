@@ -2,6 +2,7 @@ package dev.pomyharry.stocksimulator.back.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,12 +37,13 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/auth/login")
     @PostMapping
     public ResponseEntity<?> login(@RequestBody(required = true) CustomerDTO customer) {
 
         try {
             CustomerDTO c = customerService.login(customer, passwordEncoder);
+
             return ResponseEntity.ok().body(c);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -50,7 +52,7 @@ public class CustomerController {
 
     }
 
-    @RequestMapping("/join")
+    @RequestMapping("/auth/join")
     @PostMapping
     public ResponseEntity<?> createCustomer(@RequestBody(required = true) CustomerDTO customer) {
 

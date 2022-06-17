@@ -9,12 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 
-import dev.pomyharry.stocksimulator.back.service.CustomerService;
-
 @SpringBootTest
 public class PasswordEncoderTest {
-    @Autowired
-    private CustomerService customerService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

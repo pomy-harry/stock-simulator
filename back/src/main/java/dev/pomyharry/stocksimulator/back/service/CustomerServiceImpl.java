@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
+import dev.pomyharry.stocksimulator.back.security.TokenProvider;
 import dev.pomyharry.stocksimulator.back.exception.IdNotFoundException;
 import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
 
@@ -15,6 +16,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private TokenProvider tokenManager;
 
     @Override
     public CustomerDTO login(CustomerDTO c, PasswordEncoder passwordEncoder) {
@@ -25,7 +29,14 @@ public class CustomerServiceImpl implements CustomerService {
             throw new IdNotFoundException("Id cannot be found");
         }
 
-        return new CustomerDTO(customer.getId(), customer.getName(), customer.getEmail(), customer.getPassword());
+        final String token = tokenManager.createToken(c);
+
+        return CustomerDTO.builder()
+                .id(customer.getId())
+                .name(customer.getName())
+                .email(customer.getEmail())
+                .token(token)
+                .build();
     }
 
     @Override
