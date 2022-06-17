@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+  }
+
+  .box {
+    align-items: center;
+    border: 1px solid lightgray;
+    margin: 10px;
+    padding: 2rem 0;
+  }
+  
+  .summary {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    color: #333333;
+    font-size: 1rem;
+  }
+
+  .rate__red {
+    color: #DD2626;
+  }
+  
+  .rate__blue {
+    color: #4364E8;
+  }

@@ -4,7 +4,7 @@ import classes from './InfoTabs.module.css'
 import { Tab, Tabs, Box, Typography, Select, MenuItem, FormControl, Input, Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
-import MarketInfo from './MarketInfo';
+import MarketInfo from '../Commons/MarketInfo';
 
 // --- Tab관련 부분 -------------------------------------------------------
 const TabPanel = (props) => {
@@ -104,7 +104,7 @@ const InfoTabs = (props) => {
 
       setBuyStockName(event.target.value);      
       if (event.target.value !== "start") {
-        const selectedWatchStock = props.stockData.find(stock => stock.code === event.target.value.code);
+        const selectedWatchStock = props.watchStockList.find(stock => stock.code === event.target.value.code);
         setBuyStockPrice(parseInt(selectedWatchStock.price.replace(',', '')))
         setBuyStockCode(selectedWatchStock.code)
       } else {
@@ -117,7 +117,7 @@ const InfoTabs = (props) => {
 
       setSellStockName(event.target.value);      
       if (event.target.value !== "start") {
-        const selectedMyStock = props.stockData.find(stock => stock.code === event.target.value.code);
+        const selectedMyStock = props.watchStockList.find(stock => stock.code === event.target.value.code);
         setSellStockPrice(parseInt(selectedMyStock.price.replace(',', '')))
         setSellStockCode(selectedMyStock.code)
         
@@ -138,9 +138,11 @@ const InfoTabs = (props) => {
     };
     
     useEffect(() => {
+
+      
       if (buyStockAmount === ''){
         setBuyStockTotalPrice(0)
-      } else{
+      } else {
         setBuyStockTotalPrice(buyStockPrice*parseInt(buyStockAmount))    
       }
 
@@ -164,63 +166,68 @@ const InfoTabs = (props) => {
     const [myDeposit, setMyDeposit] = useState(0);
 
 
-    useEffect(async() => {
+    useEffect(() => {
 
-      await fetch(findAllWatchStockByCustomerId_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type' : 'application/json',
-        },
-        body: JSON.stringify({
-            id: sessionStorage.getItem('USER')
-        })
-        }
-      )
-      .then((res) => {
-        if(res.ok){
-          res.json().then((res2 => {
-            const dataList = [];
-            for(const key in res2){
-              dataList.push({
-                code: res2[key].code,
-                name: res2[key].name                
-              });
-            }
-            setWatchStocks(dataList)
-          }))
-        } 
+      const fetchWatchStock = async () => {
+        await fetch(findAllWatchStockByCustomerId_URL, {
+          method: 'POST',
+          headers: {
+              'Content-Type' : 'application/json',
+          },
+          body: JSON.stringify({
+              id: sessionStorage.getItem('USER')
+          })
+          }
+        )
+        .then((res) => {
+          if(res.ok){
+            res.json().then((res2 => {
+              const dataList = [];
+              for(const key in res2){
+                dataList.push({
+                  code: res2[key].code,
+                  name: res2[key].name                
+                });
+              }
+              setWatchStocks(dataList)
+            }))
+          } 
+        });
+      }
+      fetchWatchStock().catch(error => {
+        console.log(error);
       })
-      .then()
-      .catch(error => console.error('Error:', error));
 
-      await fetch(myStock_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type' : 'application/json',
-        },
-        body: JSON.stringify({
-            customerId: sessionStorage.getItem('USER')
-        })
-        }
-      )
-      .then((res) => {
-        if(res.ok){
-          res.json().then((res2 => {
-            const myStockList = [];
-            for(const key in res2){
-              myStockList.push({
-                code: res2[key].stockCode,
-                name: res2[key].name,
-                amount: res2[key].amount
-              });
-            }
-            setMyStocks(myStockList)
-          }))
-        } 
+      const fetchMyStock = async () => {
+        await fetch(myStock_URL, {
+          method: 'POST',
+          headers: {
+              'Content-Type' : 'application/json',
+          },
+          body: JSON.stringify({
+              customerId: sessionStorage.getItem('USER')
+          })
+          }
+        )
+        .then((res) => {
+          if(res.ok){
+            res.json().then((res2 => {
+              const myStockList = [];
+              for(const key in res2){
+                myStockList.push({
+                  code: res2[key].stockCode,
+                  name: res2[key].name,
+                  amount: res2[key].amount
+                });
+              }
+              setMyStocks(myStockList)
+            }))
+          } 
+        });
+      }
+      fetchMyStock().catch(error => {
+        console.log(error);
       })
-      .then()
-      .catch(error => console.error('Error:', error));
-
     
       const fetchMarketInfo = async () => {
         await fetch(MARKET_INFO_URL).then((res) => {

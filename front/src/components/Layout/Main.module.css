@@ -23,7 +23,6 @@ ul {
   }
 }
 
-
 .chart {
   width: 780px;
   min-width: 780px;
@@ -32,59 +31,7 @@ ul {
   flex-direction: column;
 }
 
-.chart__search {
-  width: calc(100%-10%);
-  height: 35px;
-  display: flex;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 10px;
-}
-
-.chart__search__input {
-  padding: 10px;
-  margin-left: 10px;
-  width: 100%;
-  border: 1px solid #1976d2;
-}
-
-.chart__search Button {
-  width: 15px;
-}
-
-.chart__search__button1 {
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 15px;
-  border: 1px solid #1976d2;
-}
-
-.chart__search__button2 {
-  margin-right: 10px;
-  width: 15px;
-  border: 1px solid #1976d2;
-}
-
-.chart__list {
-  width: calc(100%-20px);
-  height: 80vh;
-  overflow: auto;
-}
-
-.chart__list::-webkit-scrollbar {
-  width: 10px;
-}
-
-.chart__list::-webkit-scrollbar-thumb {
-  background-color: lightgray;
-  border-radius: 20px;
-}
-
-.chart__list::-webkit-scrollbar-track {
-  background-color: white;
-}
-
-.info {
+.tab {
   width: 400px;
   min-width: 400px;
 }

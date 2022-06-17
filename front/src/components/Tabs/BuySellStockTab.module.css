@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    font-family: "IBM Plex Sans KR";
+  }
+  
+  .info__tabs {
+    /* width: calc(100%-20px); */
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid lightgray;
+    padding: 1rem;
+  }
+  
+  .info__tabs__tabs{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .info__tabs__tab{
+    flex: 0.7;
+  }
+  
+  .info__tabs__tabs__BS{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 15px;
+  }
+  
+  .info__tabs__tab__BS{
+    flex: 0.7;
+  }
+  
+  .info__tabs__tabpanel {
+    padding: 0;
+    text-align: center;
+  }
+  
+  .info__tabs__body__price {
+    color: lightslategray;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .info__tabs__body__pricevalue {
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .info__tabs__body__amount {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .info__tabs__body_totalprice {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .info__tabs__body__myDeposit p {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: lightslategray;
+  
+  }
+  
+  .info__tabs__body__myDeposit{
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .tab__body__news {
+    height: 70vh;
+    overflow: auto;
+    scrollbar-width: none;
+  }
+  
+  .tab__body__news::-webkit-scrollbar {
+    display: none;
+  }
+  
