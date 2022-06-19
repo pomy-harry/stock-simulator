@@ -5,6 +5,7 @@
 - [김민기](https://github.com/minki0415)
 - [윤소희](https://github.com/mandariny)
 - [장우재](https://github.com/WoojaeJang)
+- [홍도희](https://github.com/dohee789)
 <br>
 
 ## 🗓 프로젝트 기간
