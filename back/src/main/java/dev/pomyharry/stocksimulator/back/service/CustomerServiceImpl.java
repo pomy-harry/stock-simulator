@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
+import dev.pomyharry.stocksimulator.back.repository.KakaoRepository;
 import dev.pomyharry.stocksimulator.back.exception.IdNotFoundException;
 import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
 
@@ -14,6 +15,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private KakaoRepository kakaoRepository;
 
     @Override
     public CustomerDTO login(CustomerDTO c) {
@@ -62,6 +66,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomerInfO(CustomerDTO customer) {
         customerRepository.deleteById(customer.getId());
+        kakaoRepository.deleteById(customer.getId());
     }
 
 }
