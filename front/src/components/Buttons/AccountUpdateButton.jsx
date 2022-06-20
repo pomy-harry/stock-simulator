@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import classes from './CustomerInfoUpdateButton.module.css';
+import classes from './AccountUpdateButton.module.css';
 import { Box, Button } from '@mui/material';
-import CustomerInfoUpdateModal from '../Modal/CustomerUpdateModal';
+import AccountInfoUpdateModal from '../Modal/AccountUpdateModal';
 
-const CustomerInfoUpdateButton = () => {    
+const AccountUpdateButton = (props) => {
 
     const [updateModalOpen, setUpdateModalOpen] = useState(false);
-
+    
     const updateModalOnClick = () => {
         setUpdateModalOpen(true);
     };
@@ -20,9 +20,9 @@ const CustomerInfoUpdateButton = () => {
         <Box className={classes.box}>
             <Button variant='contained' onClick={updateModalOnClick}>수정</Button>
         </Box>
-        <CustomerInfoUpdateModal open={updateModalOpen} onClose={updateModalOnClose} />
+        <AccountInfoUpdateModal open={updateModalOpen} onClose={updateModalOnClose} id={props.id}/>
     </>
   )
 }
 
-export default CustomerInfoUpdateButton
+export default AccountUpdateButton

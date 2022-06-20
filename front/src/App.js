@@ -1,7 +1,7 @@
 import './App.css';
-import Header from "./components/Layout/Header";
-import Main from "./components/Layout/Main"
-import MyPage from "./components/Layout/MyPage"
+import Header from "./layout/Header/Header";
+import Main from "./layout/Main/Main"
+import MyPage from "./layout/MyPage/MyPage"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 

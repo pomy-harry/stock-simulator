@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+  }
+
+  .mainNews p {
+    margin-bottom: 10px;
+  }
+
+  .mainNews::-webkit-scrollbar {
+    display: none;
+  }
