@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './LoginModal.module.css'
 import Modal from '@mui/material/Modal';
 import logo_img from '../../static/images/logo1.png'
-import LoginSingnUpTab from '../Tabs/LoginSingnUpTab';
+import LoginSingnUpTab from '../Tabs/LoginSignUpTab';
 
 const LoginModal = (props) => {
 

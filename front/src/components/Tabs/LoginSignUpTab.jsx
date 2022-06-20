@@ -2,8 +2,8 @@ import React from 'react'
 import classes from './LoginSignUpTab.module.css'
 import { Tab, Tabs, Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import LoginForm from '../LoginSignUp/LoginForm';
-import SignUpForm from '../LoginSignUp/SignUpForm';
+import LoginForm from '../Forms/LoginForm';
+import SignUpForm from '../Forms/SignUpForm';
 
 // --- Tab관련 부분 -------------------------------------------------------
 
