@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new IdNotFoundException("Id cannot be found");
         }
 
-        final String token = tokenManager.createToken(c);
+        final String token = tokenManager.createToken(customer);
 
         return CustomerDTO.builder()
                 .id(customer.getId())
@@ -72,8 +72,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteCustomerInfO(CustomerDTO customer) {
-        customerRepository.deleteById(customer.getId());
+    public void deleteCustomerInfO(String customerId) {
+        customerRepository.deleteById(customerId);
     }
 
 }

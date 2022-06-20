@@ -5,19 +5,21 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import dev.pomyharry.stocksimulator.back.model.entity.Customer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Slf4j
 @Service
 public class TokenProvider {
     final String key = "jsonwebtoken";
 
-    public String createToken(CustomerDTO customer) {
+    public String createToken(Customer customer) {
         Map<String, Object> headers = new HashMap<>();
         headers.put("typ", "JWT");
         headers.put("Alg", "HS256");
@@ -53,9 +55,10 @@ public class TokenProvider {
                     .getBody();
 
         } catch (ExpiredJwtException e) {
-            e.printStackTrace();
+            log.error("Token is Expired...");
+
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("You got an error : " + e.getMessage());
         }
 
         return claims.getSubject();

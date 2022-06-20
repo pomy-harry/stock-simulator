@@ -15,5 +15,5 @@ public interface CustomerService {
 
     Customer updateCustomerInfo(CustomerDTO customer);
 
-    void deleteCustomerInfO(CustomerDTO customer);
+    void deleteCustomerInfO(String customerId);
 }
