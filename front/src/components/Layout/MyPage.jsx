@@ -1,23 +1,20 @@
 import React from 'react'
 import classes from './MyPage.module.css'
-import CustomerInfo from './CustomerInfo'
-import AccountInfo from './AccountInfo'
-import MyStockInfo from './MyStockInfo'
+import MyStockInfo from './MyPage/MyStockInfo'
+import CustomerInfo from './MyPage/CustomerInfo'
+import AccountInfo from './MyPage/AccountInfo'
 
 const MyPage = () => {
     
   return (
     <div className={classes.mypage}>
-        <div className={classes.mypage__mystockinfo}>
+        <div className={classes.mypage__myStockInfo}>
             <MyStockInfo />
         </div>
-        <div className={classes.mypage__myinfo}>
-            <div className={classes.customer__info}>
-                <CustomerInfo />
-            </div>
-            <div className={classes.stock__info}>
-                <AccountInfo />
-            </div>
+
+        <div className={classes.mypage__myInfo}>
+            <CustomerInfo />
+            <AccountInfo />
         </div>
     </div>
   )

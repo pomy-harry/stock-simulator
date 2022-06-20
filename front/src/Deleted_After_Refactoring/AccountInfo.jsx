@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import CreateAccount from '../Commons/CreateAccount'
-import ShowAccount from '../Commons/ShowAccount';
+import CreateAccount from '../components/Commons/CreateAccount'
+import ShowAccount from '../components/Commons/ShowAccount';
 
 const BASE_URL = 'http://localhost:8090/info/account';
 

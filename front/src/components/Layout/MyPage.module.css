@@ -16,7 +16,7 @@
   }
 }
 
-.mypage__mystockinfo {
+.mypage__myStockInfo {
   width: 780px;
   min-width: 780px;
   height: cal(100vh-60px);
@@ -24,7 +24,7 @@
   flex-direction: column;
 }
 
-.mypage__myinfo {
+.mypage__myInfo {
   width: 400px;
   min-width: 400px;
   border: 1px solid lightgray;
@@ -33,12 +33,14 @@
   margin-bottom: 10px;
 }
 
-.customer__info {
+.mypage__myInfo__customerInfo {
   width: calc(100%-20px);
   border-bottom: 1px solid lightgray;
   padding-bottom: 2rem;
 }
 
-.stock__info {
+.mypage__myInfo__accountInfo {
   width: calc(100%-20px);
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 2rem;
 }

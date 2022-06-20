@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import classes from './MyStockSummaryMain.module.css'
+import classes from './MyStockInfo.module.css'
 import "../../../static/fonts/font.css"
+import MyStockInfoSummaryMyPage from './MyStockInfoSummaryMyPage';
+import MyStockInfoDetail from './MyStockInfoDetail';
 
 const BASE_URL = 'http://localhost:8090/stocks/my-stock'
 
-const MyStockSummaryMain = () => {
-    
+const MyStockInfo = () => {
+
     const [sumTotalBuyPrice, setSumTotalBuyPrice] = useState(0);
     const [sumTotalNowPrice, setSumTotalNowPrice] = useState(0);
+    const [myStockData, setMyStockData] = useState([]);
 
     useEffect(() => {
         const fetchStocks = async () => {
@@ -39,26 +42,24 @@ const MyStockSummaryMain = () => {
                         }
                         setSumTotalBuyPrice(calTotalBuyPrice);
                         setSumTotalNowPrice(calTotalNowPrice);
+                        setMyStockData(stockData);
                     }))
                 }
             })
         }
+
         fetchStocks().catch(error => {
             console.log(error);
         })
     }, []);
 
   return (
-    <div className={classes.box}>
-        <div className={classes.summary}>
-            <span>현재 수익률</span>
-            <span className={(sumTotalNowPrice - sumTotalBuyPrice)>0 ? classes.rate__red : classes.rate__blue}>
-                {sumTotalBuyPrice!==0? ((sumTotalNowPrice - sumTotalBuyPrice) / sumTotalBuyPrice * 100).toFixed(3) : 0} %
-            </span>
-            <span>{(sumTotalNowPrice - sumTotalBuyPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원</span>
-        </div>
+    <div className={classes.myStockInfo}>
+        <p>주식 정보</p>
+        <MyStockInfoSummaryMyPage sumTotalBuyPrice={sumTotalBuyPrice} sumTotalNowPrice={sumTotalNowPrice} />
+        <MyStockInfoDetail myStockData={myStockData} />
     </div>
   )
 }
 
-export default MyStockSummaryMain
+export default MyStockInfo

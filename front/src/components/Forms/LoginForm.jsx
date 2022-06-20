@@ -48,7 +48,7 @@ const LoginForm = (props) => {
     };
 
   return (
-    <form className={classes.login__modal__form}>
+    <form className={classes.form}>
         <Input inputRef={loginEmailInputRef} placeholder="이메일" type='text'/>
         <Input inputRef={loginPasswordInputRef} placeholder="비밀번호" type='password'/>
         <Button type="submit" onClick={loginButtonHandler}>로그인</Button>

@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+  }  
+  
+  .title {
+    border: 1px solid lightgray;
+    padding: 5px;
+    margin: 10px;
+  }
+  
+  .stock__box {
+    border: 1px solid lightgray;
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 30px;
+    overflow: auto;
+    color: #333333;
+  }
+  
+  .row {
+    padding: 5px;
+  }
+
+  .rate__red {
+    color: #DD2626;
+  }
+  
+  .rate__blue {
+    color: #4364E8;
+  }

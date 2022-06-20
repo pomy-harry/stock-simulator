@@ -45,7 +45,7 @@ const SignUpForm = (props) => {
         props.onClose();
     }
   return (
-    <form className={classes.login__modal__form}>
+    <form className={classes.form}>
         <Input inputRef={signUpUserNameInputRef} placeholder="이름" label="이름" type='text'/>
         <Input inputRef={signUpEmailInputRef} placeholder="이메일" type='text'/>
         <Input inputRef={signUpPasswordInputRef} placeholder="비밀번호" type='password'/>
