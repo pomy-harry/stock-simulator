@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form Input {
+    margin-top: 20px;
+    margin-bottom: 2px;
+    width: 100%;
+  }
+  
+  .form Button {
+    margin-top: 25px;
+    font-size: 17px;
+    background-color: #1976d2;
+    color: white;
+  }
+  
+  .form Button:hover {
+    color: #1976d2;
+  }
