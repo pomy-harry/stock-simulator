@@ -3,8 +3,8 @@ import "../../static/fonts/font.css"
 import classes from './StockBuySellTab.module.css'
 import { Tab, Tabs } from '@mui/material';
 import PropTypes from 'prop-types';
-import StockBuy from '../../lib/Stock/StockBuy';
-import StockSell from '../../lib/Stock/StockSell';
+import StockBuy from '../../features/Stock/StockBuy';
+import StockSell from '../../features/Stock/StockSell';
 import TabPanel from './Commons/TabPanel';
 
 const StockBuySellTab = (props) => {

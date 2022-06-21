@@ -2,8 +2,8 @@ import React from 'react'
 import classes from './CustomerLoginSingnUpTab.module.css'
 import { Tab, Tabs } from '@mui/material';
 import PropTypes from 'prop-types';
-import CustomerLogin from '../../lib/Customer/CustomerLogin';
-import CustomerSignUp from '../../lib/Customer/CustomerSignUp';
+import CustomerLogin from '../../features/Customer/CustomerLogin';
+import CustomerSignUp from '../../features/Customer/CustomerSignUp';
 import TabPanel from './Commons/TabPanel';
 
 const CustomerLoginSingnUpTab = (props) => {

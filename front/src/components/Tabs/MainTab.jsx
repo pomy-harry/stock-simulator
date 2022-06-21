@@ -4,7 +4,7 @@ import classes from './MainTab.module.css'
 import { Tab, Tabs } from '@mui/material';
 import PropTypes from 'prop-types';
 import StockBuySellTab from './StockBuySellTab';
-import MarketInfoShowInfo from '../../lib/MarketInfo/MarketInfoShowInfo';
+import MarketInfoShowInfo from '../../features/MarketInfo/MarketInfoShowInfo';
 import TabPanel from './Commons/TabPanel';
 
 const MainTab = (props) => {

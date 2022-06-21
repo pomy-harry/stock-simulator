@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './AccountUpdateModal.module.css';
 import { Modal } from '@mui/material';
-import AccountUpdate from '../../lib/Account/AccountUpdate';
+import AccountUpdate from '../../features/Account/AccountUpdate';
 
 const AccountUpdateModal = (props) => {
   return (

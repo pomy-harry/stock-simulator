@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './CustomerDeleteModal.module.css';
 import { Modal } from '@mui/material';
-import CustomerDelete from '../../lib/Customer/CustomerDelete';
+import CustomerDelete from '../../features/Customer/CustomerDelete';
 
 const CustomerDeleteModal = (props) => {
   return (

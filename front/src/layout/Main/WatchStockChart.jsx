@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from "./WatchStockChart.module.css";
-import StockShowChartOne from '../../lib/Stock/StockShowChartOne';
+import StockShowChartOne from '../../features/Stock/StockShowChartOne';
 
 
 const WatchStockChart = (props) => {

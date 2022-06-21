@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './MyStockInfoDetail.module.css'
 import "../../static/fonts/font.css"
-import StockShowInfoDetailOne from '../../lib/Stock/StockShowInfoDetailOne';
+import StockShowInfoDetailOne from '../../features/Stock/StockShowInfoDetailOne';
 
 const MyStockInfoDetail = (props) => {
 

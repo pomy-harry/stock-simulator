@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './AccountCreateModal.module.css';
 import { Modal } from '@mui/material';
-import AccountCreate from '../../lib/Account/AccountCreate';
+import AccountCreate from '../../features/Account/AccountCreate';
  
 const CREATE_ACCOUNT_URL = 'http://localhost:8090/account';
 
