@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import CustomerLogin from '../../features/Customer/CustomerLogin';
 import CustomerSignUp from '../../features/Customer/CustomerSignUp';
 import TabPanel from './Commons/TabPanel';
+import KakaoLoginButton from '../../features/KakaoLogin/KakaoLoginButton'
 
 const CustomerLoginSingnUpTab = (props) => {
 
@@ -37,6 +38,7 @@ const CustomerLoginSingnUpTab = (props) => {
         </Tabs>
         <TabPanel value={value} index={0}>
             <CustomerLogin onClose={props.onClose}/>
+            <KakaoLoginButton />
         </TabPanel>
         <TabPanel value={value} index={1}>
             <CustomerSignUp onClose={props.onClose}/>
