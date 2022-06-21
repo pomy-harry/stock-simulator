@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import CustomerLogin from '../../features/Customer/CustomerLogin';
 import CustomerSignUp from '../../features/Customer/CustomerSignUp';
 import TabPanel from './Commons/TabPanel';
-import KakaoLoginButton from '../../features/KakaoLogin/KakaoLoginButton'
+import KakaoLoginButton from '../Buttons/KakaoLoginButton'
 
 const CustomerLoginSingnUpTab = (props) => {
 
