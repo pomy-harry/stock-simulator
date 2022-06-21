@@ -2,6 +2,7 @@ import './App.css';
 import Header from "./layout/Header/Header";
 import Main from "./layout/Main/Main"
 import MyPage from "./layout/MyPage/MyPage"
+import KakaoLogin from "./features/KakaoLogin/KakaoLogin"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => {
