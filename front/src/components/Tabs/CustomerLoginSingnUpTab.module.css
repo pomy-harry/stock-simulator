@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+  }
+  
+  .login__modal__tabs {
+    display: flex;
+    margin-top: 20px;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .login__modal__tab {
+    flex: 1;
+  }
+  
+  .login__modal__form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login__modal__form Input {
+    margin-top: 20px;
+    margin-bottom: 2px;
+    width: 100%;
+  }
+  
+  .login__modal__form Button {
+    margin-top: 25px;
+    font-size: 17px;
+    background-color: #1976d2;
+    color: white;
+  }
+  
+  .login__modal__form Button:hover {
+    color: #1976d2;
+  }
