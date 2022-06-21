@@ -62,10 +62,18 @@
 }
 
 .login__modal__form Button {
+  height: 50px;
   margin-top: 25px;
   font-size: 17px;
   background-color: #1976d2;
   color: white;
+}
+
+.login__button_sns img {
+  width: 350px;
+  height: 50px;
+  position: relative;
+  right:7px;
 }
 
 .login__modal__form Button:hover {

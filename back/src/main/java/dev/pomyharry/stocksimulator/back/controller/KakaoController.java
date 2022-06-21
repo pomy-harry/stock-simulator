@@ -1,7 +1,5 @@
 package dev.pomyharry.stocksimulator.back.controller;
 
-import java.io.PrintWriter;
-import java.util.HashMap;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;

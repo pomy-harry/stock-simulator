@@ -34,7 +34,7 @@ const StockList = () => {
     }, []);
 
     return (
-        <Autocomplete
+        <Autocomplete   //검색어 자동완성
         disablePortal
         id="combo-box-search"
         options={stocks}

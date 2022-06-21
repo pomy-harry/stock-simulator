@@ -5,7 +5,8 @@ import { Button, Input, Tab, Tabs, Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import logo_img from '../../static/images/logo1.png'
-
+import kakao_img from '../../static/images/kakao_login_small.png'
+import { KAKAO_AUTH_URL } from './OAuth.jsx';
 // --- Tab관련 부분 -------------------------------------------------------
 const TabPanel = (props) => {
 
@@ -186,6 +187,9 @@ const LoginButton = (props) => {
                         <Input inputRef={loginPasswordInputRef} placeholder="비밀번호" type='password'/>
                         <Button type="submit" onClick={loginButtonHandler}>로그인</Button>
                     </form>
+                    <div className={classes.login__button_sns}>
+                        <Button href={KAKAO_AUTH_URL}><img src={kakao_img} alt="kako_logo" /></Button>
+                    </div>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <form className={classes.login__modal__form}>
