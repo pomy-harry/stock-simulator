@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    font-family: "IBM Plex Sans KR";
+  }
+
+  .smartTab__tabs{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .smartTab__tabs__tab{
+    flex: 0.7;
+  }
+  
+  .smartTab__tabpanel__bs {
+    padding: 0;
+    text-align: center;
+  }

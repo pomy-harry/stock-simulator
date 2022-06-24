@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+}
+
+.mypage {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+}
+
+@media (max-width: 1200px) {
+  .mypage {
+    display: flex;
+    padding: 1rem;
+    justify-content: left;
+  }
+}
+
+.mypage__myStockInfo {
+  width: 780px;
+  min-width: 780px;
+  height: cal(100vh-60px);
+  background-color: white;
+  flex-direction: column;
+}
+
+.mypage__myInfo {
+  width: 400px;
+  min-width: 400px;
+  border: 1px solid lightgray;
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mypage__myInfo__customerInfo {
+  width: calc(100%-20px);
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 2rem;
+}
+
+.mypage__myInfo__accountInfo {
+  width: calc(100%-20px);
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 2rem;
+}

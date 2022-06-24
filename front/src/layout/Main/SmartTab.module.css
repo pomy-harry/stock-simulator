@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    font-family: "IBM Plex Sans KR";
+  }
+  
+  .smartTab {
+    /* width: calc(100%-20px); */
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid lightgray;
+    padding: 1rem;
+  }
+  
+  

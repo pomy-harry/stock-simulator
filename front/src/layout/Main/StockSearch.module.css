@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+  }
+
+  .stock__search__form {
+    width: calc(100%-10%);
+    height: 35px;
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+  }
+
+  .stock__search__input {
+    padding: 10px;
+    margin-left: 10px;
+    width: 100%;
+    border: 1px solid #1976d2;
+  } 
