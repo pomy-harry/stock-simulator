@@ -6,13 +6,13 @@ import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 
 public interface AccountService {
 
-    void insertAccount(AccountDTO accountDTO);
+    void insertAccount(String customerId, AccountDTO accountDTO);
 
-    Account findByCustomerId(AccountDTO acc);
+    Account findByCustomerId(String customerId);
 
-    Account updateAccount(AccountDTO acc);
+    Account updateAccount(String customerId, AccountDTO acc);
 
-    void deleteAccount(AccountDTO acc);
+    void deleteAccount(String custoemrId, AccountDTO acc);
 
     void deleteAllAccount(Customer customer);
 }

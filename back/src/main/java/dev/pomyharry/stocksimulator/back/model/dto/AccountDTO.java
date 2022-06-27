@@ -16,6 +16,7 @@ public class AccountDTO {
     private long deposit;
     private long seedMoney;
     private String customerId;
+
     private long sumTotalNowPrice;
 
     @Override

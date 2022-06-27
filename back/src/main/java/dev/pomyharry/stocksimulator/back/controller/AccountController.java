@@ -3,6 +3,7 @@ package dev.pomyharry.stocksimulator.back.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,11 +32,9 @@ public class AccountController {
 
     @RequestMapping("account")
     @PostMapping
-    public ResponseEntity<?> insertAccount(@RequestBody AccountDTO accountDTO) {
-        System.out.println(accountDTO);
-
+    public ResponseEntity<?> insertAccount(@AuthenticationPrincipal String customerId, @RequestBody(required = true) AccountDTO accountDTO) {
         try {
-            accountService.insertAccount(accountDTO);
+            accountService.insertAccount(customerId, accountDTO);
             return ResponseEntity.ok().body(accountDTO);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -45,16 +44,14 @@ public class AccountController {
     }
 
     @PostMapping("/info/account")
-    public ResponseEntity<?> getAccountInfo(@RequestBody(required = true) AccountDTO account) {
+    public ResponseEntity<?> getAccountInfo(@AuthenticationPrincipal String customerId, @RequestBody(required = true) AccountDTO account) {
 
-        Account acc = accountService.findByCustomerId(account);
-        List<MyStockDTO> mystock = myStockService.findAllMyStockByCustomerId(account.getCustomerId());
+        Account acc = accountService.findByCustomerId(customerId);
+        List<MyStockDTO> mystock = myStockService.findAllMyStockByCustomerId(customerId);
         long sumTotalNowPrice = 0;
         for (MyStockDTO myStockDTO : mystock) {
             sumTotalNowPrice += myStockDTO.getNowPrice() * myStockDTO.getAmount();
         }
-
-        System.out.println(acc);
 
         if (acc == null) {
             return ResponseEntity.ok().body(new AccountDTO());
@@ -73,9 +70,9 @@ public class AccountController {
     }
 
     @PutMapping("/info/account")
-    public ResponseEntity<?> updateAccount(@RequestBody(required = true) AccountDTO account) {
+    public ResponseEntity<?> updateAccount(@AuthenticationPrincipal String customerId, @RequestBody(required = true) AccountDTO account) {
         try {
-            accountService.updateAccount(account);
+            accountService.updateAccount(customerId, account);
             return ResponseEntity.ok().body("성공");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -84,9 +81,9 @@ public class AccountController {
     }
 
     @DeleteMapping("/info/account")
-    public ResponseEntity<?> deleteAccount(@RequestBody(required = true) AccountDTO account) {
+    public ResponseEntity<?> deleteAccount(@AuthenticationPrincipal String customerId, @RequestBody(required = true) AccountDTO account) {
         try {
-            accountService.deleteAccount(account);
+            accountService.deleteAccount(customerId, account);
             return ResponseEntity.ok().body("성공");
         } catch (Exception e) {
             System.out.println(e.getMessage());
