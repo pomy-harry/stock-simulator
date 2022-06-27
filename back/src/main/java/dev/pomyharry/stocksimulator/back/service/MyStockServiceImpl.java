@@ -47,9 +47,11 @@ public class MyStockServiceImpl implements MyStockService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
         LocalTime nowTime = LocalTime.parse(now.format(formatter), formatter);
-        LocalTime limitTime = LocalTime.parse("16:00:00", formatter);
 
-        if (nowTime.isBefore(limitTime)) {
+        LocalTime limitStartTime = LocalTime.parse("09:00:00", formatter);
+        LocalTime limitEndTime = LocalTime.parse("16:00:00", formatter);
+        
+        if (nowTime.isAfter(limitStartTime) && nowTime.isBefore(limitEndTime)) {
             System.out.println("현재는 거래 가능 시간입니다.");
 
             // 계좌 찾기
@@ -94,9 +96,11 @@ public class MyStockServiceImpl implements MyStockService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
         LocalTime nowTime = LocalTime.parse(now.format(formatter), formatter);
-        LocalTime limitTime = LocalTime.parse("16:00:00", formatter);
-
-        if (nowTime.isBefore(limitTime)) {
+        LocalTime limitStartTime = LocalTime.parse("09:00:00", formatter);
+        LocalTime limitEndTime = LocalTime.parse("16:00:00", formatter);
+        
+        if (nowTime.isAfter(limitStartTime) && nowTime.isBefore(limitEndTime)) {
+            System.out.println("현재는 거래 가능 시간입니다.");
 
             // 계좌 찾기
             Account account = accountRepository.findByCustomerId(customerId);

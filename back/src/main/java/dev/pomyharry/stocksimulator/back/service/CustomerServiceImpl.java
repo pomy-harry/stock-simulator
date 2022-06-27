@@ -8,6 +8,7 @@ import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
 import dev.pomyharry.stocksimulator.back.security.TokenProvider;
+import dev.pomyharry.stocksimulator.back.repository.KakaoRepository;
 import dev.pomyharry.stocksimulator.back.exception.IdNotFoundException;
 import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
 
@@ -19,6 +20,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private TokenProvider tokenManager;
+    
+    @Autowired
+    private KakaoRepository kakaoRepository;
 
     @Override
     public CustomerDTO login(CustomerDTO c, PasswordEncoder passwordEncoder) {
@@ -74,6 +78,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomerInfO(String customerId) {
         customerRepository.deleteById(customerId);
+        kakaoRepository.deleteById(customerId);
     }
 
 }

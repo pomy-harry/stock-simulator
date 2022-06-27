@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+  }
+  
+  .login__modal {
+    position: absolute;
+    width: 400px;
+    height: 450px;
+    background-color: white;
+    box-shadow: 5px;
+    padding: 32px 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .login__modal__header {
+    display: flex;
+    width: 100%;
+    margin-bottom: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login__modal__header img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .login__modal__header img {
+    font-size: 23px;
+  }
+  
