@@ -1,5 +1,6 @@
 package dev.pomyharry.stocksimulator.back.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +17,12 @@ import dev.pomyharry.stocksimulator.back.service.KakaoService;
 @RestController
 public class KakaoController {
 
-    @Autowried
-	private final KakaoService kakaoService;
+    @Autowired
+	private KakaoService kakaoService;
 
-    public KakaoController(KakaoService kakaoService) {
-        this.kakaoService = kakaoService;
-    }
+//    public KakaoController(KakaoService kakaoService) {
+//        this.kakaoService = kakaoService;
+//    }
 
     @RequestMapping("/kakaologin")
     @PostMapping
