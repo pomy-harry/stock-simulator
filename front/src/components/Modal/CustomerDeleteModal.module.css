@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+  }
+
+  .customerInfoDelete__modal {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform :translate(-50%, 50%);
+    width: 400px;
+    background-color: white;
+    padding: 32px;
+    border: 0.25px solid #000;
+    box-shadow: 5px;
+  }

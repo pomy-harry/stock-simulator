@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    font-family: "IBM Plex Sans KR";
+  }
+  
+  .bs__tabs{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 15px;
+  }
+  
+  .bs__tabs__tab{
+    flex: 0.7;
+  }
+  
+  .bs__tabpanel {
+    padding: 0;
+    text-align: center;
+  }
+  

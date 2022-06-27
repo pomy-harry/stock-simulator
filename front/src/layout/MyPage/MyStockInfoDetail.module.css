@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+  }  
+  
+  .detail {
+    overflow: auto;
+    height: 100%;
+  }
+
+  .detail ul {
+    padding: 0;
+  }
