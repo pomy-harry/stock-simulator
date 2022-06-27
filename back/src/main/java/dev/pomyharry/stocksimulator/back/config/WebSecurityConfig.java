@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session 사용하지 않고
                                                                                             // stateless하게 사용
                 .and()
-                .authorizeRequests().antMatchers("/", "/auth/**").permitAll() // 해당 url로 들어오는 경우는 인증 안해도 됨
+                .authorizeRequests().antMatchers("/", "/auth/**", "/market-info").permitAll() // 해당 url로 들어오는 경우는 인증 안해도 됨
                 .anyRequest().authenticated(); // 나머지 주소는 다 인증 필요함
 
         http.addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
