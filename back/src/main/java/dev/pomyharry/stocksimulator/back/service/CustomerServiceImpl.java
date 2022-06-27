@@ -78,7 +78,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomerInfO(String customerId) {
         customerRepository.deleteById(customerId);
-        kakaoRepository.deleteById(String customerId);
+        kakaoRepository.deleteById(customerId);
     }
 
 }

@@ -7,9 +7,9 @@ import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 
 public interface MyStockService {
 
-    void buyStock(MyStockDTO myStockDTO);
+    void buyStock(String customerId, MyStockDTO myStockDTO);
 
-    void sellStock(MyStockDTO myStockDTO);
+    void sellStock(String customerId, MyStockDTO myStockDTO);
 
     List<MyStockDTO> findAllMyStockByCustomerId(String customerId);
 
