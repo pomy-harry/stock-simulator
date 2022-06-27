@@ -54,6 +54,7 @@ const StockBuy = (props) => {
     const handleAmountChangeBuy = (event) => {
         setBuyStockAmount(event.target.value)
     };
+    
 
     useEffect(() => {
         if (buyStockAmount === ''){
@@ -64,25 +65,29 @@ const StockBuy = (props) => {
     }, [buyStockAmount, buyStockPrice])
     
 
-
-
-
     const findAllWatchStockByCustomerId_URL = "http://localhost:8090/stocks/watch-list";
     const accountInfo_URL = 'http://localhost:8090/info/account';
 
     const [watchStocks, setWatchStocks] = useState([]);
     const [myDeposit, setMyDeposit] = useState(0);
+    
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
 
-    useEffect(() => {        
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
+
+    useEffect(() => {  
 
         const fetchWatchStock = async () => {
             await fetch(findAllWatchStockByCustomerId_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify({
-                id: sessionStorage.getItem('USER')
+                id: ''
             })
             }
             )
@@ -108,11 +113,9 @@ const StockBuy = (props) => {
         const myDepositInfo = async() => {
             await fetch(accountInfo_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify({
-                customerId: sessionStorage.getItem('USER')
+                customerId: ''
             })
             }).then((res) => {
             if(res.ok){
@@ -172,12 +175,9 @@ const StockBuy = (props) => {
 
                     await fetch(buyStock_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type' : 'application/json',
-                    },
+                    headers: headers,
                     body: JSON.stringify({
                         amount: buyStockAmount,
-                        customerId: sessionStorage.getItem('USER'),
                         stockCode: buyStockCode,
                         buyPrice : buyStockTotalPrice
                     })

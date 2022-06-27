@@ -14,16 +14,23 @@ const CustomerInfo = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
 
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
+
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
+
     useEffect(() => {
         const fetchCustomerInfo = async () => {
             if(sessionStorage.getItem('USER') !== null){
                 await fetch(BASE_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type' : 'application/json',
-                    },
+                    headers: headers,
                     body: JSON.stringify({
-                        id: sessionStorage.getItem('USER')
+                        id: ''
                     })
                 }).then((res) => {
                     if(res.ok){

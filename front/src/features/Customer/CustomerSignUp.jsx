@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import classes from './CustomerSignUp.module.css'
 import { Button, Input } from '@mui/material';
 
-const SIGNUP_URL = 'http://localhost:8090/join';
+const SIGNUP_URL = 'http://localhost:8090/auth/join';
 
 const CustomerSignUp = (props) => {
     

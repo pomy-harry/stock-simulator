@@ -12,15 +12,22 @@ const MyStockInfo = () => {
     const [sumTotalNowPrice, setSumTotalNowPrice] = useState(0);
     const [myStockData, setMyStockData] = useState([]);
 
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
+
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
+
     useEffect(() => {
         const fetchStocks = async () => {
             await fetch(BASE_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type' : 'application/json',
-                },
+                headers: headers,
                 body: JSON.stringify({
-                    customerId: sessionStorage.getItem('USER')
+                    customerId: ''
                 })
             }).then((res) => {
                 if(res.ok){

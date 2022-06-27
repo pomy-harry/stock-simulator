@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import classes from './CustomerLogin.module.css'
 import { Button, Input } from '@mui/material';
 
-const LOGIN_URL = 'http://localhost:8090/login';
+const LOGIN_URL = 'http://localhost:8090/auth/login';
 
 const CustomerLogin = (props) => {
 
@@ -20,7 +20,7 @@ const CustomerLogin = (props) => {
         }).then((res) => {
             if(res.ok){
                 res.json().then((res2 => {
-                    sessionStorage.setItem('USER', res2.id);
+                    sessionStorage.setItem('USER', res2.token);
                     window.location.reload();
                 }))
             } else {

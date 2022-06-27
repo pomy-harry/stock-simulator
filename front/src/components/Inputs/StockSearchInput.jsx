@@ -8,9 +8,18 @@ const STOCK_URL = 'http://localhost:8090/stocks/watch';
 const StockSearchInput = () => {
     const [stocks, setStocks] = useState([]);
 
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
+
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
+
     useEffect(() => {
         const fetchStocks = async () => {
-            await fetch(BASE_URL).then((res) => {
+            await fetch(BASE_URL, {headers: headers}).then((res) => {
                 if(res.ok){
                     res.json().then((res2 => {
                         const stockData = [];
@@ -34,12 +43,9 @@ const StockSearchInput = () => {
         const fetchWatchList = async() => {
             await fetch(STOCK_URL, {
                 method: 'POST',
-                headers: {
-                'Content-Type' : 'application/json',
-                },
+                headers: headers,
                 body: JSON.stringify({
-                    code: newValue.code,
-                    customerId: sessionStorage.getItem('USER')
+                    code: newValue.code
                 })
             }).then((res) => {
                 if(res.ok){

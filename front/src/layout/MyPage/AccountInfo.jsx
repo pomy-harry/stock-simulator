@@ -13,16 +13,23 @@ const AccountInfo = () => {
     const [deposit, setDeposit] = useState(0);
     const [balance, setBalance] = useState(0);
 
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
+
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
+
     useEffect(() => {
 
         const fetchCustomerInfo = async () => {
             await fetch(BASE_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type' : 'application/json',
-                },
+                headers: headers,
                 body: JSON.stringify({
-                    customerId: sessionStorage.getItem('USER')
+                    customerId: ''
                 })
             }).then((res) => {
                 if(res.ok){

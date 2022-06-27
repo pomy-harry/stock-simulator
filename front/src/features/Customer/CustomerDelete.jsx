@@ -5,15 +5,21 @@ import { Button } from '@mui/material';
 const BASE_URL = 'http://localhost:8090/info/customer'
 
 const CustomerDelete = (props) => {
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
+
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
 
     const customerInfoDeleteHandler = async() => {
         await fetch(BASE_URL, {
             method: 'Delete',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify({
-                id: sessionStorage.getItem('USER')
+                password:''
             })
         }).then((res) => {
             sessionStorage.removeItem('USER');
