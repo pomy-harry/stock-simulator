@@ -1,11 +1,13 @@
 package dev.pomyharry.stocksimulator.back.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
+import dev.pomyharry.stocksimulator.back.security.TokenProvider;
 import dev.pomyharry.stocksimulator.back.repository.KakaoRepository;
 import dev.pomyharry.stocksimulator.back.exception.IdNotFoundException;
 import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
@@ -17,18 +19,28 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Autowired
+    private TokenProvider tokenManager;
+    
+    @Autowired
     private KakaoRepository kakaoRepository;
 
     @Override
-    public CustomerDTO login(CustomerDTO c) {
+    public CustomerDTO login(CustomerDTO c, PasswordEncoder passwordEncoder) {
         // ID 조회
         Customer customer = customerRepository.findByEmail(c.getEmail());
 
-        if (customer == null || !customer.getPassword().equals(c.getPassword())) {
+        if (customer == null || !passwordEncoder.matches(c.getPassword(), customer.getPassword())) {
             throw new IdNotFoundException("Id cannot be found");
         }
 
-        return new CustomerDTO(customer.getId(), customer.getName(), customer.getEmail(), customer.getPassword());
+        final String token = tokenManager.createToken(customer);
+
+        return CustomerDTO.builder()
+                .id(customer.getId())
+                .name(customer.getName())
+                .email(customer.getEmail())
+                .token(token)
+                .build();
     }
 
     @Override
@@ -64,9 +76,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteCustomerInfO(CustomerDTO customer) {
-        customerRepository.deleteById(customer.getId());
-        kakaoRepository.deleteById(customer.getId());
+    public void deleteCustomerInfO(String customerId) {
+        customerRepository.deleteById(customerId);
+        kakaoRepository.deleteById(String customerId);
     }
 
 }
