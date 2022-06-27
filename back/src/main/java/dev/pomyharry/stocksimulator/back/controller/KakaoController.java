@@ -42,7 +42,7 @@ public class KakaoController {
         try {
             String access_Token = kakaoService.getAccessToken(code);
             KakaoDTO userInfo = kakaoService.getUserInfo(access_Token);
-            //System.out.println("여기 userInfo : " + userInfo);
+            System.out.println("여기 userInfo : " + userInfo);
             return ResponseEntity.ok().body(userInfo);
         } catch (Exception e) {
             System.out.println(e.getMessage());
