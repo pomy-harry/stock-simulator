@@ -41,7 +41,7 @@ public class MyStockServiceImpl implements MyStockService {
     StockDataComponent stockChartComponent;
 
     @Override
-    public void buyStock(MyStockDTO myStockDTO) {
+    public void buyStock(String customerId, MyStockDTO myStockDTO) {
 
         // 시간 확인
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -53,23 +53,19 @@ public class MyStockServiceImpl implements MyStockService {
             System.out.println("현재는 거래 가능 시간입니다.");
 
             // 계좌 찾기
-            Account account = accountRepository.findByCustomerId(myStockDTO.getCustomerId());
-            System.out.println(myStockDTO.getCustomerId());
-            System.out.println(myStockDTO.getAmount());
-            System.out.println(myStockDTO.getBuyPrice());
-            System.out.println(myStockDTO.getStockCode());
+            Account account = accountRepository.findByCustomerId(customerId);
 
             if (account != null) {
 
                 // 보유 종목 찾기
-                MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(),
+                MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(customerId,
                         myStockDTO.getStockCode());
                 if (account.getDeposit() > myStockDTO.getBuyPrice()) {
                     if (mystock == null) {
                         MyStock changedMyStock = new MyStock(
                                 myStockDTO.getAmount(),
                                 myStockDTO.getBuyPrice(),
-                                customerRepository.getOne(myStockDTO.getCustomerId()),
+                                customerRepository.getOne(customerId),
                                 stockRepository.getOne(myStockDTO.getStockCode()));
                         myStockRepository.save(changedMyStock);
                     } else {
@@ -92,7 +88,7 @@ public class MyStockServiceImpl implements MyStockService {
     }
 
     @Override
-    public void sellStock(MyStockDTO myStockDTO) {
+    public void sellStock(String customerId, MyStockDTO myStockDTO) {
 
         // 시간 확인
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -101,15 +97,14 @@ public class MyStockServiceImpl implements MyStockService {
         LocalTime limitTime = LocalTime.parse("16:00:00", formatter);
 
         if (nowTime.isBefore(limitTime)) {
-            System.out.println("현재는 거래 가능 시간입니다.");
 
             // 계좌 찾기
-            Account account = accountRepository.findByCustomerId(myStockDTO.getCustomerId());
+            Account account = accountRepository.findByCustomerId(customerId);
 
             if (account != null) {
 
                 // 보유 종목 찾기
-                MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(),
+                MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(customerId,
                         myStockDTO.getStockCode());
                 if (mystock != null) {
 
