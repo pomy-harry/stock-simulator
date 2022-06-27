@@ -83,15 +83,8 @@ const StockBuy = (props) => {
     useEffect(() => {  
 
         const fetchWatchStock = async () => {
-            await fetch(findAllWatchStockByCustomerId_URL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify({
-                id: ''
-            })
-            }
-            )
-            .then((res) => {
+            await fetch(findAllWatchStockByCustomerId_URL, {headers: headers}
+            ).then((res) => {
             if(res.ok){
                 res.json().then((res2 => {
                 const dataList = [];
@@ -111,13 +104,7 @@ const StockBuy = (props) => {
         })
 
         const myDepositInfo = async() => {
-            await fetch(accountInfo_URL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify({
-                customerId: ''
-            })
-            }).then((res) => {
+            await fetch(accountInfo_URL, {headers: headers}).then((res) => {
             if(res.ok){
                 res.json().then((res2 => {
                     setMyDeposit(res2.deposit);

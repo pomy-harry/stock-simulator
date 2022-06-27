@@ -4,13 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import dev.pomyharry.stocksimulator.back.model.dto.AccountDTO;
 import dev.pomyharry.stocksimulator.back.model.dto.MyStockDTO;
@@ -43,8 +37,8 @@ public class AccountController {
 
     }
 
-    @PostMapping("/info/account")
-    public ResponseEntity<?> getAccountInfo(@AuthenticationPrincipal String customerId, @RequestBody(required = true) AccountDTO account) {
+    @GetMapping("/info/account")
+    public ResponseEntity<?> getAccountInfo(@AuthenticationPrincipal String customerId) {
 
         Account acc = accountService.findByCustomerId(customerId);
         List<MyStockDTO> mystock = myStockService.findAllMyStockByCustomerId(customerId);

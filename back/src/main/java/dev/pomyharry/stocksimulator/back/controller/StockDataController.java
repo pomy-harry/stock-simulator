@@ -4,11 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.dto.StockDTO;
@@ -24,9 +20,8 @@ public class StockDataController {
     public StockDataController(StockDataService stockChartService) {
         this.stockChartService = stockChartService;
     }
-
-    @RequestMapping("/stock-data")
-    @PostMapping
+    
+    @GetMapping("/stock-data")
     public ResponseEntity<?> getStockChart(@AuthenticationPrincipal String customerId) {
         List<WatchStock> watch = stockChartService.findAllStocks(customerId);
         List<StockDTO> s = stockChartService.getStockChart(watch);

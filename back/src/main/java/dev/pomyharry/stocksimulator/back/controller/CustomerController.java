@@ -5,13 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
@@ -69,8 +63,8 @@ public class CustomerController {
 
     }
 
-    @PostMapping("/info/customer")
-    public ResponseEntity<?> getCustomerInfo(@AuthenticationPrincipal String customerId, @RequestBody(required = true) CustomerDTO customer) {
+    @GetMapping("/info/customer")
+    public ResponseEntity<?> getCustomerInfo(@AuthenticationPrincipal String customerId) {
         try {
             Customer c = customerService.findById(customerId);
             // return ResponseEntity.ok().body(new CustomerDTO(c.getName(), c.getEmail(),

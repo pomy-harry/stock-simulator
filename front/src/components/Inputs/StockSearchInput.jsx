@@ -3,7 +3,8 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
 const BASE_URL = 'http://localhost:8090/stocks';
-const STOCK_URL = 'http://localhost:8090/stocks/watch';
+const STOCK_URL = 'http://localhost:8090/stocks/code';
+const WATCH_STOCK_URL = 'http://localhost:8090/stocks/watch';
 
 const StockSearchInput = () => {
     const [stocks, setStocks] = useState([]);
@@ -41,8 +42,8 @@ const StockSearchInput = () => {
 
     const autocompleteHandler = (event, newValue) => {
         const fetchWatchList = async() => {
-            await fetch(STOCK_URL, {
-                method: 'POST',
+            await fetch(WATCH_STOCK_URL, {
+                method: 'GET',
                 headers: headers,
                 body: JSON.stringify({
                     code: newValue.code

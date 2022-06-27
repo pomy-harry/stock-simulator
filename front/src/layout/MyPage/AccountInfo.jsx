@@ -25,16 +25,9 @@ const AccountInfo = () => {
     useEffect(() => {
 
         const fetchCustomerInfo = async () => {
-            await fetch(BASE_URL, {
-                method: 'POST',
-                headers: headers,
-                body: JSON.stringify({
-                    customerId: ''
-                })
-            }).then((res) => {
+            await fetch(BASE_URL, {headers: headers}).then((res) => {
                 if(res.ok){
                     res.json().then((res2 => {
-                        console.log(res2.id);
                         setId(res2.id);
                         setName(res2.name);
                         setDeposit(res2.deposit);

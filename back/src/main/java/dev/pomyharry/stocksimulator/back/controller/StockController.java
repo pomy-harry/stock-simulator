@@ -42,7 +42,7 @@ public class StockController {
         }
     }
 
-    @PostMapping
+    @GetMapping("/code")
     public StockDTO findByCode(@RequestBody StockDTO stockDTO) {
         try {
             Stock stock = stockService.findByCode(stockDTO.getCode());

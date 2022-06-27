@@ -84,13 +84,7 @@ const StockSell = (props) => {
     useEffect(() => {        
 
         const fetchMyStock = async () => {
-            await fetch(myStock_URL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify({
-                customerId: ''
-            })
-            }
+            await fetch(myStock_URL, {headers: headers}
             )
             .then((res) => {
             if(res.ok){

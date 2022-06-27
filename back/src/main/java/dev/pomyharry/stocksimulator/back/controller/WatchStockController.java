@@ -5,12 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
@@ -38,7 +33,7 @@ public class WatchStockController {
     @Autowired
     private StockService stockService;
 
-    @PostMapping("/watch")
+    @GetMapping("/watch")
     public ResponseEntity<?> createWatchList(@AuthenticationPrincipal String customerId, @RequestBody WatchStockDTO watchStock) {
         try {
             Customer customer = customerService.findById(customerId);
@@ -57,9 +52,8 @@ public class WatchStockController {
         }
     }
 
-    @RequestMapping("/watch-list")
-    @PostMapping
-    public ResponseEntity<?> findAllWatchStockByCustomerId(@AuthenticationPrincipal String customerId, @RequestBody CustomerDTO customerDTO) {
+    @GetMapping("/watch-list")
+    public ResponseEntity<?> findAllWatchStockByCustomerId(@AuthenticationPrincipal String customerId) {
         try {
             List<WatchStockDTO> watchList = watchStockService.findAllWatchStockByCustomerId(customerId);
             return ResponseEntity.ok().body(watchList);

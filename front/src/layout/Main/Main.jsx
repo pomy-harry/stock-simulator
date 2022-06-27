@@ -21,13 +21,7 @@ const Main = () => {
   
     useEffect(() => {
         const fetchWatchStocks = async (userData) => {
-            await fetch(BASE_URL, {
-                method: 'POST',
-                headers: headers,
-                body: JSON.stringify({
-                    id: ''
-                })
-            }).then((res) => {
+            await fetch(BASE_URL, {headers: headers}).then((res) => {
                 if(res.ok){
                 res.json().then((res2) => {
                     setWatchStockList(res2);
