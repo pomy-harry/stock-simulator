@@ -2,6 +2,9 @@ package dev.pomyharry.stocksimulator.back.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,16 +31,20 @@ public class CustomerController {
     @Autowired
     private WatchStockService watchStockService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/auth/login")
     @PostMapping
     public ResponseEntity<?> login(@RequestBody(required = true) CustomerDTO customer) {
 
         try {
-            CustomerDTO c = customerService.login(customer);
+            CustomerDTO c = customerService.login(customer, passwordEncoder);
+
             return ResponseEntity.ok().body(c);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -46,13 +53,14 @@ public class CustomerController {
 
     }
 
-    @RequestMapping("/join")
+    @RequestMapping("/auth/join")
     @PostMapping
     public ResponseEntity<?> createCustomer(@RequestBody(required = true) CustomerDTO customer) {
 
         try {
             Customer c = customerService
-                    .create(new Customer(customer.getName(), customer.getEmail(), customer.getPassword()));
+                    .create(new Customer(customer.getName(), customer.getEmail(),
+                            passwordEncoder.encode(customer.getPassword())));
             return ResponseEntity.ok().body(c);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -62,15 +70,14 @@ public class CustomerController {
     }
 
     @PostMapping("/info/customer")
-    public ResponseEntity<?> getCustomerInfo(@RequestBody(required = true) CustomerDTO customer) {
+    public ResponseEntity<?> getCustomerInfo(@AuthenticationPrincipal String customerId, @RequestBody(required = true) CustomerDTO customer) {
         try {
-            Customer c = customerService.findById(customer.getId());
+            Customer c = customerService.findById(customerId);
             // return ResponseEntity.ok().body(new CustomerDTO(c.getName(), c.getEmail(),
             // c.getPassword()));
             return ResponseEntity.ok().body(CustomerDTO.builder()
                     .name(c.getName())
                     .email(c.getEmail())
-                    .password(c.getPassword())
                     .build());
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,9 +86,10 @@ public class CustomerController {
     }
 
     @PutMapping("/info/customer")
-    public ResponseEntity<?> updateCustomerInfo(@RequestBody(required = true) CustomerDTO customer) {
+    public ResponseEntity<?> updateCustomerInfo(@AuthenticationPrincipal String customerId, @RequestBody(required = true) CustomerDTO customer) {
         try {
-            customerService.updateCustomerInfo(customer);
+            //customerService.updateCustomerInfo(customer);
+            customerService.updateCustomerInfo(CustomerDTO.builder().id(customerId).name(customer.getName()).build());
             return ResponseEntity.ok().body("성공");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -90,14 +98,14 @@ public class CustomerController {
     }
 
     @DeleteMapping("/info/customer")
-    public ResponseEntity<?> deleteCustomerInfo(@RequestBody(required = true) CustomerDTO customer) {
+    public ResponseEntity<?> deleteCustomerInfo(@AuthenticationPrincipal String customerId, @RequestBody(required = true) CustomerDTO customer) {
         try {
-            Customer c = customerService.findById(customer.getId());
+            Customer c = customerService.findById(customerId);
 
             accountService.deleteAllAccount(c);
             watchStockService.deleteAllWatchList(c);
 
-            customerService.deleteCustomerInfO(customer);
+            customerService.deleteCustomerInfO(customerId);
 
             return ResponseEntity.ok().body("success");
         } catch (Exception e) {
