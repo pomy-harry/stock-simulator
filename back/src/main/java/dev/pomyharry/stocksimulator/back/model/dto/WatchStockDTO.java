@@ -1,6 +1,5 @@
 package dev.pomyharry.stocksimulator.back.model.dto;
 
-import dev.pomyharry.stocksimulator.back.model.entity.WatchStock;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

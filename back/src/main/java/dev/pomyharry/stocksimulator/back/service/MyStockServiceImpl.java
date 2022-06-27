@@ -1,6 +1,5 @@
 package dev.pomyharry.stocksimulator.back.service;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -42,35 +41,33 @@ public class MyStockServiceImpl implements MyStockService {
     StockDataComponent stockChartComponent;
 
     @Override
-    public void buyStock(MyStockDTO myStockDTO) {
-        
+    public void buyStock(String customerId, MyStockDTO myStockDTO) {
+
         // 시간 확인
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
         LocalTime nowTime = LocalTime.parse(now.format(formatter), formatter);
+
         LocalTime limitStartTime = LocalTime.parse("09:00:00", formatter);
         LocalTime limitEndTime = LocalTime.parse("16:00:00", formatter);
         
         if (nowTime.isAfter(limitStartTime) && nowTime.isBefore(limitEndTime)) {
             System.out.println("현재는 거래 가능 시간입니다.");
-            
+
             // 계좌 찾기
-            Account account = accountRepository.findByCustomerId(myStockDTO.getCustomerId());
-            System.out.println(myStockDTO.getCustomerId());
-            System.out.println(myStockDTO.getAmount());
-            System.out.println(myStockDTO.getBuyPrice());
-            System.out.println(myStockDTO.getStockCode());
+            Account account = accountRepository.findByCustomerId(customerId);
 
             if (account != null) {
-                
+
                 // 보유 종목 찾기
-                MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(), myStockDTO.getStockCode());
+                MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(customerId,
+                        myStockDTO.getStockCode());
                 if (account.getDeposit() > myStockDTO.getBuyPrice()) {
                     if (mystock == null) {
                         MyStock changedMyStock = new MyStock(
                                 myStockDTO.getAmount(),
                                 myStockDTO.getBuyPrice(),
-                                customerRepository.getOne(myStockDTO.getCustomerId()),
+                                customerRepository.getOne(customerId),
                                 stockRepository.getOne(myStockDTO.getStockCode()));
                         myStockRepository.save(changedMyStock);
                     } else {
@@ -81,19 +78,19 @@ public class MyStockServiceImpl implements MyStockService {
                     account.setDeposit(account.getDeposit() - myStockDTO.getBuyPrice());
                     accountRepository.save(account);
                 }
-    
-            } else {            
+
+            } else {
                 throw new AccountNotFoundException("계좌가 존재하지 않습니다.");
             }
 
-        }else {
+        } else {
             throw new AccountNotFoundException("거래 시간이 아닙니다.");
         }
-        
+
     }
 
     @Override
-    public void sellStock(MyStockDTO myStockDTO) {
+    public void sellStock(String customerId, MyStockDTO myStockDTO) {
 
         // 시간 확인
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -106,39 +103,40 @@ public class MyStockServiceImpl implements MyStockService {
             System.out.println("현재는 거래 가능 시간입니다.");
 
             // 계좌 찾기
-            Account account = accountRepository.findByCustomerId(myStockDTO.getCustomerId());
-    
+            Account account = accountRepository.findByCustomerId(customerId);
+
             if (account != null) {
-    
+
                 // 보유 종목 찾기
-                MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(), myStockDTO.getStockCode());
+                MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(customerId,
+                        myStockDTO.getStockCode());
                 if (mystock != null) {
-    
+
                     if (mystock.getAmount() >= myStockDTO.getAmount()) {
                         mystock.setAmount(mystock.getAmount() - myStockDTO.getAmount());
                         mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() - myStockDTO.getSellPrice());
-                        myStockRepository.save(mystock);        
-                
+                        myStockRepository.save(mystock);
+
                         account.setDeposit(account.getDeposit() + myStockDTO.getSellPrice());
                         accountRepository.save(account);
-    
+
                         if (mystock.getAmount() == 0) {
                             myStockRepository.delete(mystock);
                         }
-    
+
                     } else {
                         throw new AccountNotFoundException("보유 수량 부족.");
                     }
-    
+
                 } else {
                     throw new AccountNotFoundException("해당 종목을 보유하지 않습니다.");
-                }    
-    
-            } else {            
+                }
+
+            } else {
                 throw new AccountNotFoundException("계좌가 존재하지 않습니다.");
             }
 
-        }else {
+        } else {
             throw new AccountNotFoundException("거래 시간이 아닙니다.");
         }
 
