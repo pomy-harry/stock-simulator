@@ -14,6 +14,6 @@ public interface WatchStockService {
 
     List<WatchStockDTO> findAllWatchStockByCustomerId(String customerId);
 
-    void deleteByStockCode(String code);
+    void deleteByCustomerIdAndStockCode(String customerId, String code);
 
 }

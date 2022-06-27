@@ -3,6 +3,7 @@ package dev.pomyharry.stocksimulator.back.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,8 +27,8 @@ public class StockDataController {
 
     @RequestMapping("/stock-data")
     @PostMapping
-    public ResponseEntity<?> getStockChart(@RequestBody(required = true) CustomerDTO customer) {
-        List<WatchStock> watch = stockChartService.findAllStocks(customer);
+    public ResponseEntity<?> getStockChart(@AuthenticationPrincipal String customerId) {
+        List<WatchStock> watch = stockChartService.findAllStocks(customerId);
         List<StockDTO> s = stockChartService.getStockChart(watch);
 
         return ResponseEntity.ok().body(s);

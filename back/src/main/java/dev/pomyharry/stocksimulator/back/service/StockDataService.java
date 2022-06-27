@@ -8,7 +8,7 @@ import dev.pomyharry.stocksimulator.back.model.entity.WatchStock;
 
 public interface StockDataService {
 
-    List<WatchStock> findAllStocks(CustomerDTO customer);
+    List<WatchStock> findAllStocks(String customerId);
 
     public List<StockDTO> getStockChart(List<WatchStock> watchStocks);
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,9 +39,9 @@ public class WatchStockController {
     private StockService stockService;
 
     @PostMapping("/watch")
-    public ResponseEntity<?> createWatchList(@RequestBody WatchStockDTO watchStock) {
+    public ResponseEntity<?> createWatchList(@AuthenticationPrincipal String customerId, @RequestBody WatchStockDTO watchStock) {
         try {
-            Customer customer = customerService.findById(watchStock.getCustomerId());
+            Customer customer = customerService.findById(customerId);
             Stock stock = stockService.findByCode(watchStock.getCode());
             watchStockService.createWatchList(new WatchStock(stock, customer));
 
@@ -58,9 +59,8 @@ public class WatchStockController {
 
     @RequestMapping("/watch-list")
     @PostMapping
-    public ResponseEntity<?> findAllWatchStockByCustomerId(@RequestBody CustomerDTO customerDTO) {
+    public ResponseEntity<?> findAllWatchStockByCustomerId(@AuthenticationPrincipal String customerId, @RequestBody CustomerDTO customerDTO) {
         try {
-            String customerId = customerDTO.getId();
             List<WatchStockDTO> watchList = watchStockService.findAllWatchStockByCustomerId(customerId);
             return ResponseEntity.ok().body(watchList);
         } catch (Exception e) {
@@ -70,9 +70,9 @@ public class WatchStockController {
     }
 
     @DeleteMapping("/watch")
-    public ResponseEntity<?> deleteByStockCode(@RequestBody StockDTO stock) {
+    public ResponseEntity<?> deleteByStockCode(@AuthenticationPrincipal String customerId, @RequestBody StockDTO stock) {
         try {
-            watchStockService.deleteByStockCode(stock.getCode());
+            watchStockService.deleteByCustomerIdAndStockCode(customerId, stock.getCode());
             return ResponseEntity.ok().body("success");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

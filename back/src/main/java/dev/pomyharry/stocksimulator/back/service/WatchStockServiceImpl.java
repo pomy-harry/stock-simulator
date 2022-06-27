@@ -52,8 +52,8 @@ public class WatchStockServiceImpl implements WatchStockService {
     }
 
     @Override
-    public void deleteByStockCode(String code) {
-        watchStockRepository.deleteByStockCode(code);
+    public void deleteByCustomerIdAndStockCode(String customerId, String code) {
+        watchStockRepository.deleteByCustomerIdAndStockCode(customerId, code);
     }
 
 }

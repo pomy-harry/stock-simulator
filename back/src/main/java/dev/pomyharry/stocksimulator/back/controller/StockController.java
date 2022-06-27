@@ -31,9 +31,6 @@ public class StockController {
         try {
             List<Stock> stockList = stockService.findAllStocks();
 
-            // List<StockDTO> stocks = stockList.stream().map(stock -> new
-            // StockDTO(stock.getCode(), stock.getName()))
-            // .collect(Collectors.toList());
             List<StockDTO> stocks = stockList.stream()
                     .map(stock -> StockDTO.builder().code(stock.getCode()).name(stock.getName()).build())
                     .collect(Collectors.toList());
@@ -49,7 +46,7 @@ public class StockController {
     public StockDTO findByCode(@RequestBody StockDTO stockDTO) {
         try {
             Stock stock = stockService.findByCode(stockDTO.getCode());
-            // return new StockDTO(stock.getCode(), stock.getName());
+
             return StockDTO.builder().code(stock.getCode()).name(stock.getName()).build();
         } catch (Exception e) {
             System.out.println(e.getMessage());
