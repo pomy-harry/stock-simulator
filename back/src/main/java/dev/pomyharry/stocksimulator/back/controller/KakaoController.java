@@ -1,5 +1,7 @@
 package dev.pomyharry.stocksimulator.back.controller;
 
+import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,7 +46,13 @@ public class KakaoController {
             String access_Token = kakaoService.getAccessToken(code);
             KakaoDTO userInfo = kakaoService.getUserInfo(access_Token);
             //System.out.println("여기 userInfo : " + userInfo);
-            return ResponseEntity.ok().body(userInfo);
+            String token = kakaoService.getJWT(userInfo);
+
+            CustomerDTO customer = CustomerDTO.builder()
+                    .token(token)
+                    .build();
+
+            return ResponseEntity.ok().body(customer);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             // 에러페이지

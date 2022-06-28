@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new IdNotFoundException("Id cannot be found");
         }
 
-        final String token = tokenManager.createToken(customer);
+        final String token = tokenManager.createToken(customer.getId());
 
         return CustomerDTO.builder()
                 .id(customer.getId())

@@ -20,7 +20,7 @@ const KakaoLogin = (props) => {
         }).then((res) => {
             if(res.ok){
                 res.json().then((res2 => {
-                    sessionStorage.setItem('USER', res2.id);
+                    sessionStorage.setItem('USER', res2.token);
                     window.location.href="/";
                 }))
             }else{

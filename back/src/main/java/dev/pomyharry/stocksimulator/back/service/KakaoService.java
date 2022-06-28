@@ -10,4 +10,6 @@ public interface KakaoService {
 	Kakao findById(String id);
 
 	String getAccessToken (String authorize_code);
+
+	String getJWT(KakaoDTO kakao);
 }

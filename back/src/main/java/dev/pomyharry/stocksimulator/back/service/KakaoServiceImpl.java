@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import dev.pomyharry.stocksimulator.back.security.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,9 @@ public class KakaoServiceImpl implements KakaoService {
 	private KakaoRepository kakaoRepository;
 	@Autowired
 	private CustomerRepository customerRepository;
+
+	@Autowired
+	private TokenProvider tokenProvider;
 
 	@Override
 	public String getAccessToken (String authorize_code) {
@@ -182,6 +186,11 @@ public class KakaoServiceImpl implements KakaoService {
 
 		return kakaoRepository.findByEmail(userInfo.get("email"));
     }
+
+	public String getJWT(KakaoDTO kakao){
+		final String token = tokenProvider.createToken(kakao.getId());
+		return token;
+	}
 
 
 }

@@ -20,7 +20,7 @@ public class StockDataController {
     public StockDataController(StockDataService stockChartService) {
         this.stockChartService = stockChartService;
     }
-    
+
     @GetMapping("/stock-data")
     public ResponseEntity<?> getStockChart(@AuthenticationPrincipal String customerId) {
         List<WatchStock> watch = stockChartService.findAllStocks(customerId);
