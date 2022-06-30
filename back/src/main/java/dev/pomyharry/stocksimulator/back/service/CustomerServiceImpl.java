@@ -1,5 +1,6 @@
 package dev.pomyharry.stocksimulator.back.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import dev.pomyharry.stocksimulator.back.repository.KakaoRepository;
 import dev.pomyharry.stocksimulator.back.exception.IdNotFoundException;
 import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
 
+@Slf4j
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -36,15 +38,12 @@ public class CustomerServiceImpl implements CustomerService {
         final String token = tokenManager.createToken(customer.getId());
 
         return CustomerDTO.builder()
-                .id(customer.getId())
-                .name(customer.getName())
-                .email(customer.getEmail())
                 .token(token)
                 .build();
     }
 
     @Override
-    public Customer create(Customer c) {
+    public CustomerDTO create(CustomerDTO c, PasswordEncoder passwordEncoder) {
         Customer customer = customerRepository.findByEmail(c.getEmail());
 
         // ID 중복 검사
@@ -52,7 +51,12 @@ public class CustomerServiceImpl implements CustomerService {
             throw new DuplicationException("Id is Duplicated");
         }
 
-        return customerRepository.save(c);
+        customer = customerRepository.save(new Customer(c.getName(), c.getEmail(),
+                passwordEncoder.encode(c.getPassword())));
+
+        final String token = tokenManager.createToken(customer.getId());
+
+        return CustomerDTO.builder().token(token).build();
     }
 
     @Override

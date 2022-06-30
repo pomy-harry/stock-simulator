@@ -52,9 +52,8 @@ public class CustomerController {
     public ResponseEntity<?> createCustomer(@RequestBody(required = true) CustomerDTO customer) {
 
         try {
-            Customer c = customerService
-                    .create(new Customer(customer.getName(), customer.getEmail(),
-                            passwordEncoder.encode(customer.getPassword())));
+            CustomerDTO c = customerService
+                    .create(customer, passwordEncoder);
             return ResponseEntity.ok().body(c);
         } catch (Exception e) {
             System.out.println(e.getMessage());
