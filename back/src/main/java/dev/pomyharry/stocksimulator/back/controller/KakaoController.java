@@ -22,42 +22,47 @@ public class KakaoController {
     @Autowired
 	private KakaoService kakaoService;
 
-//    public KakaoController(KakaoService kakaoService) {
-//        this.kakaoService = kakaoService;
-//    }
-
     @RequestMapping("/kakaologin")
     @PostMapping
-    public String kakaoLogin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
+    public void kakaoLogin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
         try {
-            response.sendRedirect("http://localhost:3000/KakaoLogin/" + code);
-            return "dd";
+            String access_Token = kakaoService.getAccessToken(code);
+            System.out.println("여기 access_Token: " + access_Token);
+            KakaoDTO userInfo = kakaoService.getUserInfo(access_Token);
+            System.out.println("여기 userInfo : " + userInfo);
+            kakaoService.kakaoLogin(access_Token);
+            System.out.println("로그인됨");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            // 에러페이지
-            return "redirect:http://localhost:3000";
         }
     }
 
     @RequestMapping("/afterlogin")
     @PostMapping
-    public ResponseEntity<?> afterlogin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
+    public void afterlogin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
         try {
             String access_Token = kakaoService.getAccessToken(code);
-            KakaoDTO userInfo = kakaoService.getUserInfo(access_Token);
-            //System.out.println("여기 userInfo : " + userInfo);
-            String token = kakaoService.getJWT(userInfo);
-
-            CustomerDTO customer = CustomerDTO.builder()
-                    .token(token)
-                    .build();
-
-            return ResponseEntity.ok().body(customer);
+            KakaoDTO userJoin = kakaoService.kakaoJoin(access_Token);
+            System.out.println("가입완료: " + userJoin);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            // 에러페이지
-            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    // @RequestMapping("/afterjoin")
+    // @PostMapping
+    // public ResponseEntity<?> afterjoin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
+    //     try {
+    //         String access_Token = kakaoService.getAccessToken(code);
+    //         KakaoDTO userInfo = kakaoService.getUserInfo(access_Token);
+    //         System.out.println("여기 userInfo : " + userInfo);
+    //         KakaoDTO userJoinInfo = kakaoService.kakaoJoin(access_Token);
+    //         System.out.println("여기 userJoinInfo : " + userJoinInfo);
+    //         return ResponseEntity.ok().body(userInfo);
+    //     } catch (Exception e) {
+    //         System.out.println(e.getMessage());
+    //         return ResponseEntity.badRequest().body(e.getMessage());
+    //     }
+    // }
     
 }

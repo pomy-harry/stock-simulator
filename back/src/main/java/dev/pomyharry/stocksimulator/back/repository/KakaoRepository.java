@@ -9,6 +9,6 @@ public interface KakaoRepository  extends JpaRepository<Kakao, String>{
     
     KakaoDTO findByEmail(Object email);
 
-    Kakao findByEmail(String id);
+    Kakao findByEmail(String email);
 
 }

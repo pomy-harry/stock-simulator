@@ -42,6 +42,7 @@ const CustomerLoginSingnUpTab = (props) => {
         </TabPanel>
         <TabPanel value={value} index={1}>
             <CustomerSignUp onClose={props.onClose}/>
+            <KakaoLoginButton />
         </TabPanel>
     </>
   )

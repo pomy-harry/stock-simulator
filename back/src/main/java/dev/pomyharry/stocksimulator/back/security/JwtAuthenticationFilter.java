@@ -40,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (token != null && !token.equalsIgnoreCase("null")) {
                 String customerId = tokenProvider.verifyJWT(token);
                 log.info("Authenticated customer ID : " + customerId);
-
+                // filter 통과해야 id 얻을수있음
                 AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         customerId,
                         null,
