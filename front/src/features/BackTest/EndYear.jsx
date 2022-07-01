@@ -22,8 +22,8 @@ const EndYear = () => {
     <FormControl fullWidth>
         <InputLabel id="demo-simple">종료일</InputLabel>
         <Select
-            labelId="start"
-            id="start"
+            labelId="end"
+            id="end"
             value={year}
             label="Date"
             onChange={handleChange}
