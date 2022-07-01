@@ -8,12 +8,7 @@ import dev.pomyharry.stocksimulator.back.model.entity.Stock;
 import dev.pomyharry.stocksimulator.back.service.StockService;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -43,9 +38,9 @@ public class StockController {
     }
 
     @GetMapping("/code")
-    public StockDTO findByCode(@RequestBody StockDTO stockDTO) {
+    public StockDTO findByCode(@RequestParam(value="code") String code) {
         try {
-            Stock stock = stockService.findByCode(stockDTO.getCode());
+            Stock stock = stockService.findByCode(code);
 
             return StockDTO.builder().code(stock.getCode()).name(stock.getName()).build();
         } catch (Exception e) {

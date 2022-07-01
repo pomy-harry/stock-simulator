@@ -66,8 +66,7 @@ public class CustomerController {
     public ResponseEntity<?> getCustomerInfo(@AuthenticationPrincipal String customerId) {
         try {
             Customer c = customerService.findById(customerId);
-            // return ResponseEntity.ok().body(new CustomerDTO(c.getName(), c.getEmail(),
-            // c.getPassword()));
+
             return ResponseEntity.ok().body(CustomerDTO.builder()
                     .name(c.getName())
                     .email(c.getEmail())
@@ -100,7 +99,7 @@ public class CustomerController {
 
             customerService.deleteCustomerInfO(customerId);
 
-            return ResponseEntity.ok().body("success");
+            return ResponseEntity.ok().body("성공");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());

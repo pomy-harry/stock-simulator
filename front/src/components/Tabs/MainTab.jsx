@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import StockBuySellTab from './StockBuySellTab';
 import MarketInfoShowInfo from '../../features/MarketInfo/MarketInfoShowInfo';
 import TabPanel from './Commons/TabPanel';
+import BackTesting from '../../features/BackTest/BackTesting';
 
 const MainTab = (props) => {
 
@@ -32,6 +33,7 @@ const MainTab = (props) => {
         <Tabs value={tabValue} onChange={handleInfoTabChange} className={classes.smartTab__tabs}>  
           <Tab label="모의투자" {...a11yProps(0)} className={classes.smartTab__tabs__tab}/>
           <Tab label="시장정보" {...a11yProps(1)} className={classes.smartTab__tabs__tab}/>
+          <Tab label="투자전략" {...a11yProps(2)} className={classes.smartTab__tabs__tab}/>
         </Tabs>
 
         <TabPanel className={classes.smartTab__tabpanel__bs} value={tabValue} index={0}>
@@ -40,6 +42,10 @@ const MainTab = (props) => {
         
         <TabPanel value={tabValue} index={1}>
             <MarketInfoShowInfo />   
+        </TabPanel>
+
+        <TabPanel value={tabValue} index={2}>
+            <BackTesting/>
         </TabPanel>
     </>
   )

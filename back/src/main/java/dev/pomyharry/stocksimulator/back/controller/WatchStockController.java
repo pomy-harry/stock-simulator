@@ -34,10 +34,10 @@ public class WatchStockController {
     private StockService stockService;
 
     @GetMapping("/watch")
-    public ResponseEntity<?> createWatchList(@AuthenticationPrincipal String customerId, @RequestBody WatchStockDTO watchStock) {
+    public ResponseEntity<?> createWatchList(@AuthenticationPrincipal String customerId, @RequestParam(value="code") String code) {
         try {
             Customer customer = customerService.findById(customerId);
-            Stock stock = stockService.findByCode(watchStock.getCode());
+            Stock stock = stockService.findByCode(code);
             watchStockService.createWatchList(new WatchStock(stock, customer));
 
             return ResponseEntity.ok().body("success");

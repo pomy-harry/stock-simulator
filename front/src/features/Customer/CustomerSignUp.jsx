@@ -73,7 +73,7 @@ const CustomerSignUp = (props) => {
             return;
         }else if(pwRegex.test(enteredSignUpPassword) === false){
             setPwMsg("조건에 맞게 입력하세요.");
-            setEmailMsg("")
+            return;
         }
 
         if(enteredSignUpPasswordCheck === ""){
