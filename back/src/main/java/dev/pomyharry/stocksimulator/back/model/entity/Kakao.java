@@ -20,12 +20,12 @@ public class Kakao {
     @Id
     @GeneratedValue(generator = "kakao-uuid")
     @GenericGenerator(name = "kakao-uuid", strategy = "uuid")
-    @Column(name = "KAKAO_ID")
+    @Column(name = "kakao_id")
     private String id;
 
-    @Column(name = "KAKAO_NAME")
+    @Column(name = "kakao_name")
     private String name;
 
-    @Column(name = "KAKAO_EMAIL")
+    @Column(name = "kakao_email")
     private String email;
 }
