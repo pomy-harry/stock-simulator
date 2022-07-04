@@ -1,15 +1,19 @@
 package dev.pomyharry.stocksimulator.back.service;
 
+import java.net.MalformedURLException;
+
 import dev.pomyharry.stocksimulator.back.model.dto.KakaoDTO;
-import dev.pomyharry.stocksimulator.back.model.entity.Kakao;
 
 public interface KakaoService {
 
+	void kakaoJoin(String access_Token);
+
+	KakaoDTO kakaoLogin(String access_Token); 
+
+	String getAccessTokenForLogin (String authorize_code);
+
+	String getAccessTokenForJoin (String authorize_code);
+
 	KakaoDTO getUserInfo(String access_Token);
 
-	Kakao findById(String id);
-
-	String getAccessToken (String authorize_code);
-
-	String getJWT(KakaoDTO kakao);
 }
