@@ -6,6 +6,7 @@ import CustomerLogin from '../../features/Customer/CustomerLogin';
 import CustomerSignUp from '../../features/Customer/CustomerSignUp';
 import TabPanel from './Commons/TabPanel';
 import KakaoLoginButton from '../Buttons/KakaoLoginButton'
+import KakaoJoinButton from '../Buttons/KakaoJoinButton'
 
 const CustomerLoginSingnUpTab = (props) => {
 
@@ -42,7 +43,7 @@ const CustomerLoginSingnUpTab = (props) => {
         </TabPanel>
         <TabPanel value={value} index={1}>
             <CustomerSignUp onClose={props.onClose}/>
-            <KakaoLoginButton />
+            <KakaoJoinButton />
         </TabPanel>
     </>
   )

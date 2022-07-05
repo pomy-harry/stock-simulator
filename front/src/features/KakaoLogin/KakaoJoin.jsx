@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const KakaoLogin = (props) => {
+const KakaoJoin = (props) => {
     const { code } = useParams();
-    // useEffect [] 여기 안에 들어가는값이 바뀔때마다 실행시킴.
-    
     useEffect(() => {
         if (code !== null) {
             a(code);
-        }//code가 바뀌면 실행
+        }
     }, [code]);
 
     const a = async (code) => {
@@ -22,11 +20,11 @@ const KakaoLogin = (props) => {
         }).then((res) => {
             if(res.ok){
                 res.json().then((res2 => {
-                    sessionStorage.setItem('USER', res2.id);
+                    sessionStorage.setItem('USER', res2.token);
                     window.location.href="/";
                 }))
             }else{
-                window.alert("로그인에 실패했습니다.\n로그인 정보를 확인해주세요");
+                window.alert("이미 등록된 사용자입니다.\n로그인해주세요");
             }
         }
         );
@@ -40,4 +38,4 @@ const KakaoLogin = (props) => {
   )
 }
 
-export default KakaoLogin
+export default KakaoJoin
