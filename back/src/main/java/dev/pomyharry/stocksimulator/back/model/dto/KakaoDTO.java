@@ -16,4 +16,6 @@ public class KakaoDTO {
 	private String name;
 
 	private String email;
+
+	private String customerId;
 }

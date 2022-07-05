@@ -6,7 +6,7 @@ import dev.pomyharry.stocksimulator.back.model.dto.KakaoDTO;
 
 public interface KakaoService {
 
-	void kakaoJoin(String access_Token);
+	KakaoDTO kakaoJoin(String access_Token);
 
 	KakaoDTO kakaoLogin(String access_Token); 
 
@@ -15,5 +15,7 @@ public interface KakaoService {
 	String getAccessTokenForJoin (String authorize_code);
 
 	KakaoDTO getUserInfo(String access_Token);
+
+	public String getJWT(KakaoDTO kakao);
 
 }
