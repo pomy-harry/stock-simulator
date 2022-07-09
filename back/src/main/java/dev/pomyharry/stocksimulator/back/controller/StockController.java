@@ -8,12 +8,7 @@ import dev.pomyharry.stocksimulator.back.model.entity.Stock;
 import dev.pomyharry.stocksimulator.back.service.StockService;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -31,9 +26,6 @@ public class StockController {
         try {
             List<Stock> stockList = stockService.findAllStocks();
 
-            // List<StockDTO> stocks = stockList.stream().map(stock -> new
-            // StockDTO(stock.getCode(), stock.getName()))
-            // .collect(Collectors.toList());
             List<StockDTO> stocks = stockList.stream()
                     .map(stock -> StockDTO.builder().code(stock.getCode()).name(stock.getName()).build())
                     .collect(Collectors.toList());
@@ -45,11 +37,11 @@ public class StockController {
         }
     }
 
-    @PostMapping
-    public StockDTO findByCode(@RequestBody StockDTO stockDTO) {
+    @GetMapping("/code")
+    public StockDTO findByCode(@RequestParam(value="code") String code) {
         try {
-            Stock stock = stockService.findByCode(stockDTO.getCode());
-            // return new StockDTO(stock.getCode(), stock.getName());
+            Stock stock = stockService.findByCode(code);
+
             return StockDTO.builder().code(stock.getCode()).name(stock.getName()).build();
         } catch (Exception e) {
             System.out.println(e.getMessage());

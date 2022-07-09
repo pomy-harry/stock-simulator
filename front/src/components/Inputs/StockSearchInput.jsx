@@ -3,14 +3,23 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
 const BASE_URL = 'http://localhost:8090/stocks';
-const STOCK_URL = 'http://localhost:8090/stocks/watch';
+const WATCH_STOCK_URL = 'http://localhost:8090/stocks/watch';
 
 const StockSearchInput = () => {
     const [stocks, setStocks] = useState([]);
 
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
+
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
+
     useEffect(() => {
         const fetchStocks = async () => {
-            await fetch(BASE_URL).then((res) => {
+            await fetch(BASE_URL, {headers: headers}).then((res) => {
                 if(res.ok){
                     res.json().then((res2 => {
                         const stockData = [];
@@ -32,16 +41,8 @@ const StockSearchInput = () => {
 
     const autocompleteHandler = (event, newValue) => {
         const fetchWatchList = async() => {
-            await fetch(STOCK_URL, {
-                method: 'POST',
-                headers: {
-                'Content-Type' : 'application/json',
-                },
-                body: JSON.stringify({
-                    code: newValue.code,
-                    customerId: sessionStorage.getItem('USER')
-                })
-            }).then((res) => {
+            await fetch(WATCH_STOCK_URL + `/?code=${newValue.code}`, {headers: headers})
+                .then((res) => {
                 if(res.ok){
                     res.json().then((res2 => {
                         console.log(res2);

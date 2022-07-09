@@ -68,26 +68,23 @@ const StockSell = (props) => {
 
     }, [sellStockAmount, sellStockPrice])
 
-
-
-
-
     const myStock_URL = 'http://localhost:8090/stocks/my-stock';
 
     const [myStocks, setMyStocks] = useState([]);    
 
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
+
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
+
     useEffect(() => {        
 
         const fetchMyStock = async () => {
-            await fetch(myStock_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
-            body: JSON.stringify({
-                customerId: sessionStorage.getItem('USER')
-            })
-            }
+            await fetch(myStock_URL, {headers: headers}
             )
             .then((res) => {
             if(res.ok){
@@ -151,13 +148,10 @@ const StockSell = (props) => {
         
                     await fetch(sellStock_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type' : 'application/json',
-                    },
+                    headers: headers,
                     body: JSON.stringify({
                         sellPrice : sellStockTotalPrice,
                         amount: sellStockAmount,
-                        customerId: sessionStorage.getItem('USER'),
                         stockCode: sellStockCode
                     })
                     }).then((res) => {

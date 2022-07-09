@@ -5,16 +5,21 @@ import { Button } from '@mui/material';
 const BASE_URL = 'http://localhost:8090/info/account'
 
 const AccountDelete = (props) => {
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
+
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
 
     const accountInfoDeleteHandler = async() => {
         await fetch(BASE_URL, {
             method: 'Delete',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify({
-                id: props.id,
-                customerId: sessionStorage.getItem('USER')
+                id: props.id
             })
         }).then((res) => {
             if(res.ok){

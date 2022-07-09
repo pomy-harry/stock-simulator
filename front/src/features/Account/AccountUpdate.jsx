@@ -17,12 +17,19 @@ const AccountUpdate = (props) => {
         updateAccountHandler(name);
     }
 
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
+
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
+
     const updateAccountHandler = async(updateName) => {
         await fetch(BASE_URL, {
             method: 'PUT',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify({
                 id: props.id,
                 name: updateName

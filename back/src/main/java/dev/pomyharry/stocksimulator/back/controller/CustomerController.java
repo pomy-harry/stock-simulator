@@ -5,13 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
@@ -58,9 +52,8 @@ public class CustomerController {
     public ResponseEntity<?> createCustomer(@RequestBody(required = true) CustomerDTO customer) {
 
         try {
-            Customer c = customerService
-                    .create(new Customer(customer.getName(), customer.getEmail(),
-                            passwordEncoder.encode(customer.getPassword())));
+            CustomerDTO c = customerService
+                    .create(customer, passwordEncoder);
             return ResponseEntity.ok().body(c);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -69,12 +62,11 @@ public class CustomerController {
 
     }
 
-    @PostMapping("/info/customer")
-    public ResponseEntity<?> getCustomerInfo(@AuthenticationPrincipal String customerId, @RequestBody(required = true) CustomerDTO customer) {
+    @GetMapping("/info/customer")
+    public ResponseEntity<?> getCustomerInfo(@AuthenticationPrincipal String customerId) {
         try {
             Customer c = customerService.findById(customerId);
-            // return ResponseEntity.ok().body(new CustomerDTO(c.getName(), c.getEmail(),
-            // c.getPassword()));
+
             return ResponseEntity.ok().body(CustomerDTO.builder()
                     .name(c.getName())
                     .email(c.getEmail())
@@ -107,7 +99,7 @@ public class CustomerController {
 
             customerService.deleteCustomerInfO(customerId);
 
-            return ResponseEntity.ok().body("success");
+            return ResponseEntity.ok().body("성공");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());

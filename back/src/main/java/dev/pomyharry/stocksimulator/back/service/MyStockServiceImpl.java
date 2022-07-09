@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
 import dev.pomyharry.stocksimulator.back.repository.MyStockRepository;
 import dev.pomyharry.stocksimulator.back.repository.StockRepository;
 
+@Slf4j
 @Service
 public class MyStockServiceImpl implements MyStockService {
 
@@ -52,7 +54,7 @@ public class MyStockServiceImpl implements MyStockService {
         LocalTime limitEndTime = LocalTime.parse("16:00:00", formatter);
         
         if (nowTime.isAfter(limitStartTime) && nowTime.isBefore(limitEndTime)) {
-            System.out.println("현재는 거래 가능 시간입니다.");
+            log.info("거래 가능 시간");
 
             // 계좌 찾기
             Account account = accountRepository.findByCustomerId(customerId);
@@ -62,6 +64,7 @@ public class MyStockServiceImpl implements MyStockService {
                 // 보유 종목 찾기
                 MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(customerId,
                         myStockDTO.getStockCode());
+
                 if (account.getDeposit() > myStockDTO.getBuyPrice()) {
                     if (mystock == null) {
                         MyStock changedMyStock = new MyStock(
@@ -100,7 +103,7 @@ public class MyStockServiceImpl implements MyStockService {
         LocalTime limitEndTime = LocalTime.parse("16:00:00", formatter);
         
         if (nowTime.isAfter(limitStartTime) && nowTime.isBefore(limitEndTime)) {
-            System.out.println("현재는 거래 가능 시간입니다.");
+            log.info("거래 가능 시간");
 
             // 계좌 찾기
             Account account = accountRepository.findByCustomerId(customerId);

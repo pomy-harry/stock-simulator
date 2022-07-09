@@ -9,6 +9,15 @@ const AccountCreateModal = (props) => {
     
     const [accountName, setAccountName] = useState('');
     const [deposit, setDeposit] = useState('');
+
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+    });
+
+    const accessToken = sessionStorage.getItem("USER");
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
     
     const createAccount = async (event) => {
         event.preventDefault();
@@ -17,14 +26,11 @@ const AccountCreateModal = (props) => {
             CREATE_ACCOUNT_URL,
             {
             method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify({
                 name: accountName,
                 deposit: deposit,
-                seedMoney: deposit,
-                customerId: sessionStorage.getItem('USER')
+                seedMoney: deposit
             })
             }
         )

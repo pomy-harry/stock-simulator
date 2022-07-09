@@ -7,20 +7,21 @@ import SmartTab from './SmartTab';
 
 const BASE_URL = 'http://localhost:8090/stock-data'
 
+let headers = new Headers({
+    'Content-Type' : 'application/json'
+});
+
+const accessToken = sessionStorage.getItem("USER");
+if(accessToken && accessToken !== null){
+    headers.append("Authorization", "Bearer " + accessToken);
+}
+
 const Main = () => {
     const [watchStockList, setWatchStockList] = useState([{}]);
   
     useEffect(() => {
         const fetchWatchStocks = async (userData) => {
-            await fetch(BASE_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type' : 'application/json',
-                },
-                body: JSON.stringify({
-                    id: sessionStorage.getItem('USER'),
-                })
-            }).then((res) => {
+            await fetch(BASE_URL, {headers: headers}).then((res) => {
                 if(res.ok){
                 res.json().then((res2) => {
                     setWatchStockList(res2);

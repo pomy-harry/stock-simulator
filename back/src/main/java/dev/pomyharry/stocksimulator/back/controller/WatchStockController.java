@@ -4,12 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
@@ -37,11 +33,11 @@ public class WatchStockController {
     @Autowired
     private StockService stockService;
 
-    @PostMapping("/watch")
-    public ResponseEntity<?> createWatchList(@RequestBody WatchStockDTO watchStock) {
+    @GetMapping("/watch")
+    public ResponseEntity<?> createWatchList(@AuthenticationPrincipal String customerId, @RequestParam(value="code") String code) {
         try {
-            Customer customer = customerService.findById(watchStock.getCustomerId());
-            Stock stock = stockService.findByCode(watchStock.getCode());
+            Customer customer = customerService.findById(customerId);
+            Stock stock = stockService.findByCode(code);
             watchStockService.createWatchList(new WatchStock(stock, customer));
 
             return ResponseEntity.ok().body("success");
@@ -56,11 +52,9 @@ public class WatchStockController {
         }
     }
 
-    @RequestMapping("/watch-list")
-    @PostMapping
-    public ResponseEntity<?> findAllWatchStockByCustomerId(@RequestBody CustomerDTO customerDTO) {
+    @GetMapping("/watch-list")
+    public ResponseEntity<?> findAllWatchStockByCustomerId(@AuthenticationPrincipal String customerId) {
         try {
-            String customerId = customerDTO.getId();
             List<WatchStockDTO> watchList = watchStockService.findAllWatchStockByCustomerId(customerId);
             return ResponseEntity.ok().body(watchList);
         } catch (Exception e) {
@@ -70,9 +64,9 @@ public class WatchStockController {
     }
 
     @DeleteMapping("/watch")
-    public ResponseEntity<?> deleteByStockCode(@RequestBody StockDTO stock) {
+    public ResponseEntity<?> deleteByStockCode(@AuthenticationPrincipal String customerId, @RequestBody StockDTO stock) {
         try {
-            watchStockService.deleteByStockCode(stock.getCode());
+            watchStockService.deleteByCustomerIdAndStockCode(customerId, stock.getCode());
             return ResponseEntity.ok().body("success");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

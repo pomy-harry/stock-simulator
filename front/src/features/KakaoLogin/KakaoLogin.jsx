@@ -20,11 +20,12 @@ const KakaoLogin = (props) => {
         }).then((res) => {
             if(res.ok){
                 res.json().then((res2 => {
-                    sessionStorage.setItem('USER', res2.id);
+                    sessionStorage.setItem('USER', res2.token);
                     window.location.href="/";
+                    console.log(sessionStorage.getItem('USER') + ": 로그인");
                 }))
             }else{
-                window.alert("로그인에 실패했습니다.\n로그인 정보를 확인해주세요");
+                window.alert("존재하지 않는 아이디입니다.\n회원가입을 진행해주세요");
             }
         }
         );

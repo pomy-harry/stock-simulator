@@ -19,14 +19,14 @@ public class StockDataServiceImpl implements StockDataService {
     private StockDataRepository stockDataRepository;
 
     @Override
-    public List<WatchStock> findAllStocks(CustomerDTO customerDto) {
+    public List<WatchStock> findAllStocks(String customerId) {
 
         // Customer customer = new Customer(customerDto.getId(), customerDto.getName(),
         // customerDto.getEmail(),
         // customerDto.getPassword());
 
         // customerId 로 wathchlist에 있는 watchStocks(stockName, StockCode) 조회
-        List<WatchStock> watchStocks = stockDataRepository.findAllByCustomerId(customerDto.getId());
+        List<WatchStock> watchStocks = stockDataRepository.findAllByCustomerId(customerId);
         return watchStocks;
 
     }

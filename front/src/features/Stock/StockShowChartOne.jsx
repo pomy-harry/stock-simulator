@@ -4,12 +4,19 @@ import classes from './StockShowChartOne.module.css'
 const BASE_URL = 'http://localhost:8090/stocks/watch'
 
 const StockShowChartOne = (props) => {
+  let headers = new Headers({
+    'Content-Type' : 'application/json'
+  });
+
+  const accessToken = sessionStorage.getItem("USER");
+  if(accessToken && accessToken !== null){
+      headers.append("Authorization", "Bearer " + accessToken);
+  }
+
     const clickDelHandler = async() => {
         await fetch(BASE_URL, {
           method: 'Delete',
-          headers: {
-            'Content-Type' : 'application/json',
-          },
+          headers: headers,
           body: JSON.stringify({
             code: props.code
           })

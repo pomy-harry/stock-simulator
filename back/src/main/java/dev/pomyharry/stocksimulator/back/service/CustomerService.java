@@ -9,7 +9,7 @@ public interface CustomerService {
 
     CustomerDTO login(CustomerDTO customer, PasswordEncoder passwordEncoder);
 
-    Customer create(Customer customer);
+    CustomerDTO create(CustomerDTO customer, PasswordEncoder passwordEncoder);
 
     Customer findById(String id);
 

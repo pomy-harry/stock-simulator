@@ -19,13 +19,13 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class TokenProvider {
     final String key = "jsonwebtoken";
 
-    public String createToken(Customer customer) {
+    public String createToken(String customerId) {
         Map<String, Object> headers = new HashMap<>();
         headers.put("typ", "JWT");
         headers.put("Alg", "HS256");
 
         Map<String, Object> payloads = new HashMap<>();
-        payloads.put("data", "JWT Test");
+        //payloads.put("data", "JWT Test");
 
         // 24H
         Long expiredTime = 1000 * 60L * 60L * 24L;
@@ -36,7 +36,7 @@ public class TokenProvider {
         String jwt = Jwts.builder()
                 .setHeader(headers)
                 .setClaims(payloads)
-                .setSubject(customer.getId())
+                .setSubject(customerId)
                 .setIssuer("pomyharry")
                 .setIssuedAt(new Date())
                 .setExpiration(ext)
