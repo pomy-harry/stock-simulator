@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,17 +17,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Kakao {
+public class OAuth {
     
     @Id
-    @GeneratedValue(generator = "kakao-uuid")
-    @GenericGenerator(name = "kakao-uuid", strategy = "uuid")
-    @Column(name = "kakao_id")
+    @Column(name = "OAUTH_ID")
     private String id;
 
-    @Column(name = "kakao_name")
-    private String name;
+    @Column(name = "PLATFORM_TYPE")
+    private String type;
 
-    @Column(name = "kakao_email")
-    private String email;
+    @ManyToOne
+    @JoinColumn(name = "CUSTOMER_ID")
+    private Customer customer;
+
 }

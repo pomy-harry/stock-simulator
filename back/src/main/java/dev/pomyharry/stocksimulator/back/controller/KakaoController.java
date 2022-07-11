@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
-import dev.pomyharry.stocksimulator.back.model.dto.KakaoDTO;
-import dev.pomyharry.stocksimulator.back.service.KakaoService;
+import dev.pomyharry.stocksimulator.back.model.dto.OAuthDTO;
+import dev.pomyharry.stocksimulator.back.service.OAuthService;
 
 @Slf4j
 @CrossOrigin(origins = "*")
@@ -21,7 +21,7 @@ import dev.pomyharry.stocksimulator.back.service.KakaoService;
 public class KakaoController {
 
     @Autowired
-	private KakaoService kakaoService;
+	private OAuthService oauthService;
 
     @RequestMapping("/kakaologin")
     @PostMapping
@@ -41,12 +41,12 @@ public class KakaoController {
         log.debug("==== /afterlogin ====");
 
         try {
-            String access_Token = kakaoService.getAccessTokenForLogin(code);
+            String access_Token = oauthService.getAccessTokenForLogin(code);
             System.out.println("여기토큰: "+access_Token);
-            KakaoDTO userInfo = kakaoService.kakaoLogin(access_Token);
+            OAuthDTO userInfo = oauthService.kakaoLogin(access_Token);
             System.out.println("여기 userInfo: "+userInfo);
 
-            String token = kakaoService.getJWT(userInfo);
+            String token = oauthService.getJWT(userInfo);
 
             log.debug("token = " + token);
 
@@ -79,13 +79,13 @@ public class KakaoController {
         log.debug("==== /afterjoin ====");
 
         try {
-            String access_Token = kakaoService.getAccessTokenForJoin(code);
+            String access_Token = oauthService.getAccessTokenForJoin(code);
             System.out.println("여기 access_Token: " + access_Token);
-            KakaoDTO userInfo = kakaoService.getUserInfo(access_Token);
+            OAuthDTO userInfo = oauthService.getUserInfo(access_Token);
             System.out.println("여기 userInfo : " + userInfo);
-            KakaoDTO user = kakaoService.kakaoJoin(access_Token);
+            OAuthDTO user = oauthService.kakaoJoin(access_Token);
 
-            String token = kakaoService.getJWT(user);
+            String token = oauthService.getJWT(user);
 
             log.debug("token = " + token);
 
