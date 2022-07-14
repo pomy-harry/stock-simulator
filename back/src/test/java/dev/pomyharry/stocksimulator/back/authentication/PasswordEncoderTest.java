@@ -1,4 +1,4 @@
-package dev.pomyharry.stocksimulator.back;
+package dev.pomyharry.stocksimulator.back.authentication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
