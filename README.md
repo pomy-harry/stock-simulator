@@ -47,8 +47,7 @@
 <br>
 
 ### 요구사항 명세서
-![image](https://user-images.githubusercontent.com/93183070/161183528-317c7d7f-34f8-4cb0-a4d7-14b7b420c381.png)
-
+![image](https://user-images.githubusercontent.com/78744630/179929234-ddc4fd84-044c-43c0-8604-49ee020c8c25.jpg)
 <br>
 
 ### 화면구성도
