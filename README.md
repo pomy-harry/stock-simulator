@@ -123,8 +123,8 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 
 ### 1. 회원가입
 
-기본▶ 메인 페이지에서 로그인 버튼 클릭 시 회원가입 모달 창이 생성 되며 이름, 이메일, 비밀번호를 기입하면 회원가입할 수 있다.
-소셜▶ 회원가입 모달 창에서 카카오로 시작하기 버튼 클릭 시 소셜로그인 사이트로 이동, 소셜이메일, 비밀번호를 기입하면 회원가입할 수 있다
+기본▶ 메인 페이지에서 로그인 버튼 클릭 시 회원가입 모달 창이 생성 되며 이름, 이메일, 비밀번호를 기입하면 회원가입할 수 있다.<br>
+소셜▶ 회원가입 모달 창에서 카카오로 시작하기 버튼 클릭 시 소셜로그인 사이트로 이동, 소셜이메일, 비밀번호를 기입하면 회원가입할 수 있다.<br>
 
 ![image](https://user-images.githubusercontent.com/93183070/161186704-e902f3b6-a11c-4ce5-9147-5cc5c591c90a.png)
 
@@ -134,15 +134,15 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 
 ### 2. 로그인
 
-기본▶ 가입 시 입력한 이메일과 비밀번호를 통해 로그인이 가능하다.
-소셜▶ 소셜로그 시 입력한 이메일과 비밀번호를 통해 로그인이 가능하다.
+기본▶ 가입 시 입력한 이메일과 비밀번호를 통해 로그인이 가능하다.<br>
+소셜▶ 소셜로그 시 입력한 이메일과 비밀번호를 통해 로그인이 가능하다.<br>
 
 ![image](https://user-images.githubusercontent.com/78744630/179953266-b9365659-0503-437c-8d3f-89dc0a9cfe53.png)
 
 로그인 정보가 일치하지 않을 경우 로그인에 실패했다는 알림창이 생성된다.
-<br>기본▶
+<br>기본 알림창▶
 ![image](https://user-images.githubusercontent.com/78744630/179954514-c2c3fabb-15ca-4b16-8e9f-84f0f134c46b.png)
-<br>소셜▶
+<br>소셜 ▶
 ![image](https://user-images.githubusercontent.com/78744630/179954162-ddd1df3e-b59d-4ebd-a1ea-8b69b3874fbd.png)
 
 <br>
@@ -260,10 +260,7 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
     - const watchStock = watchStocks.map((stock) => { ~~ });
     - -> - const watchStock = watchStocks.map((stock) => ( ~~ ));
 
-## 개선할 점
-- 매도 기능 추가
-- 로그인 유효성 검사 추가
-- 코드 리팩토링
-- 세션을 활용하여 안전하게 유저 정보를 유지하고 전달하는 방법 찾아보기 
-- 알고리즘 투자
+## 개선할 점 
+- 자동 매매기능 추가
 - 크롤링 이외에 주식 정보를 가져올 수 있는 방법 고민 
+- 분단위 
