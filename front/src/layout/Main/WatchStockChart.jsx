@@ -4,8 +4,7 @@ import StockShowChartOne from '../../features/Stock/StockShowChartOne';
 
 
 const WatchStockChart = (props) => {
-
-    const watchStockChartList = props.watchStockList.map((stock) => (
+    const watchStockChartList = props.watchStockList && props.watchStockList.map((stock) => (
         <StockShowChartOne 
             key={stock.id}
             code={stock.code}
@@ -14,6 +13,7 @@ const WatchStockChart = (props) => {
             change={stock.change}
             changeRate={stock.changeRate}
             chartUrl={stock.chartUrl}
+            stockData={props.stockData}
         />
     ));
 
