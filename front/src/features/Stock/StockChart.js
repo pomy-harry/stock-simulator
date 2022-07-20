@@ -2,14 +2,13 @@ import React, { Component, useEffect, useState } from 'react';
 import CanvasJSReact from '../../assets/canvasjs.stock.react';
 import { isEmpty } from 'lodash';
 var CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
-const BASE_URL = 'http://localhost:8090/stock-data'
 
 const StockChart = (props) => {
 	const [a, setA] = useState({isLoaded: false, dataPoints1: [], dataPoints2: [], dataPoints3: []});
 	const [options, setOptions] = useState({});
 	const [containerProps, setContainerProps] = useState({});
 	useEffect(() => {
-		if(!isEmpty(props.stockData)) {
+		if(!isEmpty(props.stockData) && props.stockData.length > 1) {
 			const a = props.stockData;
 			let dps1 = [], dps2 = [], dps3 = [];
 			for (var i = 0; i< a.length; i++) {

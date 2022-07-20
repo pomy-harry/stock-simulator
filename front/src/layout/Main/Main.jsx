@@ -26,10 +26,10 @@ const Main = () => {
                 if(res.ok){
                 res.json().then((res2) => {
                     setWatchStockList(res2.s);
-                    setStockData(res2.a.slice(0,300));
+                    setStockData(res2.a);
                 })
                 }else{
-                res.json().then((res2) => console.log(res2));
+                res.json().then((res2) => console.log(res2.s));
                 }
             })
             }

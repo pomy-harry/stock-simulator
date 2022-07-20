@@ -1,7 +1,6 @@
 import "../../static/fonts/font.css"
 import StockChart from "./StockChart";
 import classes from './StockShowChartOne.module.css'
-
 const BASE_URL = 'http://localhost:8090/stocks/watch'
 
 const StockShowChartOne = (props) => {

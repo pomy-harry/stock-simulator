@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './KakaoJoinButton.module.css'
 import { Button } from '@mui/material';
-import kakao_img from '../../static/images/kakao_login_small.png'
+import kakao_img from '../../static/images/kakao_login_medium_narrow.png'
 
 const CLIENT_ID  = "ef23cfa2f66fcc25924f54647f3f5460";
 const REDIRECT_URI =  "http://localhost:8090/kakaojoin";
