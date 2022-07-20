@@ -231,8 +231,6 @@ public class KakaoServiceImpl implements OAuthService {
 
 	@Override
     public OAuthDTO kakaoLogin(String access_Token) {
-		log.debug("==== LOGIN ====");
-
 		OAuthDTO oauth = getUserInfo(access_Token);
 		// 1. id, email을가지고 디비에 조회를한다.
 		Optional<OAuth> succLogin = kakaoRepository.findById(oauth.getId());
@@ -256,7 +254,6 @@ public class KakaoServiceImpl implements OAuthService {
 
 	@Override
     public OAuthDTO kakaoJoin(String access_Token) {
-		log.debug("==== JOIN ====");
 		OAuthDTO oauth = getUserInfo(access_Token);
 
 		// 1. id을가지고 디비에 조회를한다.
@@ -278,7 +275,6 @@ public class KakaoServiceImpl implements OAuthService {
 			customer.setEmail(oauth.getEmail());
 
 			customerRepository.save(customer); 
-			System.out.println("들어갔니 customer?"+ customer);
 
 			// kakao에도 가져온 id 넣기
 			OAuth kakao = new OAuth();
@@ -287,7 +283,6 @@ public class KakaoServiceImpl implements OAuthService {
 			kakao.setCustomer(customer);
 
 			kakaoRepository.save(kakao);
-			System.out.println("들어갔니kakao?"+ kakao);
 
 			return OAuthDTO.builder()
 					.customerId(kakao.getCustomer().getId())

@@ -26,7 +26,6 @@ public class KakaoController {
     @RequestMapping("/kakaologin")
     @PostMapping
     public void kakaoLogin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
-        log.debug("==== /kakaologin ====");
 
         try {
             response.sendRedirect("http://localhost:3000/KakaoLogin/" + code);
@@ -38,13 +37,10 @@ public class KakaoController {
     @RequestMapping("/afterlogin")
     @PostMapping
     public ResponseEntity<?> afterlogin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
-        log.debug("==== /afterlogin ====");
 
         try {
             String access_Token = oauthService.getAccessTokenForLogin(code);
-            System.out.println("여기토큰: "+access_Token);
             OAuthDTO userInfo = oauthService.kakaoLogin(access_Token);
-            System.out.println("여기 userInfo: "+userInfo);
 
             String token = oauthService.getJWT(userInfo);
 
@@ -64,7 +60,6 @@ public class KakaoController {
     @RequestMapping("/kakaojoin")
     @PostMapping
     public void KakaoJoin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
-        log.debug("==== /kakaojoin ====");
 
         try {
             response.sendRedirect("http://localhost:3000/KakaoJoin/" + code);
@@ -76,13 +71,10 @@ public class KakaoController {
     @RequestMapping("/afterjoin")
     @PostMapping
     public ResponseEntity<?> afterjoin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
-        log.debug("==== /afterjoin ====");
 
         try {
             String access_Token = oauthService.getAccessTokenForJoin(code);
-            System.out.println("여기 access_Token: " + access_Token);
             OAuthDTO userInfo = oauthService.getUserInfo(access_Token);
-            System.out.println("여기 userInfo : " + userInfo);
             OAuthDTO user = oauthService.kakaoJoin(access_Token);
 
             String token = oauthService.getJWT(user);
