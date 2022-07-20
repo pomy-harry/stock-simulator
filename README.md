@@ -32,7 +32,7 @@
   - 김민기 : 회원가입 및 로그인 / 주식 데이터 크롤링 / 관심종목 차트 조회 / 금융 주요뉴스 확인
   - 윤소희 : 회원가입 및 로그인 / 관심종목 검색, 저장, 삭제 / 고객정보 확인, 수정, 삭제 / 모의투자 전체, 종목별 수익률 조회 / 백테스팅
   - 장우재 : 주식 정보 DB 구성 / 가상계좌 생성, 수정 / 초기  디자인 / 모의투자 매수, 매도 기능 구현 / 
-  - 홍도희 : 카카오 회원가입 및 로그인 / 주식 데이터 크롤링 / 관심종목 차트 조회
+  - 홍도희 : 소셜 회원가입 및 로그인 / 주식 데이터 크롤링 / 관심종목 차트 조회
 <br>
 
 ## 🛠 기술 스택
@@ -67,12 +67,18 @@
 |MyStock|id : 보유 주식 현황 아이디 <br> buy_price : 매수 단가 <br> amount : 보유 주식 수량| 매수한 주식의 정보를 저장하는 테이블|
 |Stock|code : 종목 코드 <br> name : 종목 이름|종목 코드와 종목 이름을 저장하는 테이블 |
 |WatchStock|id : 관심종목 아이디 <br> index : 관심종목 순서|등록된 관심종목 정보를 저장하는 테이블|
+|OAuth|id: 소셜 회원번호 <br> type: 소셜 타입 | 소셜 회원 정보를 저장하는 테이블|
+|StockData|id : 거래날짜와 코드번호를 합친 아이디값 <br> trade_date : 거래날짜 <br> stock_code : 종목코드 <br> high_price : 고가 <br> low_price : 저가 <br> start_price : 시가 <br> last_price : 종가 | 일별 OHLC(시가,고가,저가,종가) 정보를 저장하는 테이블
 <br>
 
 ## 도메인 용어 정리
 |용어|용어 설명|
 |---|---|
 |모의투자|가상 자산을 생성하여 투자를 해볼 수 있는 기능 |
+|시가|특정 타임프레임 내에 기록된 자산의 최초 거래 가격|
+|고가|특정 타임프레임 내에 기록된 자산의 가장 높은 거래 가격|
+|저가|특정 타임프레임 내에 기록된 자산의 가장 낮은 거래 가격|
+|종가|특정 타임프레임 내에 기록된 자산의 마지막 거래 가격|
 |매수|주식을 구매한다|
 |매도|주식을 판매한다|
 |예수금|주식을 거래할 수 있는 자금       (투자 원금 - 매수금액)|
@@ -112,27 +118,33 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 
 ## 화면 구성 및 기능 소개
 
-![image](https://user-images.githubusercontent.com/93183070/161186549-61668371-56f2-41ae-8adb-642803558c42.png)
+![image](https://user-images.githubusercontent.com/78744630/179944586-c78d8206-2796-4e15-9a44-14995ddfe6e7.png)
 
 
 ### 1. 회원가입
 
-메인 페이지에서 로그인 버튼 클릭 시 회원가입 모달 창이 생성 되며 이름, 이메일, 비밀번호를 기입하면 회원가입할 수 있다.
+기본▶ 메인 페이지에서 로그인 버튼 클릭 시 회원가입 모달 창이 생성 되며 이름, 이메일, 비밀번호를 기입하면 회원가입할 수 있다.
+소셜▶ 회원가입 모달 창에서 카카오로 시작하기 버튼 클릭 시 소셜로그인 사이트로 이동, 소셜이메일, 비밀번호를 기입하면 회원가입할 수 있다
 
 ![image](https://user-images.githubusercontent.com/93183070/161186704-e902f3b6-a11c-4ce5-9147-5cc5c591c90a.png)
 
-![image](https://user-images.githubusercontent.com/93183070/161186684-7e8ec592-9411-4478-b8a2-65bceccd3efb.png)
+![image](https://user-images.githubusercontent.com/78744630/179946127-bf3cd295-917b-4d08-a636-986c0c3575b6.png)
+
 <br>
 
 ### 2. 로그인
 
-가입 시 입력한 이메일과 비밀번호를 통해 로그인이 가능하다.
+기본▶ 가입 시 입력한 이메일과 비밀번호를 통해 로그인이 가능하다.
+소셜▶ 소셜로그 시 입력한 이메일과 비밀번호를 통해 로그인이 가능하다.
 
-![image](https://user-images.githubusercontent.com/93183070/161186609-4f30de0f-67b4-462d-9953-fb96564a5703.png)
+![image](https://user-images.githubusercontent.com/78744630/179953266-b9365659-0503-437c-8d3f-89dc0a9cfe53.png)
 
 로그인 정보가 일치하지 않을 경우 로그인에 실패했다는 알림창이 생성된다.
+<br>기본▶
+![image](https://user-images.githubusercontent.com/78744630/179954514-c2c3fabb-15ca-4b16-8e9f-84f0f134c46b.png)
+<br>소셜▶
+![image](https://user-images.githubusercontent.com/78744630/179954162-ddd1df3e-b59d-4ebd-a1ea-8b69b3874fbd.png)
 
-![image](https://user-images.githubusercontent.com/93183070/161186750-d557480d-e380-43db-ae76-2f634b105377.png)
 <br>
 
 ### 3. 관심종목
@@ -160,7 +172,7 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 
 관심종목으로 등록하면 네이버 증권에서 해당 종목의 차트, 현재가격, 변동률을 크롤링하여 메인페이지에서 출력
 
-![image](https://user-images.githubusercontent.com/93183070/161187016-4e0b93b4-45be-4c58-861a-2fbf280c2838.png)
+![image](https://user-images.githubusercontent.com/78744630/179955831-a0d4fe59-2a09-46a5-99b6-b2e849e0ef0e.png)
 
 **3.3 관심종목 삭제**
 
@@ -222,7 +234,7 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 
 전체 수익률은 메인 페이지에서도 조회할 수 있다.
 
-![image](https://user-images.githubusercontent.com/93183070/161187438-1053a306-2ca1-472e-bf79-7ab6cb155fd9.png)
+![image](https://user-images.githubusercontent.com/78744630/179944586-c78d8206-2796-4e15-9a44-14995ddfe6e7.png)
 <br>
 
 ### 6. 시장 정보 조회
