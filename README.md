@@ -47,7 +47,7 @@
 <br>
 
 ### 요구사항 명세서
-![image](https://user-images.githubusercontent.com/78744630/179929234-ddc4fd84-044c-43c0-8604-49ee020c8c25.jpg)
+![image](https://user-images.githubusercontent.com/78744630/180142231-7ea03527-ba23-475e-9865-15d076134176.jpg)
 <br>
 
 ### 화면구성도
@@ -56,8 +56,8 @@
 ![image](https://user-images.githubusercontent.com/93183070/161184006-06d17431-5db1-436b-9996-e51af57303d5.png)
 
 ### ERD
-![image](https://user-images.githubusercontent.com/93183070/161184291-50873fc8-cd4e-4a36-895c-4c091bef11d1.png)
-![image](https://user-images.githubusercontent.com/93183070/161215928-26bd227d-ff79-4ee9-94b2-ead72e0843f9.png)
+
+![image](https://user-images.githubusercontent.com/78744630/180142650-19b8348b-bd08-411b-8fb9-661b7f921647.jpg)
 
 
 |Table|Row|설명|
@@ -142,7 +142,7 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 로그인 정보가 일치하지 않을 경우 로그인에 실패했다는 알림창이 생성된다.
 <br>기본 알림창▶
 ![image](https://user-images.githubusercontent.com/78744630/179954514-c2c3fabb-15ca-4b16-8e9f-84f0f134c46b.png)
-<br>소셜 ▶
+<br>소셜 알림창▶
 ![image](https://user-images.githubusercontent.com/78744630/179954162-ddd1df3e-b59d-4ebd-a1ea-8b69b3874fbd.png)
 
 <br>
