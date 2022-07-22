@@ -41,7 +41,7 @@ public class BackTestServiceImpl implements BackTestService {
 
     @Override
     public List<StockDataView> getStocksByCodeAndPeriodOfView(String code, int startYear, int endYear){
-        List<StockDataView> stocks = stockPriceDataViewRepository.findAllByStockCodeAndTradeDateBetween("005930", LocalDate.of(startYear, 1, 1), LocalDate.of(endYear, 12, 31));
+        List<StockDataView> stocks = stockPriceDataViewRepository.findAllByStockCodeAndTradeDateBetween(code, LocalDate.of(startYear, 1, 1), LocalDate.of(endYear, 12, 31));
 
         log.debug("service stocks size : " + stocks.size());
         log.debug("service first stock : " + stocks.get(0));
@@ -107,17 +107,22 @@ public class BackTestServiceImpl implements BackTestService {
     }
 
     @Override
-    public Balance getBalances(PortfolioDTO portfolio){
-        long balance = portfolio.getDeposit();
-
-        int len = portfolio.getCodes().size();
-        List<Integer> prices = portfolio.getStockPrices();
+    public List<Balance> getBalances(PortfolioDTO portfolio, List<List<StockDataView>> stocks){
+        List<Balance> balances = new ArrayList<>();
         List<Integer> amount = portfolio.getStockAmount();
-        for(int i=0; i<len; i++){
-            balance += prices.get(i) * amount.get(i);
+
+        int dateSize = stocks.get(0).size();
+        int stockSize = stocks.size();
+
+        for(int i=0; i<dateSize; i++){
+            long balance = portfolio.getDeposit();
+            for(int j=0; j<stockSize; j++){
+                balance += stocks.get(j).get(i).getLastPrice() * amount.get(j);
+            }
+            balances.add(Balance.builder().date(stocks.get(0).get(i).getTradeDate()).balance(balance).build());
         }
 
-        return Balance.builder().date(LocalDate.of(portfolio.getStartYear(), portfolio.getMonth(), 1)).balance(balance).build();
+        return balances;
     }
 
     @Override

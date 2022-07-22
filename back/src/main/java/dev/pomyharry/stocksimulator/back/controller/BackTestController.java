@@ -26,15 +26,18 @@ public class BackTestController {
 
     @PostMapping("/backtest")
     public ResponseEntity<?> getBackTestResult(@AuthenticationPrincipal String customerId, @RequestBody PortfolioDTO portfolio){
+        log.debug("controller code : " + portfolio.getCodes().get(0));
+
         List<List<StockDataView>> stockList = new ArrayList<>();
         int startYear = portfolio.getStartYear();
         int endYear = portfolio.getEndYear();
-        int len = stockList.get(0).size();
-        int listLen = stockList.size();
 
         for(String s : portfolio.getCodes()){
             stockList.add(service.getStocksByCodeAndPeriodOfView(s, startYear, endYear));
         }
+
+        int len = stockList.get(0).size();
+        int listLen = stockList.size();
 
         long startMoney;
         long endMoney = 0l;
@@ -48,15 +51,7 @@ public class BackTestController {
         List<Profit> profits = new ArrayList<>();
 
         startMoney = portfolio.getDeposit();
-
-        long boughtPrice = 0l;
-
-        for(int i=startYear; i <= endYear; i++){
-            for(int j=1; j<=12; j++){
-                if(i == portfolio.getStartYear() && j == 1) continue;
-                balances.add(service.getBalances(PortfolioDTO.builder().build()));
-            }
-        }
+        portfolio = service.getStockAmount(portfolio, stockList);
 
         long bought = 0l;
 
@@ -70,8 +65,13 @@ public class BackTestController {
                 int month = stockList.get(j).get(i).getTradeDate().getMonthValue();
                 long now = stockList.get(j).get(i).getLastPrice() * portfolio.getStockAmount().get(j);
                 profits.add(service.getProfitRate(year, month, now, bought));
+                bought = now;
             }
         }
+        
+        balances = service.getBalances(portfolio, stockList);
+
+        endMoney = balances.get(balances.size() - 1).getBalance();
 
         stdev = service.getStdev(profits);
         bestYear = service.getBestYear(profits);

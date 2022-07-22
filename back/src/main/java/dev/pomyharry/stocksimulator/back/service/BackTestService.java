@@ -22,7 +22,7 @@ public interface BackTestService {
 
     public Fall getFalls(List<StockData> stocks);
 
-    public Balance getBalances(PortfolioDTO portfolio);
+    public List<Balance> getBalances(PortfolioDTO portfolio, List<List<StockDataView>> stocks);
 
     public double getStdev(List<Profit> profits);
 
@@ -32,4 +32,5 @@ public interface BackTestService {
 
     public double getMDD(List<Fall> falls);
 
+    PortfolioDTO getStockAmount(PortfolioDTO portfolio, List<List<StockDataView>> stockList);
 }
