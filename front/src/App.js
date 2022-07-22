@@ -4,6 +4,7 @@ import Main from "./layout/Main/Main"
 import MyPage from "./layout/MyPage/MyPage"
 import KakaoLogin from "./features/KakaoLogin/KakaoLogin"
 import KakaoJoin from "./features/KakaoLogin/KakaoJoin"
+import DateTimeAxisStockChart from "./features/Stock/StockChart";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => {

@@ -9,13 +9,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class KakaoDTO {
+public class OAuthDTO {
     
     private String id;
 
 	private String name;
 
 	private String email;
+
+	private String type;
 
 	private String customerId;
 }

@@ -14,7 +14,7 @@ const CustomerLoginModal = (props) => {
                 <img src={logo_img} alt="logo" />
                 <h2>주린이집</h2>
             </div>
-
+          
             <CustomerLoginSingnUpTab onClose={props.onClose}/>
 
         </div>        

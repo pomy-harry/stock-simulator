@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Optional;
 
 import dev.pomyharry.stocksimulator.back.security.TokenProvider;
 import lombok.extern.slf4j.Slf4j;
@@ -21,18 +22,18 @@ import com.google.gson.JsonParser;
 
 import dev.pomyharry.stocksimulator.back.exception.DuplicationException;
 import dev.pomyharry.stocksimulator.back.exception.IdNotFoundException;
-import dev.pomyharry.stocksimulator.back.model.dto.KakaoDTO;
+import dev.pomyharry.stocksimulator.back.model.dto.OAuthDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.Customer;
-import dev.pomyharry.stocksimulator.back.model.entity.Kakao;
+import dev.pomyharry.stocksimulator.back.model.entity.OAuth;
 import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
-import dev.pomyharry.stocksimulator.back.repository.KakaoRepository;
+import dev.pomyharry.stocksimulator.back.repository.OAuthRepository;
 
 @Slf4j
 @Service
-public class KakaoServiceImpl implements KakaoService {
+public class KakaoServiceImpl implements OAuthService {
 
 	@Autowired
-	private KakaoRepository kakaoRepository;
+	private OAuthRepository kakaoRepository;
 
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -171,7 +172,7 @@ public class KakaoServiceImpl implements KakaoService {
 
 
 	@Override
-	public KakaoDTO getUserInfo(String access_Token){
+	public OAuthDTO getUserInfo(String access_Token){
 		
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		 HashMap<String, Object> userInfo = new HashMap<String, Object>();
@@ -214,98 +215,86 @@ public class KakaoServiceImpl implements KakaoService {
 			 userInfo.put("id", user_id);
 			 userInfo.put("nickname", nickname);
 			 userInfo.put("email", email);
-		
-		
+
 			 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			//return kakaoRepository.findByEmail(userInfo);
-			//return new KakaoDTO(userInfo.get("id").toString(), userInfo.get("nickname").toString(), userInfo.get("email").toString());
-			return KakaoDTO.builder()
+			return OAuthDTO.builder()
 					.id(userInfo.get("id").toString())
 					.name(userInfo.get("nickname").toString())
 					.email(userInfo.get("email").toString())
+					.type("kakao")
+					.customerId(userInfo.get("id").toString())
 					.build();
     }
 
 	@Override
-    public KakaoDTO kakaoLogin(String access_Token) {
-		log.debug("==== LOGIN ====");
+    public OAuthDTO kakaoLogin(String access_Token) {
+		OAuthDTO oauth = getUserInfo(access_Token);
+		// 1. id, email을가지고 디비에 조회를한다.
+		Optional<OAuth> succLogin = kakaoRepository.findById(oauth.getId());
+		Customer customer = customerRepository.findByEmail(oauth.getEmail());
 
-		String email = getUserInfo(access_Token).getEmail();
-		// 1. email을가지고 디비에 조회를한다.
-		Kakao succLogin = kakaoRepository.findByEmail(email);
-		Customer customer = customerRepository.findByEmail(email);
-
-		System.out.println(succLogin + "////");
 		// 2-1 email이없다 ? IdNotFoundException
-		if(succLogin == null){
+		if(!succLogin.isPresent()){
 			throw new IdNotFoundException("Id cannot be found");
 		}
-		
-		//return new KakaoDTO(succLogin.getId(),succLogin.getName(),succLogin.getEmail());
-		return KakaoDTO.builder()
-				.id(succLogin.getId())
-				.name(succLogin.getName())
-				.email(succLogin.getEmail())
-				.customerId(customer.getId())
-				.build();
+		else{
+			return OAuthDTO.builder()
+					.id(oauth.getId())
+					.name(customer.getName())
+					.email(customer.getEmail())
+					.customerId(customer.getId())
+					.build();
+		}
+
     }
 
 
 	@Override
-    public KakaoDTO kakaoJoin(String access_Token) {
-		log.debug("==== JOIN ====");
+    public OAuthDTO kakaoJoin(String access_Token) {
+		OAuthDTO oauth = getUserInfo(access_Token);
 
-		// 1. email을가지고 디비에 조회를한다.
-		Kakao K_Email = kakaoRepository.findByEmail(getUserInfo(access_Token).getEmail());
-		Customer C_Email = customerRepository.findByEmail(getUserInfo(access_Token).getEmail());
-		//System.out.println(K_Email + "////");
-		//System.out.println(C_Email + "////");
-		log.debug("이메일 확인 : " + K_Email);
+		// 1. id을가지고 디비에 조회를한다.
+		Optional<OAuth> K_Id = kakaoRepository.findById(oauth.getId());
 
-		// 2-1 email이없다 ? 디비에 값을 인서트 시킴
-		// 2-1 email이있다 ? 로그인 하라는 알림창
-		if(K_Email != null || C_Email != null){
-			log.debug(K_Email + ", " + C_Email);
+		System.out.println(K_Id + "////");
+
+
+		// 2-1 id가 없다 ? 디비에 값을 인서트 시킴
+		// 2-1 id가 있다 ? 로그인 하라는 알림창
+		if(K_Id.isPresent()){
 			throw new DuplicationException("Id is duplicated.");
 		}
-		else if (K_Email == null || C_Email == null) {
+		else {
 
-			// customer에 id 저장후
-			// getUserInfo 요청이 너무 잦은듯. 변수에 저장해놓고 사용하는 편이 좋을 것 같음.
+			// customer에 저장후
 			Customer customer = new Customer();
-			customer.setId(getUserInfo(access_Token).getId());
-			customer.setName(getUserInfo(access_Token).getName());
-			customer.setEmail(getUserInfo(access_Token).getEmail());
+			customer.setName(oauth.getName());
+			customer.setEmail(oauth.getEmail());
 
-			customerRepository.save(customer);
-			System.out.println("들어갔니?"+ customer);
+			customerRepository.save(customer); 
 
-			// email로 조회
-			Customer c = customerRepository.findByEmail(customer.getEmail());
-			//System.out.println("?????" + c);
 			// kakao에도 가져온 id 넣기
-			Kakao kakao = new Kakao();
-			kakao.setId(c.getId());
-			kakao.setName(c.getName());
-			kakao.setEmail(c.getEmail());
+			OAuth kakao = new OAuth();
+			kakao.setId(oauth.getId());
+			kakao.setType("kakao");
+			kakao.setCustomer(customer);
 
-			System.out.println("들어갔니?"+ kakaoRepository.save(kakao));
+			kakaoRepository.save(kakao);
 
-			return KakaoDTO.builder()
-					.customerId(c.getId())
+			return OAuthDTO.builder()
+					.customerId(kakao.getCustomer().getId())
 					.build();
 		}
 
-		return null;
+		//return null;
     }
 
-	public String getJWT(KakaoDTO kakao){
+	public String getJWT(OAuthDTO kakao){
 		final String token = tokenProvider.createToken(kakao.getCustomerId());
 		return token;
 	}
 
 }
-

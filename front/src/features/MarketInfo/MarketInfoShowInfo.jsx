@@ -15,6 +15,7 @@ const MarketInfoShowInfo = () => {
             if(res.ok){
                 res.json().then((res2) => {
                 setMarketInfo(res2);
+                console.log(res2);
                 })
             }
             });       
