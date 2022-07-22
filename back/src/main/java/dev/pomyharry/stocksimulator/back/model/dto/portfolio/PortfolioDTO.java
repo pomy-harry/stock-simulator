@@ -14,12 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 public class PortfolioDTO {
 
-    private List<Stock> stocks;
+    private List<String> codes;
     private int startYear;
     private int endYear;
+    private int month;
     private RebalancingTerm term;
     private long deposit;
     private List<Double> percentage;
     private List<Integer> stockPrices;
+    private List<Integer> stockAmount;
 
 }
