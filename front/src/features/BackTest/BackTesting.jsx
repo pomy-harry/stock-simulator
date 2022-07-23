@@ -37,6 +37,7 @@ const BackTesting = (props) => {
   const [stocks, setStocks] = useState([]);
   const [selectStock, setSelectStock] = useState([]);
   const [percent, setPercent] = useState([]);
+  const [count, setCount] = useState([0]);
 
   // 시작년도 
   const years = [];
@@ -93,15 +94,26 @@ const BackTesting = (props) => {
   }
 
   const stockHandler = (e, newValue) => {
-    console.log(newValue.code);
-    setSelectStock([newValue.code]);
+    let stockList = [...selectStock];
+    stockList.push(newValue.code);
+    setSelectStock(stockList);
+    console.log(selectStock);
   }
 
-  const percentHandler = (e) => {
-    setPercent([e.target.value]);
+  const percentHandler = (e, i) => {
+    // let percentList = [...percent];
+    // percentList.push(e.target.value);
+    // setPercent(percentList);
+    // console.log(percent);
+    console.log(i);
+    let percentList = [...percent];
+    percentList[i] = e.target.value;
+    setPercent(percentList);
   }
 
   const eventHandler = () => {
+    console.log(selectStock);
+    console.log(percent);
     const fetchBacktest = async() => {
       await fetch(BASE_URL, {
         method: 'POST',
@@ -136,14 +148,6 @@ const BackTesting = (props) => {
               })
             }
 
-            // console.log(res2.balances);
-            // for(const key in res2.balances){
-            //   console.log('----');
-            //   console.log(key);
-            //   console.log(res2.balances[key]);
-            //   console.log(res2.balances[key].date);
-            // }
-
             props.onOpenBacktest(
               res2.startMoney,
               res2.endMoney,
@@ -165,6 +169,13 @@ const BackTesting = (props) => {
     })
   }
 
+  const addComponent = () => {
+    let countArr = [...count]
+    let cnt = countArr.slice(-1)[0]
+    cnt += 1
+    countArr.push(cnt)
+    setCount(countArr)
+  }
   // 플러스 버튼
 
   return (
@@ -207,26 +218,32 @@ const BackTesting = (props) => {
             />
         </FormControl>
 
-        {/* 주식 선택 */}
-        <Autocomplete        
-            disablePortal
-            id="combo-box-search"
-            options={stocks}
-            sx={{ width: 0.9}}
-            autoSelect={true}
-            onChange={stockHandler}
-            renderInput={(params) => <TextField {...params} placeholder="Search" variant='standard'
-            className='classes.input'/> }
-        />
-        <TextField 
-            id="outlined-basic" 
-            label="구매 비율 (%)" 
-            variant="outlined" 
-            value={percent}
-            onChange={percentHandler}
-            className='classes.input'
-        />
+        {count && count.map((item, i) => (
+          <div key = {i}>
+            {/* 주식 선택 */}
+            <Autocomplete        
+                disablePortal
+                id="combo-box-search"
+                options={stocks}
+                sx={{ width: 0.9}}
+                autoSelect={true}
+                onChange={stockHandler}
+                renderInput={(params) => <TextField {...params} placeholder="Search" variant='standard'
+                className='classes.input'/> }
+            />
+            <TextField 
+                id="outlined-basic" 
+                label="구매 비율 (%)" 
+                variant="outlined" 
+                value={percent[i]}
+                onChange={(e) => {percentHandler(e, i)}}
+                className='classes.input'
+            />
+          </div>
+        ))}
+
         {/* plus button */}
+        <Button onClick={addComponent}>+</Button>
         <Button onClick={eventHandler}>백테스팅 시작</Button>
     </div>
   )
