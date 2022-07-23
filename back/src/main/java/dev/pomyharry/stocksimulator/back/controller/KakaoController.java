@@ -12,41 +12,39 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
-import dev.pomyharry.stocksimulator.back.model.dto.KakaoDTO;
-import dev.pomyharry.stocksimulator.back.service.KakaoService;
+import dev.pomyharry.stocksimulator.back.model.dto.OAuthDTO;
+import dev.pomyharry.stocksimulator.back.service.OAuthService;
 
+@Slf4j
 @CrossOrigin(origins = "*")
 @RestController
 public class KakaoController {
 
     @Autowired
-	private KakaoService kakaoService;
-
-//    public KakaoController(KakaoService kakaoService) {
-//        this.kakaoService = kakaoService;
-//    }
+	private OAuthService oauthService;
 
     @RequestMapping("/kakaologin")
     @PostMapping
-    public String kakaoLogin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
+    public void kakaoLogin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
+
         try {
             response.sendRedirect("http://localhost:3000/KakaoLogin/" + code);
-            return "dd";
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            // 에러페이지
-            return "redirect:http://localhost:3000";
         }
     }
 
     @RequestMapping("/afterlogin")
     @PostMapping
     public ResponseEntity<?> afterlogin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
+
         try {
-            String access_Token = kakaoService.getAccessToken(code);
-            KakaoDTO userInfo = kakaoService.getUserInfo(access_Token);
-            //System.out.println("여기 userInfo : " + userInfo);
-            String token = kakaoService.getJWT(userInfo);
+            String access_Token = oauthService.getAccessTokenForLogin(code);
+            OAuthDTO userInfo = oauthService.kakaoLogin(access_Token);
+
+            String token = oauthService.getJWT(userInfo);
+
+            log.debug("token = " + token);
 
             CustomerDTO customer = CustomerDTO.builder()
                     .token(token)
@@ -55,7 +53,41 @@ public class KakaoController {
             return ResponseEntity.ok().body(customer);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            // 에러페이지
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @RequestMapping("/kakaojoin")
+    @PostMapping
+    public void KakaoJoin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
+
+        try {
+            response.sendRedirect("http://localhost:3000/KakaoJoin/" + code);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @RequestMapping("/afterjoin")
+    @PostMapping
+    public ResponseEntity<?> afterjoin(@RequestParam(value = "code", required = true) String code, HttpServletResponse response) throws Exception {
+
+        try {
+            String access_Token = oauthService.getAccessTokenForJoin(code);
+            OAuthDTO userInfo = oauthService.getUserInfo(access_Token);
+            OAuthDTO user = oauthService.kakaoJoin(access_Token);
+
+            String token = oauthService.getJWT(user);
+
+            log.debug("token = " + token);
+
+            CustomerDTO customer = CustomerDTO.builder()
+                    .token(token)
+                    .build();
+
+            return ResponseEntity.ok().body(customer);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

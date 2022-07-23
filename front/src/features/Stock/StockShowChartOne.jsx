@@ -1,13 +1,12 @@
 import "../../static/fonts/font.css"
+import StockChart from "./StockChart";
 import classes from './StockShowChartOne.module.css'
-
 const BASE_URL = 'http://localhost:8090/stocks/watch'
 
 const StockShowChartOne = (props) => {
   let headers = new Headers({
     'Content-Type' : 'application/json'
   });
-
   const accessToken = sessionStorage.getItem("USER");
   if(accessToken && accessToken !== null){
       headers.append("Authorization", "Bearer " + accessToken);
@@ -48,7 +47,7 @@ const StockShowChartOne = (props) => {
             </div>
 
             <div className={classes.stock_data__chart}>
-            <img src={props.chartUrl} alt="" />
+                <StockChart stockData={props.stockData}/>
             </div>
         </div>
     </div>

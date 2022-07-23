@@ -26,6 +26,7 @@ public class MarketInfoController {
     public ResponseEntity<?> getMarketInfo() {
         try {
             List<MarketInfoDTO> market = marketInfoService.getMarketInfo();
+            System.out.println(market);
             return ResponseEntity.ok().body(market);
         } catch (Exception e) {
             System.out.println(e.getMessage());

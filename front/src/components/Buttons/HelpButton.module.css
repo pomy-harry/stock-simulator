@@ -1,0 +1,19 @@
+* {
+    margin: 0px;
+  }
+  .button {
+    display: flex;
+    align-items: right;
+    justify-content: center;
+
+  }
+
+  .helpModal__button img {
+    width: 10%;
+    margin-right : 8px;
+  }
+
+  .helpModal__button h2 {
+    color: black;
+    font-size: 13px;
+  }
