@@ -61,14 +61,13 @@ public class BackTestController {
                     bought += stockList.get(j).get(i).getLastPrice() * portfolio.getStockAmount().get(j);
                     continue;
                 }
-                int year = stockList.get(j).get(i).getTradeDate().getYear();
-                int month = stockList.get(j).get(i).getTradeDate().getMonthValue();
+
                 long now = stockList.get(j).get(i).getLastPrice() * portfolio.getStockAmount().get(j);
-                profits.add(service.getProfitRate(year, month, now, bought));
+                profits.add(service.getProfitRate(stockList.get(j).get(i).getTradeDate(), now, bought));
                 bought = now;
             }
         }
-        
+
         balances = service.getBalances(portfolio, stockList);
 
         endMoney = balances.get(balances.size() - 1).getBalance();
@@ -76,6 +75,7 @@ public class BackTestController {
         stdev = service.getStdev(profits);
         bestYear = service.getBestYear(profits);
         worstYear = service.getWorstYear(profits);
+        cagr = service.getCAGR(startMoney, endMoney, endYear - startYear + 1);
 
         BackTestDTO bactest = BackTestDTO.builder()
                 .startMoney(startMoney)

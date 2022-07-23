@@ -8,6 +8,7 @@ import dev.pomyharry.stocksimulator.back.model.dto.portfolio.PortfolioDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.StockData;
 import dev.pomyharry.stocksimulator.back.model.entity.StockDataView;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BackTestService {
@@ -18,7 +19,7 @@ public interface BackTestService {
 
     public double getCAGR(long startPrice, long endPrice, int years);
 
-    public Profit getProfitRate(int year, int month, double nowPrice, double boughtPrice);
+    public Profit getProfitRate(LocalDate date, double nowPrice, double boughtPrice);
 
     public Fall getFalls(List<StockData> stocks);
 

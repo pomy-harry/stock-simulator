@@ -52,14 +52,16 @@ public class BackTestServiceImpl implements BackTestService {
         int len = stocks.size();
         List<Integer> amount = new ArrayList<>();
         long money = portfolio.getDeposit();
-        long deposit = 0l;
+        int change = 0;
         for(int i=0; i<len; i++){
-            int available = (int) (money * portfolio.getPercentage().get(i));
+            int available = (int) (money * portfolio.getPercentage().get(i) / 100);
             amount.add(available / stocks.get(i).get(0).getLastPrice());
-            deposit += available - ((int)(available / stocks.get(i).get(0).getLastPrice()));
+            change += available - (stocks.get(i).get(0).getLastPrice()) * amount.get(i);
         }
-
+        log.debug("stock amount : " + amount.toString());
+        log.debug("stock change : " + change);
         portfolio.setStockAmount(amount);
+        portfolio.setChange(change);
 
         return portfolio;
     }
@@ -67,19 +69,27 @@ public class BackTestServiceImpl implements BackTestService {
     @Override
     public double getCAGR(long startPrice, long endPrice, int years){
 
-        double cagr = Math.pow(((double)endPrice / (double)startPrice), (double)(1 / (double)years)) - 1.0;
+        double div = endPrice / (double)startPrice;
+        double term = 1 / (double)years;
 
-        log.debug("debugging : " + cagr);
+        double cagr = Math.pow(div,term)  - 1.0;
 
-        return Math.round(cagr * 100 * 10) /10.0;
+        log.debug("year : " + years);
+        log.debug("div : " + div);
+        log.debug("term : " + term);
+        log.debug("debugging cagr : " + cagr);
+        log.debug("cagr : " + Math.round(cagr * 100 * 100) / 100.0);
+
+        // Math.round(Math.sqrt(varianceRate) * 10) / 10.0
+        return Math.round(cagr * 100 * 100) / 100.0;
     }
 
     @Override
-    public Profit getProfitRate(int year, int month, double nowPrice, double boughtPrice){
+    public Profit getProfitRate(LocalDate date, double nowPrice, double boughtPrice){
 
         double rate = (double)(nowPrice - boughtPrice) / (double)boughtPrice * 100;
 
-        return Profit.builder().date(LocalDate.of(year, month, 1)).rate(rate).build();
+        return Profit.builder().date(date).rate(rate).build();
     }
 
     @Override
@@ -115,7 +125,7 @@ public class BackTestServiceImpl implements BackTestService {
         int stockSize = stocks.size();
 
         for(int i=0; i<dateSize; i++){
-            long balance = portfolio.getDeposit();
+            long balance = portfolio.getChange();
             for(int j=0; j<stockSize; j++){
                 balance += stocks.get(j).get(i).getLastPrice() * amount.get(j);
             }
@@ -148,7 +158,7 @@ public class BackTestServiceImpl implements BackTestService {
 
         log.debug("variance : " +varianceRate);
 
-        return Math.round(Math.sqrt(varianceRate) * 10) / 10.0;
+        return Math.round(Math.sqrt(varianceRate) * 100) / 100.0;
     }
 
     @Override

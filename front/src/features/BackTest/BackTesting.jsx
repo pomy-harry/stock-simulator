@@ -29,7 +29,7 @@ const NumberFormatCustom = forwardRef((props, ref) => {
   );
 });
 
-const BackTesting = () => {
+const BackTesting = (props) => {
   const date = new Date().getFullYear();
   const [startYear, setStartYear] = useState('');
   const [endYear, setEndYear] = useState('');
@@ -110,15 +110,53 @@ const BackTesting = () => {
           startYear: startYear,
           endYear: endYear,
           codes: selectStock,
-          deposit: money,
+          deposit: money * 10000,
           percentage: percent
         })
       })
       .then((res) => {
         if(res.ok){
           console.log("ok");
+          res.json().then((res2 =>{
+            // 정보 출력
+            const balances = [];
+            const profits = [];
+
+            for(const key in res2.balances){
+              balances.push({
+                date: res2.balances[key].date,
+                balance: res2.balances[key].balance
+              });
+            }
+
+            for(const key in res2.profits){
+              profits.push({
+                date: res2.profits[key].date,
+                profit: res2.profits[key].profit
+              })
+            }
+
+            // console.log(res2.balances);
+            // for(const key in res2.balances){
+            //   console.log('----');
+            //   console.log(key);
+            //   console.log(res2.balances[key]);
+            //   console.log(res2.balances[key].date);
+            // }
+
+            props.onOpenBacktest(
+              res2.startMoney,
+              res2.endMoney,
+              res2.cagr,
+              res2.stdev,
+              res2.bestYear,
+              res2.worstYear,
+              balances,
+              profits
+              );
+          }))
         }else{
-          console.log("tt");
+          console.log("Bad request");
         }
       })
     }

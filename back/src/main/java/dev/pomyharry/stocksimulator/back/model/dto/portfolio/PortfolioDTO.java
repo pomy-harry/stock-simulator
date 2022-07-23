@@ -23,5 +23,6 @@ public class PortfolioDTO {
     private List<Double> percentage;
     private List<Integer> stockPrices;
     private List<Integer> stockAmount;
+    private int change;
 
 }
