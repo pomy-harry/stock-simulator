@@ -13,3 +13,10 @@ public interface StockDataRepository extends JpaRepository<StockData, String> {
     List<StockData> findAllByStockCode(String stock);
 
 }
+
+//select trade_date, stock_data_id, max(trade_date)
+//from stock_data
+//group by trade_date;
+//select date_format(trade_date, '%Y-%m'), stock_code, stock_data_id, max(date_format(trade_date, '%d')), last_price
+//        -> from stock_data
+//        -> group by 1, 2;

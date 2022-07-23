@@ -4,21 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class StockData {
+public class StockDataView {
 
     @Id
     @Column(name = "STOCK_DATA_ID")
@@ -27,9 +22,10 @@ public class StockData {
     @Column(name = "TRADE_DATE")
     private LocalDate tradeDate;
 
-    @ManyToOne
+    //@ManyToOne
     @JoinColumn(name = "STOCK_CODE")
-    private Stock stock;
+    private String stockCode;
+    //private Stock stock;
 
     @Column(name = "HIGH_PRICE")
     private int highPrice;

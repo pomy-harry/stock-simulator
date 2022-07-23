@@ -7,6 +7,7 @@ import StockBuySellTab from './StockBuySellTab';
 import MarketInfoShowInfo from '../../features/MarketInfo/MarketInfoShowInfo';
 import TabPanel from './Commons/TabPanel';
 import BackTesting from '../../features/BackTest/BackTesting';
+import BackTestingResult from '../../features/BackTest/BackTestingResult';
 
 const MainTab = (props) => {
 
@@ -28,6 +29,35 @@ const MainTab = (props) => {
         setTabValue(newTabValue);
     };
 
+    const [startMoney, setStartMoeny] = useState(0);
+    const [endMoney, setEndMoney] = useState(0);
+    const [cagr, setCagr] = useState(0);
+    const [stdev, setStdev] = useState(0);
+    const [bestYear, setBestYear] = useState(0);
+    const [worstYear, setWorstYear] = useState(0);
+    const [balances, setBalances] = useState([]);
+    const [profits, setProfits] = useState([]);
+
+    const [backtest, setBacktest] = useState(true);
+    const openBacktest = () => {
+        console.log("openBacktest");
+        setBacktest(true);
+    }
+
+    const openBacktestResult = (startMoney, endMoney, cagr, stdev, bestYear, worstYear, balances, profits) => {
+        setStartMoeny(startMoney);
+        setEndMoney(endMoney);
+        setCagr(cagr);
+        setStdev(stdev);
+        setBestYear(bestYear);
+        setWorstYear(worstYear);
+        setBalances(balances);
+        setProfits(profits);
+
+        console.log("openBacktestResult");
+        setBacktest(false);
+    }
+
   return (
     <>
         <Tabs value={tabValue} onChange={handleInfoTabChange} className={classes.smartTab__tabs}>  
@@ -45,7 +75,20 @@ const MainTab = (props) => {
         </TabPanel>
 
         <TabPanel value={tabValue} index={2}>
-            <BackTesting/>
+            {
+                backtest === true
+                ? <BackTesting onOpenBacktest = {openBacktestResult}/>
+                : <BackTestingResult onOpenBacktestResult = {openBacktest}
+                startMoney = {startMoney} 
+                endMoney = {endMoney} 
+                cagr = {cagr} 
+                stdev = {stdev} 
+                bestYear = {bestYear} 
+                worstYear = {worstYear} 
+                balances = {balances} 
+                profits = {profits}
+                />
+            }
         </TabPanel>
     </>
   )
