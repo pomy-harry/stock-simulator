@@ -31,8 +31,8 @@ const StockBuySellTab = (props) => {
 
     <>
         <Tabs value={tabValueBS} onChange={handleInfoTabChangeBS} className={classes.bs__tabs}>  
-            <Tab label="매도" {...a11yProps(0)} className={classes.bs__tabs__tab}/>
-            <Tab label="매수" {...a11yProps(1)} className={classes.bs__tabs__tab}/>
+            <Tab label="매수" {...a11yProps(0)} className={classes.bs__tabs__tab}/>
+            <Tab label="매도" {...a11yProps(1)} className={classes.bs__tabs__tab}/>
         </Tabs>
 
         <TabPanel className={classes.bs__tabpanel} value={tabValueBS} index={0}>
