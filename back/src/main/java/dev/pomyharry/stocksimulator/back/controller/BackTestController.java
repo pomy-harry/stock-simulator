@@ -43,8 +43,8 @@ public class BackTestController {
         long endMoney = 0l;
         double cagr = 0d;
         double stdev = 0d;
-        int bestYear = 0;
-        int worstYear = 0;
+        double bestYear = 0;
+        double worstYear = 0;
         double mdd = 0l;
         List<Balance> balances = new ArrayList<>();
         List<Fall> falls = new ArrayList<>();

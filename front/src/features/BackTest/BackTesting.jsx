@@ -82,15 +82,31 @@ const BackTesting = (props) => {
     setPercent(percentList);
   }
 
+  const deleteStockHandler = (e, key) => {
+    let stockList = [];
+    let percentList = [];
+    for(let i=0; i<count; i++){
+      if(i == key) continue;
+
+      stockList.push(selectStock[i]);
+      percentList.push(percent[i]);
+    }
+
+    setSelectStock(stockList);
+    setPercent(percentList);
+    let cnt = count;
+    setCount(cnt - 1);
+  }
+
   const eventHandler = () => {
     console.log(selectStock);
     console.log(percent);
     let sum = 0;
     for(let p of percent){
-      sum += p;
+      sum += Number(p);
     }
 
-    if(sum == 100){
+    if(sum === 100){
       const fetchBacktest = async() => {
         await fetch(BASE_URL, {
           method: 'POST',
@@ -121,9 +137,11 @@ const BackTesting = (props) => {
               for(const key in res2.profits){
                 profits.push({
                   date: res2.profits[key].date,
-                  profit: res2.profits[key].profit
+                  profit: res2.profits[key].rate
                 })
               }
+
+              console.log("profit" + res2.profits);
   
               props.onOpenBacktest(
                 res2.startMoney,
@@ -146,6 +164,7 @@ const BackTesting = (props) => {
       })
     }else{
       alert("비율의 총합을 100%로 맞춰주세요");
+      console.log(sum);
     }
   }
 

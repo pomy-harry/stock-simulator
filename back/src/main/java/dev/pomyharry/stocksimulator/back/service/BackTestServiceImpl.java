@@ -87,7 +87,7 @@ public class BackTestServiceImpl implements BackTestService {
     @Override
     public Profit getProfitRate(LocalDate date, double nowPrice, double boughtPrice){
 
-        double rate = (double)(nowPrice - boughtPrice) / (double)boughtPrice * 100;
+        double rate = Math.round((double)(nowPrice - boughtPrice) / boughtPrice * 100 * 100) / 100.0;
 
         return Profit.builder().date(date).rate(rate).build();
     }
@@ -99,7 +99,7 @@ public class BackTestServiceImpl implements BackTestService {
         int low = Integer.MAX_VALUE;
 
          for(StockData stock : stocks){
-             int last = stock.getLastPrice();
+             int last = Integer.parseInt(stock.getLastPrice());
 
              high = high < last ? last : high;
              low = low > last ? last : low;
@@ -108,8 +108,8 @@ public class BackTestServiceImpl implements BackTestService {
          double rate = (high - low) / high * 100;
 
         return Fall.builder()
-                .year(stocks.get(0).getTradeDate().getYear())
-                .month(stocks.get(0).getTradeDate().getMonthValue())
+                //.year(stocks.get(0).getTradeDate().getYear())
+                //.month(stocks.get(0).getTradeDate().getMonthValue())
                 .high(high)
                 .low(low)
                 .fall(rate)
@@ -162,7 +162,7 @@ public class BackTestServiceImpl implements BackTestService {
     }
 
     @Override
-    public int getBestYear(List<Profit> profits){
+    public double getBestYear(List<Profit> profits){
 
         int year = 0;
         double rate = 0;
@@ -174,11 +174,11 @@ public class BackTestServiceImpl implements BackTestService {
                 }
         }
 
-        return year;
+        return rate;
     }
 
     @Override
-    public int getWorstYear(List<Profit> profits){
+    public double getWorstYear(List<Profit> profits){
 
         int year = 0;
         double rate = 0;
@@ -190,7 +190,7 @@ public class BackTestServiceImpl implements BackTestService {
             }
         }
 
-        return year;
+        return rate;
     }
 
     @Override

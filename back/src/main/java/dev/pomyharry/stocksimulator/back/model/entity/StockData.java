@@ -1,48 +1,42 @@
 package dev.pomyharry.stocksimulator.back.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
-import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Entity
 public class StockData {
 
     @Id
     @Column(name = "STOCK_DATA_ID")
-    private String id;
+    private String stockDataId;
 
     @Column(name = "TRADE_DATE")
-    private LocalDate tradeDate;
+    private String tradeDate;
 
-    @ManyToOne
-    @JoinColumn(name = "STOCK_CODE")
-    private Stock stock;
+    @Column(name = "STOCK_CODE")
+    private String stockCode;
 
     @Column(name = "HIGH_PRICE")
-    private int highPrice;
+    private String highPrice;
 
     @Column(name = "LOW_PRICE")
-    private int lowPrice;
+    private String lowPrice;
 
     @Column(name = "START_PRICE")
-    private int startPrice;
+    private String startPrice;
 
     @Column(name = "LAST_PRICE")
-    private int lastPrice;
+    private String lastPrice;
 
     @Column(name = "TRADE_VOLUME")
-    private int tradeVolume;
+    private String tradeVolume;
+
 }

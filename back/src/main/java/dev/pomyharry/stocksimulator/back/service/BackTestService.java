@@ -27,9 +27,9 @@ public interface BackTestService {
 
     public double getStdev(List<Profit> profits);
 
-    public int getBestYear(List<Profit> profits);
+    public double getBestYear(List<Profit> profits);
 
-    public int getWorstYear(List<Profit> profits);
+    public double getWorstYear(List<Profit> profits);
 
     public double getMDD(List<Fall> falls);
 

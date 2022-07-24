@@ -17,8 +17,8 @@ public class BackTestDTO {
     private long endMoney;
     private double cagr;
     private double stdev;
-    private int bestYear;
-    private int worstYear;
+    private double bestYear;
+    private double worstYear;
     private double mdd;
     private List<Balance> balances;
     private List<Fall> falls;

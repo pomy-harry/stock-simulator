@@ -1,42 +1,51 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import React from 'react'
+import ResultChart from './ResultChart'
+import ResultChart2 from './ResultChart2'
+import classes from './BackTestingResult.module.css'
 
 const BackTestingResult = (props) => {
   return (
-    <>
-        {props.balances[0].balance}
-        <br></br>
-        {props.profits[0].profit}
-        요약정보
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                <TableRow>
-                    <TableCell>초기자본 (원)</TableCell>
-                    <TableCell align="right">최종자본 (원)</TableCell>
-                    <TableCell align="right">연이율 (%)</TableCell>
-                    <TableCell align="right">표준편차 (%)</TableCell>
-                    <TableCell align="right">최고의 해 (년)</TableCell>
-                    <TableCell align="right">최악의 해 (년)</TableCell>
-                </TableRow>
-                </TableHead>
-                <TableBody>
-                <TableRow
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                    <TableCell component="th" scope="row">{props.startMoney}원</TableCell>
-                    <TableCell align="right">{props.endMoney}원</TableCell>
-                    <TableCell align="right">{props.cagr}%</TableCell>
-                    <TableCell align="right">{props.stdev}%</TableCell>
-                    <TableCell align="right">{props.bestYear}년</TableCell>
-                    <TableCell align="right">{props.worstYear}년</TableCell>
+    <div>
+        <div className={classes.info}>
+            요약정보
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell align="right">초기자본 (원)</TableCell>
+                        <TableCell align="right">최종자본 (원)</TableCell>
+                        <TableCell align="right">연이율 (%)</TableCell>
+                        <TableCell align="right">표준편차 (%)</TableCell>
+                        <TableCell align="right">최고 수익률 (%)</TableCell>
+                        <TableCell align="right">최악 수익률 (%)</TableCell>
                     </TableRow>
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                    <TableRow
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                        <TableCell component="th" scope="row" align="right">{String(props.startMoney).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</TableCell>
+                        <TableCell align="right">{String(props.endMoney).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</TableCell>
+                        <TableCell align="right">{props.cagr}%</TableCell>
+                        <TableCell align="right">{props.stdev}%</TableCell>
+                        <TableCell align="right">{props.bestYear}%</TableCell>
+                        <TableCell align="right">{props.worstYear}%</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
 
-        <button onClick={props.onOpenBacktestResult}>다시 하기</button>
-    </>
+        <div className={classes.info__detail}>
+            <ResultChart balances={props.balances}></ResultChart>
+        </div>
+        <div className={classes.info__detail}>
+            <ResultChart2 profits={props.profits}></ResultChart2>
+        </div>
+
+        <Button onClick={props.onOpenBacktestResult} className={classes.info__btn}>다시 하기</Button>
+    </div>
   )
 }
 

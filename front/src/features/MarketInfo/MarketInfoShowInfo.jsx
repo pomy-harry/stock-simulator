@@ -8,10 +8,19 @@ const MarketInfoShowInfo = () => {
     const MARKET_INFO_URL = 'http://localhost:8090/market-info';
     const [marketInfo, setMarketInfo] = useState([{}]);
 
+    let headers = new Headers({
+        'Content-Type' : 'application/json'
+      });
+    
+      const accessToken = sessionStorage.getItem("USER");
+      if(accessToken && accessToken !== null){
+          headers.append("Authorization", "Bearer " + accessToken);
+      } 
+
     useEffect(() => {
     
         const fetchMarketInfo = async () => {
-            await fetch(MARKET_INFO_URL).then((res) => {
+            await fetch(MARKET_INFO_URL, {headers: headers}).then((res) => {
             if(res.ok){
                 res.json().then((res2) => {
                 setMarketInfo(res2);

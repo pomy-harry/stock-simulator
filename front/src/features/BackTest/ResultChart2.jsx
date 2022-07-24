@@ -2,23 +2,23 @@ import React from 'react'
 import CanvasJSReact from '../../assets/canvasjs.stock.react';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-const ResultChart = (props) => {
+const ResultChart2 = (props) => {
 	const dataList = [];
-	let maximum;
+    let maximum;
 	let minimum;
 
-	for(const key in props.balances){
-		if(key == 0){
-			minimum = new Date(props.balances[key].date)
+	for(const key in props.profits){
+        if(key == 0){
+			minimum = new Date(props.profits[key].date)
 			console.log("minimum : " + minimum)
 		}
-		if(key == props.balances.length - 1){
-			maximum = new Date(props.balances[key].date)
+		if(key == props.profits.length - 1){
+			maximum = new Date(props.profits[key].date)
 			console.log("maximum : " + maximum)
 		}
 		dataList.push({
-			x: new Date(props.balances[key].date),
-			y: props.balances[key].balance
+			x: new Date(props.profits[key].date),
+			y: props.profits[key].profit
 		})
 	}
 
@@ -27,23 +27,23 @@ const ResultChart = (props) => {
 		exportEnabled: true,
 		theme: "light2", // "light1", "dark1", "dark2"
 		title:{
-			text: "월별 자산 현황"
+			text: "월별 수익률"
 		},
 		axisY: {
-			suffix: "원"
+			title: "월별 수익률",
+			suffix: "%"
 		},
 		axisX: {
 			//title: "Week of Year",
 			//prefix: "월",
 			//interval: 2
-			minimum: minimum,
+            minimum: minimum,
 			maximum: maximum
 		},
 		data: [{
 			type: "line",
-			toolTipContent: "{x}: {y}원",
-			dataPoints : dataList,
-			
+			toolTipContent: "{x}: {y}%",
+			dataPoints : dataList
 		}]
 	}
 	return (
@@ -56,4 +56,4 @@ const ResultChart = (props) => {
 	);
 }
 
-export default ResultChart
+export default ResultChart2
