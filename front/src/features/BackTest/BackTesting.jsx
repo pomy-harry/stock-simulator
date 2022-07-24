@@ -1,33 +1,9 @@
-import React, { forwardRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Autocomplete, Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import NumberFormat from 'react-number-format';
 import classes from './BackTesting.module.css'
 
 const STOCK_URL = 'http://localhost:8090/stocks';
 const BASE_URL = 'http://localhost:8090/backtest';
-
-const NumberFormatCustom = forwardRef((props, ref) => {
-  const { onChange, ...other } = props;
-
-  return (
-      <NumberFormat
-          {...other}
-          customInput={TextField}
-          thousandSeparator
-          isNumericString
-          suffix=" 원"
-          type="text"
-          onValueChange={(values) => {
-              onChange({
-                  target: {
-                      name: props.name,
-                      value: values.value
-                  }
-              });
-          }}
-      />
-  );
-});
 
 const BackTesting = (props) => {
   const date = new Date().getFullYear();
@@ -101,11 +77,6 @@ const BackTesting = (props) => {
   }
 
   const percentHandler = (e, i) => {
-    // let percentList = [...percent];
-    // percentList.push(e.target.value);
-    // setPercent(percentList);
-    // console.log(percent);
-    console.log(i);
     let percentList = [...percent];
     percentList[i] = e.target.value;
     setPercent(percentList);
@@ -114,59 +85,68 @@ const BackTesting = (props) => {
   const eventHandler = () => {
     console.log(selectStock);
     console.log(percent);
-    const fetchBacktest = async() => {
-      await fetch(BASE_URL, {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify({
-          startYear: startYear,
-          endYear: endYear,
-          codes: selectStock,
-          deposit: money * 10000,
-          percentage: percent
-        })
-      })
-      .then((res) => {
-        if(res.ok){
-          console.log("ok");
-          res.json().then((res2 =>{
-            // 정보 출력
-            const balances = [];
-            const profits = [];
-
-            for(const key in res2.balances){
-              balances.push({
-                date: res2.balances[key].date,
-                balance: res2.balances[key].balance
-              });
-            }
-
-            for(const key in res2.profits){
-              profits.push({
-                date: res2.profits[key].date,
-                profit: res2.profits[key].profit
-              })
-            }
-
-            props.onOpenBacktest(
-              res2.startMoney,
-              res2.endMoney,
-              res2.cagr,
-              res2.stdev,
-              res2.bestYear,
-              res2.worstYear,
-              balances,
-              profits
-              );
-          }))
-        }else{
-          console.log("Bad request");
-        }
-      })
+    let sum = 0;
+    for(let p of percent){
+      sum += p;
     }
-    fetchBacktest().catch(error => {
-      console.log(error);
-    })
+
+    if(sum == 100){
+      const fetchBacktest = async() => {
+        await fetch(BASE_URL, {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({
+            startYear: startYear,
+            endYear: endYear,
+            codes: selectStock,
+            deposit: money * 10000,
+            percentage: percent
+          })
+        })
+        .then((res) => {
+          if(res.ok){
+            console.log("ok");
+            res.json().then((res2 =>{
+              // 정보 출력
+              const balances = [];
+              const profits = [];
+  
+              for(const key in res2.balances){
+                balances.push({
+                  date: res2.balances[key].date,
+                  balance: res2.balances[key].balance
+                });
+              }
+  
+              for(const key in res2.profits){
+                profits.push({
+                  date: res2.profits[key].date,
+                  profit: res2.profits[key].profit
+                })
+              }
+  
+              props.onOpenBacktest(
+                res2.startMoney,
+                res2.endMoney,
+                res2.cagr,
+                res2.stdev,
+                res2.bestYear,
+                res2.worstYear,
+                balances,
+                profits
+                );
+            }))
+          }else{
+            console.log("Bad request");
+          }
+        })
+      }
+      fetchBacktest().catch(error => {
+        console.log(error);
+      })
+    }else{
+      alert("비율의 총합을 100%로 맞춰주세요");
+    }
   }
 
   const addComponent = () => {
@@ -179,9 +159,9 @@ const BackTesting = (props) => {
   // 플러스 버튼
 
   return (
-    <div className='classes.box'>
+    <div className={classes.box}>
         {/* 시작년도 */}
-        <FormControl fullWidth className='input'>
+        <FormControl fullWidth className={classes.input__container}>
             <InputLabel id="demo-simple">시작일</InputLabel>
             <Select
                 labelId="start"
@@ -194,7 +174,7 @@ const BackTesting = (props) => {
             </Select>
         </FormControl>
         {/* 종료년도 */}
-        <FormControl fullWidth className='classes.input'>
+        <FormControl fullWidth className={classes.input__container}>
             <InputLabel id="demo-simple">종료일</InputLabel>
             <Select
                 labelId="end"
@@ -208,7 +188,7 @@ const BackTesting = (props) => {
         </FormControl>
         {/* <Rebalancing/> */}
         {/* 초기 자본 */}
-        <FormControl fullWidth className='classes.input'>
+        <FormControl fullWidth className={classes.input__container}>
             <TextField 
                 id="outlined-basic" 
                 label="시작 금액 (만 원)" 
@@ -229,7 +209,7 @@ const BackTesting = (props) => {
                 autoSelect={true}
                 onChange={stockHandler}
                 renderInput={(params) => <TextField {...params} placeholder="Search" variant='standard'
-                className='classes.input'/> }
+                className={classes.input__container}/> }
             />
             <TextField 
                 id="outlined-basic" 
@@ -237,13 +217,13 @@ const BackTesting = (props) => {
                 variant="outlined" 
                 value={percent[i]}
                 onChange={(e) => {percentHandler(e, i)}}
-                className='classes.input'
+                className={classes.input__container}
             />
           </div>
         ))}
 
         {/* plus button */}
-        <Button onClick={addComponent}>+</Button>
+        <Button onClick={addComponent} className={classes.input__container}>+</Button>
         <Button onClick={eventHandler}>백테스팅 시작</Button>
     </div>
   )
