@@ -31,7 +31,7 @@ public class TokenProvider {
         Long expiredTime = 1000 * 60L * 60L * 24L;
 
         Date ext = new Date();
-        ext.setTime(ext.getTime() + expiredTime);
+        ext.setTime(ext.getTime() + expiredTime); // 현재시간 + expiredTime
 
         String jwt = Jwts.builder()
                 .setHeader(headers)
@@ -41,11 +41,11 @@ public class TokenProvider {
                 .setIssuedAt(new Date())
                 .setExpiration(ext)
                 .signWith(SignatureAlgorithm.HS512, key.getBytes())
-                .compact();
+                .compact(); 
 
         return jwt;
     }
-
+    // 암호화된 토큰을 다시 코드만 뽑기
     public String verifyJWT(String token) throws UnsupportedEncodingException {
         Claims claims = null;
         try {

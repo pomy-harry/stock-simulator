@@ -18,16 +18,18 @@ if(accessToken && accessToken !== null){
 
 const Main = () => {
     const [watchStockList, setWatchStockList] = useState([{}]);
-  
+    const [stockData, setStockData] = useState([{}]);
+
     useEffect(() => {
         const fetchWatchStocks = async (userData) => {
             await fetch(BASE_URL, {headers: headers}).then((res) => {
                 if(res.ok){
                 res.json().then((res2) => {
-                    setWatchStockList(res2);
+                    setWatchStockList(res2.s);
+                    setStockData(res2.a);
                 })
                 }else{
-                res.json().then((res2) => console.log(res2));
+                res.json().then((res2) => console.log(res2.s));
                 }
             })
             }
@@ -41,7 +43,7 @@ const Main = () => {
 
         <div className={classes.chart}>
             <StockSearch />
-            <WatchStockChart watchStockList={watchStockList}/>
+            <WatchStockChart watchStockList={watchStockList} stockData={stockData}/>
         </div>
 
         <div className={classes.tab}>

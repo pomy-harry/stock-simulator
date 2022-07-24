@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const KakaoLogin = (props) => {
+const KakaoJoin = (props) => {
     const { code } = useParams();
     useEffect(() => {
         if (code !== null) {
@@ -12,7 +12,7 @@ const KakaoLogin = (props) => {
     const a = async (code) => {
         console.log(code);
         
-        await fetch("http://localhost:8090/afterlogin?code="+code, {
+        await fetch("http://localhost:8090/afterjoin?code="+code, {
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json',
@@ -22,10 +22,9 @@ const KakaoLogin = (props) => {
                 res.json().then((res2 => {
                     sessionStorage.setItem('USER', res2.token);
                     window.location.href="/";
-                    console.log(sessionStorage.getItem('USER') + ": 로그인");
                 }))
             }else{
-                window.alert("존재하지 않는 아이디입니다.\n회원가입을 진행해주세요");
+                window.alert("이미 등록된 사용자입니다.\n로그인해주세요");
             }
         }
         );
@@ -39,4 +38,4 @@ const KakaoLogin = (props) => {
   )
 }
 
-export default KakaoLogin
+export default KakaoJoin
