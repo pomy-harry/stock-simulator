@@ -29,6 +29,9 @@ const HelpModal = (props) => {
                 <ListItemText className={classes.help__modal__body}
                     primary="6️⃣ 구매"
                     secondary="모의투자를 진행하셨다면, 마이페이지에서 상세 정보를 확인할 수 있습니다."/>      
+                <ListItemText className={classes.help__modal__body}
+                    primary="7️⃣ 백테스팅"
+                    secondary="나만의 포트폴리오를 만들고 실험해보세요. 지난 10년치 데이터를 기반으로 수익과 수익률을 계산해볼 수 있습니다."/> 
             </div>        
         </Modal>
     )
