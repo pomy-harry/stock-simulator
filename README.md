@@ -112,6 +112,12 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 
 ![image](https://user-images.githubusercontent.com/93183070/161186549-61668371-56f2-41ae-8adb-642803558c42.png)
 
+### 0. 주린이집 가이드
+
+메인 페이지에서 도움말 버튼 클릭 시 가이드 창이 생성된다.
+
+![image](https://user-images.githubusercontent.com/78744630/182990462-b44ee464-76f8-4b8e-9ac6-12b76989eb88.png)
+
 
 ### 1. 회원가입
 
@@ -230,6 +236,12 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 클릭 시 네이버 뉴스페이지로 이동  
 
 ![image](https://user-images.githubusercontent.com/93183070/161187466-74560fb8-c592-4786-8d73-895ca2257f0f.png)
+
+### 7. 백테스팅
+
+과거의 주식 데이터를 이용해 자신의 투자 전략이 어느 정도의 수익을 낼 수 있는지 확인할 수 있다.
+
+![image](https://user-images.githubusercontent.com/78744630/182990645-c19e61e1-8606-4e31-a7bf-d9eb6a1faae1.png)
 
 <br>
 
