@@ -95,7 +95,8 @@
 
 ## 주요기능
 
-### 메인페이지 (6)
+### 메인페이지 (8)
+- 주린이집 도움말
 - 회원가입
 - 로그인
 - 관심종목 저장, 삭제
@@ -121,6 +122,12 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 ## 화면 구성 및 기능 소개
 
 ![image](https://user-images.githubusercontent.com/78744630/179944586-c78d8206-2796-4e15-9a44-14995ddfe6e7.png)
+
+### 0. 주린이집 도움말
+
+메인페이지의 도움말 버튼을 클릭하면 창이 생성된다.<br>
+
+![image](https://user-images.githubusercontent.com/78744630/182992051-3dc999d4-353e-47cf-9e6f-f51fb854d270.png)<br>
 
 
 ### 1. 회원가입
@@ -246,6 +253,12 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 클릭 시 네이버 뉴스페이지로 이동  
 
 ![image](https://user-images.githubusercontent.com/93183070/161187466-74560fb8-c592-4786-8d73-895ca2257f0f.png)
+
+### 7. 백테스팅
+
+과거의 주식 데이터를 이용해 자신의 투자전략이 어느 정도의 수익을 낼 수 있는지 확인할 수 있다.
+
+![image](https://user-images.githubusercontent.com/78744630/182992268-7b0f22d1-9459-4c70-a11a-ddcf9f61a445.png)
 
 <br>
 
