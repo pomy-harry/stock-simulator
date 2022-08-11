@@ -120,19 +120,11 @@ https://documenter.getpostman.com/view/19511451/UVyrUcGR
 ## 화면 구성 및 기능 소개
 
 ![image](https://user-images.githubusercontent.com/78744630/179944586-c78d8206-2796-4e15-9a44-14995ddfe6e7.png)
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
 ### 0. 주린이집 도움말
 
 메인페이지의 도움말 버튼을 클릭하면 창이 생성된다.<br>
 
 ![image](https://user-images.githubusercontent.com/78744630/182992051-3dc999d4-353e-47cf-9e6f-f51fb854d270.png)<br>
->>>>>>> 96a731711df12e841589f876ccd11b2d67fa3e43
-
-=======
->>>>>>> 0c48639425daae1e7d65fb4ff5943a3052d3939d
 
 ### 1. 회원가입
 
