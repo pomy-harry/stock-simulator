@@ -3,6 +3,7 @@ package dev.pomyharry.stocksimulator.back.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +24,10 @@ public class MarketInfoController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getMarketInfo() {
+    public ResponseEntity<?> getMarketInfo(@AuthenticationPrincipal String customerId) {
         try {
             List<MarketInfoDTO> market = marketInfoService.getMarketInfo();
+            System.out.println(market);
             return ResponseEntity.ok().body(market);
         } catch (Exception e) {
             System.out.println(e.getMessage());

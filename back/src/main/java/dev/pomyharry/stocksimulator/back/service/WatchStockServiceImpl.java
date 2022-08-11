@@ -38,15 +38,22 @@ public class WatchStockServiceImpl implements WatchStockService {
     public List<WatchStockDTO> findAllWatchStockByCustomerId(String customerId) {
 
         List<WatchStock> watchStockList = watchStockRepository.findAllByCustomerId(customerId);
-        List<WatchStockDTO> watchStockDTOList = watchStockList.stream()
-                .map(r -> new WatchStockDTO(r, r.getStock().getName())).collect(Collectors.toList());
+        // List<WatchStockDTO> watchStockDTOList = watchStockList.stream()
+        // .map(r -> new WatchStockDTO(r,
+        // r.getStock().getName())).collect(Collectors.toList());
+
+        List<WatchStockDTO> watchStockDTOList = watchStockList.stream().map(r -> WatchStockDTO.builder()
+                .index(r.getIndex())
+                .code(r.getStock().getCode())
+                .customerId(r.getCustomer().getId())
+                .name(r.getStock().getName()).build()).collect(Collectors.toList());
 
         return watchStockDTOList;
     }
 
     @Override
-    public void deleteByStockCode(String code) {
-        watchStockRepository.deleteByStockCode(code);
+    public void deleteByCustomerIdAndStockCode(String customerId, String code) {
+        watchStockRepository.deleteByCustomerIdAndStockCode(customerId, code);
     }
 
 }

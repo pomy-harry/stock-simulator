@@ -1,17 +1,22 @@
 package dev.pomyharry.stocksimulator.back.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import dev.pomyharry.stocksimulator.back.model.dto.CustomerDTO;
 import dev.pomyharry.stocksimulator.back.model.dto.StockDTO;
+import dev.pomyharry.stocksimulator.back.model.dto.StockDataDTO;
 import dev.pomyharry.stocksimulator.back.model.entity.WatchStock;
+import dev.pomyharry.stocksimulator.back.model.entity.StockData;
 import dev.pomyharry.stocksimulator.back.service.StockDataService;
 
 @CrossOrigin(origins = "*")
@@ -24,12 +29,16 @@ public class StockDataController {
         this.stockChartService = stockChartService;
     }
 
-    @RequestMapping("/stock-data")
-    @PostMapping
-    public ResponseEntity<?> getStockChart(@RequestBody(required = true) CustomerDTO customer) {
-        List<WatchStock> watch = stockChartService.findAllStocks(customer);
-        List<StockDTO> s = stockChartService.getStockChart(watch);
+    @GetMapping("/stock-data")
+    public ResponseEntity<?> getStockChart(@AuthenticationPrincipal String customerId) {
+        List<WatchStock> watch = stockChartService.findAllStocks(customerId);
+        List<StockDTO> s = stockChartService.getStockChart(watch); 
+        List<StockDataDTO> a = stockChartService.getStockData(watch.get(0).getStock().getCode());
+ 
+        Map<String, Object> result = new HashMap<String,Object>();
+        result.put("a", a);
+        result.put("s", s);
+        return ResponseEntity.ok().body(result);
 
-        return ResponseEntity.ok().body(s);
     }
 }

@@ -1,0 +1,33 @@
+@startuml
+actor User
+database DB order 100
+User -> Controller: POST/getBackTestResult
+Controller -> Service: getBackTestResult
+Service -> DB: getStocksByCodeAndPeriod(String code, int startYear, int endYear)
+DB -> Service: return List<StockData>
+Service -> ProfitCalculator: double getCAGR(int startPrice, int endPrice, int years)
+ProfitCalculator -> Service: return double cagr
+loop 기간 내 매년
+    Service -> ProfitCalculator: rebalancing(PortfolioDTO portfolio)
+    ProfitCalculator -> Service: return PortfolioDTO portfolio
+    Service -> ProfitCalculator: getProfitRate(int nowPrice, int boughtPrice)
+    ProfitCalculator -> Service: return Profit profit
+    loop 매 달
+        Service -> ProfitCalculator: getFalls(List<StockData>)
+        ProfitCalculator -> Service: return fall
+        Service -> ProfitCalculator: getBalances(List<StockData>)
+        ProfitCalculator -> Service: return balance
+    end
+end
+Service -> ProfitCalculator: double getStdev(List<Profit>)
+ProfitCalculator -> Service: return stdev
+Service -> ProfitCalculator: int getBestYear(List<Profit>)
+ProfitCalculator -> Service: return year
+Service -> ProfitCalculator: int getWorstYear(List<Profit>)
+ProfitCalculator -> Service: return year
+Service -> ProfitCalculator: double getMDD(List<Fall>)
+ProfitCalculator -> Service: return mdd
+Service -> Controller: return BackResultDTO
+Controller -> User: return BackResultDTO
+@enduml
+

@@ -19,4 +19,5 @@ public interface MyStockRepository extends JpaRepository<MyStock, String> {
 
     @Transactional
     void deleteByCustomerId(String customerId);
+
 }

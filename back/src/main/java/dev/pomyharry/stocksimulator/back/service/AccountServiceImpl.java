@@ -21,21 +21,21 @@ public class AccountServiceImpl implements AccountService {
     MyStockService myStockService;
 
     @Override
-    public void insertAccount(AccountDTO accountDTO) {
+    public void insertAccount(String customerId, AccountDTO accountDTO) {
 
         Account account = new Account();
         account.setName(accountDTO.getName());
         account.setDeposit(accountDTO.getDeposit());
         account.setSeedMoney(accountDTO.getSeedMoney());
-        account.setCustomer(customerService.findById(accountDTO.getCustomerId()));
+        account.setCustomer(customerService.findById(customerId));
 
         accountRepository.save(account);
     }
 
     @Override
-    public Account findByCustomerId(AccountDTO acc) {
+    public Account findByCustomerId(String customerId) {
         try {
-            return accountRepository.findByCustomerId(acc.getCustomerId());
+            return accountRepository.findByCustomerId(customerId);
         } catch (Exception e) {
             System.out.println(e.getMessage() + " 오류입니다.");
         }
@@ -43,16 +43,16 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account updateAccount(AccountDTO acc) {
-        Account account = accountRepository.getById(acc.getId());
+    public Account updateAccount(String customerId, AccountDTO acc) {
+        Account account = accountRepository.findByCustomerId(customerId);
         account.setName(acc.getName());
 
         return accountRepository.save(account);
     }
 
     @Override
-    public void deleteAccount(AccountDTO acc) {
-        myStockService.deleteByCustomerId(acc.getCustomerId());
+    public void deleteAccount(String customerId, AccountDTO acc) {
+        myStockService.deleteByCustomerId(customerId);
         accountRepository.deleteById(acc.getId());
     }
 

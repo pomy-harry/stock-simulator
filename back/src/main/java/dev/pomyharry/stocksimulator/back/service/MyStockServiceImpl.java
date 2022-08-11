@@ -1,8 +1,13 @@
 package dev.pomyharry.stocksimulator.back.service;
 
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +23,7 @@ import dev.pomyharry.stocksimulator.back.repository.CustomerRepository;
 import dev.pomyharry.stocksimulator.back.repository.MyStockRepository;
 import dev.pomyharry.stocksimulator.back.repository.StockRepository;
 
+@Slf4j
 @Service
 public class MyStockServiceImpl implements MyStockService {
 
@@ -37,70 +43,130 @@ public class MyStockServiceImpl implements MyStockService {
     StockDataComponent stockChartComponent;
 
     @Override
-    public void buyStock(MyStockDTO myStockDTO) {
+    public void buyStock(String customerId, MyStockDTO myStockDTO) {
 
-        // 계좌 찾기
-        Account account = accountRepository.findByCustomerId(myStockDTO.getCustomerId());
-        System.out.println(myStockDTO.getCustomerId());
-        System.out.println(myStockDTO.getAmount());
-        System.out.println(myStockDTO.getBuyPrice());
-        System.out.println(myStockDTO.getStockCode());
-        if (account == null) {
-            throw new AccountNotFoundException("계좌가 존재하지 않습니다.");
-        }
-        // 보유 종목 찾기
-        MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(), myStockDTO.getStockCode());
-        if (account.getDeposit() > myStockDTO.getBuyPrice()) {
-            if (mystock == null) {
-                MyStock changedMyStock = new MyStock(
-                        myStockDTO.getAmount(),
-                        myStockDTO.getBuyPrice(),
-                        customerRepository.getOne(myStockDTO.getCustomerId()),
-                        stockRepository.getOne(myStockDTO.getStockCode()));
-                myStockRepository.save(changedMyStock);
+        // 시간 확인
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
+        LocalTime nowTime = LocalTime.parse(now.format(formatter), formatter);
+
+        LocalTime limitStartTime = LocalTime.parse("09:00:00", formatter);
+        LocalTime limitEndTime = LocalTime.parse("16:00:00", formatter);
+        
+        if (nowTime.isAfter(limitStartTime) && nowTime.isBefore(limitEndTime)) {
+            log.info("거래 가능 시간");
+
+            // 계좌 찾기
+            Account account = accountRepository.findByCustomerId(customerId);
+
+            if (account != null) {
+
+                // 보유 종목 찾기
+                MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(customerId,
+                        myStockDTO.getStockCode());
+
+                if (account.getDeposit() > myStockDTO.getBuyPrice()) {
+                    if (mystock == null) {
+                        MyStock changedMyStock = new MyStock(
+                                myStockDTO.getAmount(),
+                                myStockDTO.getBuyPrice(),
+                                customerRepository.getOne(customerId),
+                                stockRepository.getOne(myStockDTO.getStockCode()));
+                        myStockRepository.save(changedMyStock);
+                    } else {
+                        mystock.setAmount(mystock.getAmount() + myStockDTO.getAmount());
+                        mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() + myStockDTO.getBuyPrice());
+                        myStockRepository.save(mystock);
+                    }
+                    account.setDeposit(account.getDeposit() - myStockDTO.getBuyPrice());
+                    accountRepository.save(account);
+                }
+
             } else {
-                mystock.setAmount(mystock.getAmount() + myStockDTO.getAmount());
-                mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() + myStockDTO.getBuyPrice());
-                myStockRepository.save(mystock);
+                throw new AccountNotFoundException("계좌가 존재하지 않습니다.");
             }
-            account.setDeposit(account.getDeposit() - myStockDTO.getBuyPrice());
-            accountRepository.save(account);
+
+        } else {
+            throw new AccountNotFoundException("거래 시간이 아닙니다.");
         }
+
     }
 
     @Override
-    public void sellStock(MyStockDTO myStockDTO) {
-        // 계좌 찾기
-        Account account = accountRepository.findByCustomerId(myStockDTO.getCustomerId());
+    public void sellStock(String customerId, MyStockDTO myStockDTO) {
 
-        if (account == null) {
-            throw new AccountNotFoundException("계좌가 존재하지 않습니다.");
+        // 시간 확인
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
+        LocalTime nowTime = LocalTime.parse(now.format(formatter), formatter);
+        LocalTime limitStartTime = LocalTime.parse("09:00:00", formatter);
+        LocalTime limitEndTime = LocalTime.parse("16:00:00", formatter);
+        
+        if (nowTime.isAfter(limitStartTime) && nowTime.isBefore(limitEndTime)) {
+            log.info("거래 가능 시간");
+
+            // 계좌 찾기
+            Account account = accountRepository.findByCustomerId(customerId);
+
+            if (account != null) {
+
+                // 보유 종목 찾기
+                MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(customerId,
+                        myStockDTO.getStockCode());
+                if (mystock != null) {
+
+                    if (mystock.getAmount() >= myStockDTO.getAmount()) {
+                        mystock.setAmount(mystock.getAmount() - myStockDTO.getAmount());
+                        mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() - myStockDTO.getSellPrice());
+                        myStockRepository.save(mystock);
+
+                        account.setDeposit(account.getDeposit() + myStockDTO.getSellPrice());
+                        accountRepository.save(account);
+
+                        if (mystock.getAmount() == 0) {
+                            myStockRepository.delete(mystock);
+                        }
+
+                    } else {
+                        throw new AccountNotFoundException("보유 수량 부족.");
+                    }
+
+                } else {
+                    throw new AccountNotFoundException("해당 종목을 보유하지 않습니다.");
+                }
+
+            } else {
+                throw new AccountNotFoundException("계좌가 존재하지 않습니다.");
+            }
+
+        } else {
+            throw new AccountNotFoundException("거래 시간이 아닙니다.");
         }
 
-        // 보유 종목 찾기
-        MyStock mystock = myStockRepository.findByCustomerIdAndStockCode(myStockDTO.getCustomerId(), myStockDTO.getStockCode());
-        if (mystock == null) {
-            throw new AccountNotFoundException("해당 종목을 보유하지 않습니다.");
-        } 
-
-        if (mystock.getAmount() > myStockDTO.getAmount()) {
-            mystock.setAmount(mystock.getAmount() - myStockDTO.getAmount());
-            mystock.setTotalBuyPrice(mystock.getTotalBuyPrice() - myStockDTO.getSellPrice());
-            myStockRepository.save(mystock);        
-    
-            account.setDeposit(account.getDeposit() + myStockDTO.getSellPrice());
-            accountRepository.save(account);
-        }
     }
 
     @Override
     public List<MyStockDTO> findAllMyStockByCustomerId(String customerId) {
         List<MyStock> stocks = myStockRepository.findAllByCustomerId(customerId);
 
+        /*
+         * List<MyStockDTO> myStockList = stocks.stream()
+         * .map(stock -> new MyStockDTO(stock.getTotalBuyPrice(), stock.getAmount(),
+         * stock.getStock().getCode(), stock.getStock().getName(),
+         * Long.parseLong(stockChartComponent.getStockChart(new
+         * WatchStock(stock.getStock())).getPrice().replace(",", ""))))
+         * .collect(Collectors.toList());
+         */
+
         List<MyStockDTO> myStockList = stocks.stream()
-                .map(stock -> new MyStockDTO(stock.getTotalBuyPrice(), stock.getAmount(), stock.getStock().getCode(), stock.getStock().getName(),
-                        Long.parseLong(stockChartComponent.getStockChart(new WatchStock(stock.getStock())).getPrice()
-                                .replace(",", ""))))
+                .map(stock -> MyStockDTO.builder()
+                        .totalBuyPrice(stock.getTotalBuyPrice())
+                        .amount(stock.getAmount())
+                        .stockCode(stock.getStock().getCode())
+                        .name(stock.getStock().getName())
+                        .nowPrice(Long.parseLong(stockChartComponent.getStockChart(new WatchStock(stock.getStock()))
+                                .getPrice().replace(",", "")))
+                        .build())
                 .collect(Collectors.toList());
 
         return myStockList;

@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+  }
+
+   .help__modal {
+    position: absolute;
+    left: 50%;
+    transform :translate(-50%, 10%);
+    width: 400px;
+    height: 600px;
+    background-color: white;
+    padding: 32px;
+    border: 0.25px solid #000;
+    box-shadow: 5px;
+  } 
+
+  .help__modal__header {
+    display: flex;
+    width: 100%;
+    margin-bottom: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .help__modal__header img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .help__modal__body {
+    color: black;
+  }
+
+
+

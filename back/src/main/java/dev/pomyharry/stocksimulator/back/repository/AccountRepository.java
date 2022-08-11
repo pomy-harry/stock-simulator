@@ -8,7 +8,7 @@ import dev.pomyharry.stocksimulator.back.model.entity.Customer;
 
 public interface AccountRepository extends JpaRepository<Account, String> {
     
-    Account findByCustomerId(String id);
+    Account findByCustomerId(String customerId);
 
     @Transactional
     void deleteAllByCustomer(Customer customer);

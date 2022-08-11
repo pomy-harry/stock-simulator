@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    font-family: "IBM Plex Sans KR";
+  }
+  
+  .smartTab {
+    /* width: calc(100%-20px); */
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid lightgray;
+    padding: 1rem;
+
+    /* width: calc(100%-20px); */
+    height: 71vh;
+    overflow: auto;
+  }
+
+  .smartTab::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .smartTab::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 20px;
+  }
+  
+  .smartTab::-webkit-scrollbar-track {
+    background-color: white;
+  }
+  
